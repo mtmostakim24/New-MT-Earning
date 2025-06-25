@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>হাই! আমি এখানে 1200টাকা বোনাস পেয়েছি চাইলে তুমিও নিতে পারো জাস্ট লিংকে ক্লিক করো  Earn App</title>
+  <title>Earn App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -9,104 +9,92 @@
       background: linear-gradient(to right, #d4fc79, #96e6a1);
       margin: 0;
       padding: 0;
-    }header {
-  background: #388e3c;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.container {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-}
-
-.card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-h3 {
-  margin-top: 0;
-  color: #2e7d32;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.button {
-  background: #43a047;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.button:hover {
-  background: #2e7d32;
-}
-
-.copy-btn {
-  margin-top: 10px;
-  background: #00796b;
-}
-
-.copy-btn:hover {
-  background: #004d40;
-}
-
-.hidden {
-  display: none;
-}
-
-.balance-box {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.balance-item {
-  background: #e0f2f1;
-  padding: 10px;
-  border-radius: 10px;
-  width: 48%;
-  text-align: center;
-  font-weight: bold;
-}
-
-.share-message {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #388e3c;
-  text-align: center;
-}
-
+    }
+    header {
+      background: #388e3c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    .button {
+      background: #43a047;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: #2e7d32;
+    }
+    .hidden {
+      display: none;
+    }
+    .balance-box {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .balance-item {
+      background: #e0f2f1;
+      padding: 10px;
+      border-radius: 10px;
+      width: 48%;
+      text-align: center;
+      font-weight: bold;
+    }
+    .share-message {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #388e3c;
+      text-align: center;
+    }
+    .center-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body><header>Earn App - রেফার করে আয় করুন</header><div class="container">  <!-- Step 1: Invite Friends -->  <div class="card" id="inviteCard">
     <h3>🎯 কাজ শুরু করার আগে</h3>
-    <p class="share-message">শুরু করতে হলে প্রথমে আপনার ১০ জন বন্ধুকে Messenger-এ রেফার লিংক পাঠাতে হবে।</p><strong>👇 আপনার রেফার লিংক:</strong>
-<input type="text" id="myLink" readonly>
-<div class="button copy-btn" onclick="copyLink()">🔗 লিংক কপি করুন</div>
-
-<div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
-
+    <p class="share-message">প্রথমে আপনার ১০ জন বন্ধুকে Messenger-এ রেফার লিংক পাঠান।</p>
+    <div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
+  </div>  <!-- Confirmation Dialog -->  <div class="card hidden" id="confirmCard">
+    <h3>📢 আপনি কি ১০ জন বন্ধুকে শেয়ার করেছেন?</h3>
+    <div class="center-buttons">
+      <div class="button" onclick="enterSite()">✅ Yes</div>
+      <div class="button" onclick="shareOnMessenger()">❌ No</div>
+    </div>
   </div>  <!-- Step 2: After shared -->  <div class="card hidden" id="mainContent">
     <h3>💰 আপনার ব্যালেন্স</h3>
     <div class="balance-box">
@@ -114,6 +102,7 @@ input, select {
       <div class="balance-item">Referrals: 10</div>
     </div>
     <div class="button" onclick="showWithdraw()">💵 টাকা তুলুন</div>
+    <div class="button" onclick="shareOnMessenger()">📩 আবার বন্ধুদের পাঠান</div>
   </div>  <!-- Withdraw Form -->  <div class="card hidden" id="withdrawForm">
     <h3>🧾 টাকা উত্তোলন</h3>
     <select id="method">
@@ -129,47 +118,29 @@ input, select {
     <h3>🔐 অ্যাকাউন্ট ভেরিফাই করুন</h3>
     <p>উত্তোলনের জন্য আপনার অ্যাকাউন্ট ভেরিফিকেশন প্রয়োজন। নিচে ক্লিক করুন:</p>
     <a class="button" href="https://adsterra.com/verify-link" target="_blank">🔓 Verify Now</a>
-  </div></div><script>
-  let shareCount = 10;
-  const myLink = document.getElementById("myLink");
-
-  // Generate unique referral link
+  </div>
+</div><script>
   const ip = Math.floor(Math.random() * 100000);
   const refLink = `https://new-mt-earning.vercel.app?ref=ip${ip}`;
-  myLink.value = refLink;
 
   function shareOnMessenger() {
-    copyLink();
-
-    const text = `বন্ধু, এই অ্যাপ দিয়ে দিনে আয় করা যায় 🤑\nতুমি ও জয়েন করো এখান থেকে 👇\n${refLink}`;
-
+    const text = `বন্ধু, আমি ১২০০ টাকা ফ্রি বোনাস পেয়েছি 🤑
+তুমি ও পাবে এখান থেকে 👇\n${refLink}`;
     const encodedText = encodeURIComponent(text);
-
-    // Messenger deep link (best effort)
     const fbDeepLink = `fb-messenger://share?link=${encodeURIComponent(refLink)}&app_id=1234567890`;
     const fallbackLink = `https://m.me/?link=${encodeURIComponent(refLink)}&quote=${encodedText}`;
-
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const messengerLink = isMobile ? fbDeepLink : fallbackLink;
-
+    window.location.href = messengerLink;
     setTimeout(() => {
-      window.location.href = messengerLink;
-    }, 300);
-
-    shareCount++;
-    document.getElementById("shareCount").innerText = shareCount;
-
-    if (shareCount >= 10) {
       document.getElementById("inviteCard").classList.add("hidden");
-      document.getElementById("mainContent").classList.remove("hidden");
-    }
+      document.getElementById("confirmCard").classList.remove("hidden");
+    }, 1000);
   }
 
-  function copyLink() {
-    myLink.select();
-    myLink.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    alert("✅ লিংক কপি হয়েছে!");
+  function enterSite() {
+    document.getElementById("confirmCard").classList.add("hidden");
+    document.getElementById("mainContent").classList.remove("hidden");
   }
 
   function showWithdraw() {
@@ -180,12 +151,10 @@ input, select {
     const method = document.getElementById("method").value;
     const number = document.getElementById("number").value;
     const amount = document.getElementById("amount").value;
-
     if (!method || !number || !amount) {
       alert("⚠️ সব ঘর পূরণ করুন");
       return;
     }
-
     document.getElementById("withdrawForm").classList.add("hidden");
     document.getElementById("verifyCard").classList.remove("hidden");
   }
