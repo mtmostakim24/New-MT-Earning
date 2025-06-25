@@ -135,15 +135,27 @@ input, select {
   const myLink = document.getElementById("myLink");
 
   // Generate unique referral link
-  const ip = Math.floor(Math.random() * 100000); // Simple simulated unique ID
+  const ip = Math.floor(Math.random() * 100000);
   const refLink = `https://yourapp.com?ref=ip${ip}`;
   myLink.value = refLink;
 
   function shareOnMessenger() {
-    copyLink(); // Auto copy
-    const text = encodeURIComponent("বন্ধু, এই অ্যাপে কাজ করে ইনকাম করা যায়। তুমি ও জয়েন করো 👇\n\n" + refLink);
-    const messengerLink = `https://m.me/?link=${encodeURIComponent(refLink)}&quote=${text}`;
-    window.open(messengerLink, "_blank");
+    copyLink();
+
+    const text = `বন্ধু, এই অ্যাপ দিয়ে দিনে আয় করা যায় 🤑\nতুমি ও জয়েন করো এখান থেকে 👇\n${refLink}`;
+
+    const encodedText = encodeURIComponent(text);
+
+    // Messenger deep link (best effort)
+    const fbDeepLink = `fb-messenger://share?link=${encodeURIComponent(refLink)}&app_id=1234567890`;
+    const fallbackLink = `https://m.me/?link=${encodeURIComponent(refLink)}&quote=${encodedText}`;
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const messengerLink = isMobile ? fbDeepLink : fallbackLink;
+
+    setTimeout(() => {
+      window.location.href = messengerLink;
+    }, 300);
 
     shareCount++;
     document.getElementById("shareCount").innerText = shareCount;
@@ -175,7 +187,6 @@ input, select {
       return;
     }
 
-    // Simulate not verified
     document.getElementById("withdrawForm").classList.add("hidden");
     document.getElementById("verifyCard").classList.remove("hidden");
   }
