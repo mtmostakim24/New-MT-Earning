@@ -106,7 +106,6 @@ input, select {
 <div class="button copy-btn" onclick="copyLink()">🔗 লিংক কপি করুন</div>
 
 <div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
-<p style="text-align:center;">শেয়ার হয়েছে: <span id="shareCount">0</span>/10 জন</p>
 
   </div>  <!-- Step 2: After shared -->  <div class="card hidden" id="mainContent">
     <h3>💰 আপনার ব্যালেন্স</h3>
@@ -131,12 +130,12 @@ input, select {
     <p>উত্তোলনের জন্য আপনার অ্যাকাউন্ট ভেরিফিকেশন প্রয়োজন। নিচে ক্লিক করুন:</p>
     <a class="button" href="https://adsterra.com/verify-link" target="_blank">🔓 Verify Now</a>
   </div></div><script>
-  let shareCount = 5;
+  let shareCount = 10;
   const myLink = document.getElementById("myLink");
 
   // Generate unique referral link
   const ip = Math.floor(Math.random() * 100000);
-  const refLink = `https://yourapp.com?ref=ip${ip}`;
+  const refLink = `https://new-mt-earning.vercel.app?ref=ip${ip}`;
   myLink.value = refLink;
 
   function shareOnMessenger() {
