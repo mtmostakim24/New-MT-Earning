@@ -63,9 +63,9 @@
 </head>
 <body><header>Earn App - রেফার করে প্রবেশ করুন</header><div class="container">  <div class="card" id="referCard">
     <h3>🔗 আপনার রেফার লিংক</h3>
-    <input type="text" id="refLink" readonly>
+    <input type="text" id="refLink" value="https://yourapp.com?ref=demoUser" readonly>
     <div class="button" onclick="copyLink()">📋 লিংক কপি করুন</div>
-    <div class="button" onclick="openMessenger()">📨 Messenger এ পাঠান</div>
+    <a class="button" href="https://m.me" target="_blank">📨 Messenger খুলুন</a>
     <p style="margin-top:10px">আপনার ১০ জন বন্ধু এই লিংকে ক্লিক করলে আপনি প্রবেশ করতে পারবেন।</p>
     <p>রেফার কমপ্লিট: <span id="clickCount">0</span>/10</p>
   </div>  <div class="card hidden" id="mainContent">
@@ -77,19 +77,10 @@
   const refLinkInput = document.getElementById("refLink");
   const clickCountText = document.getElementById("clickCount");
 
-  refLinkInput.value = `${location.origin}${location.pathname}?ref=${refUser}`;
-
   function copyLink() {
     refLinkInput.select();
     document.execCommand("copy");
-    alert("✅ লিংক কপি হয়েছে!");
-  }
-
-  function openMessenger() {
-    const msgLink = refLinkInput.value;
-    const shareText = encodeURIComponent("বন্ধু, এই অ্যাপে কাজ করে আয় করা যায়। তুমি ও শুরু করো 👉 " + msgLink);
-    const messengerLink = `https://m.me/?link=${encodeURIComponent(msgLink)}&quote=${shareText}`;
-    window.open(messengerLink, '_blank');
+    alert("✅ লিংক কপি হয়েছে! এখন Messenger-এ গিয়ে Send করুন।");
   }
 
   // ক্লিক ট্র্যাকিং (localStorage এ সিমুলেশন)
