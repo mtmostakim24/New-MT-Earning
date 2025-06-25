@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
   <meta charset="UTF-8">
   <title>Earn App</title>
@@ -10,128 +9,113 @@
       background: linear-gradient(to right, #d4fc79, #96e6a1);
       margin: 0;
       padding: 0;
-    }
+    }header {
+  background: #388e3c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-    header {
-      background: #388e3c;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
+h3 {
+  margin-top: 0;
+  color: #2e7d32;
+}
 
-    h3 {
-      margin-top: 0;
-      color: #2e7d32;
-    }
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
 
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-    }
+.button {
+  background: #43a047;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
 
-    .button {
-      background: #43a047;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 12px;
-      margin-top: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
+.button:hover {
+  background: #2e7d32;
+}
 
-    .button:hover {
-      background: #2e7d32;
-    }
+.copy-btn {
+  margin-top: 10px;
+  background: #00796b;
+}
 
-    .copy-btn {
-      margin-top: 10px;
-      background: #00796b;
-    }
+.copy-btn:hover {
+  background: #004d40;
+}
 
-    .copy-btn:hover {
-      background: #004d40;
-    }
+.hidden {
+  display: none;
+}
 
-    .hidden {
-      display: none;
-    }
+.balance-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 
-    .balance-box {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
+.balance-item {
+  background: #e0f2f1;
+  padding: 10px;
+  border-radius: 10px;
+  width: 48%;
+  text-align: center;
+  font-weight: bold;
+}
 
-    .balance-item {
-      background: #e0f2f1;
-      padding: 10px;
-      border-radius: 10px;
-      width: 48%;
-      text-align: center;
-      font-weight: bold;
-    }
+.share-message {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #388e3c;
+  text-align: center;
+}
 
-    .share-message {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #388e3c;
-      text-align: center;
-    }
   </style>
 </head>
-<body>
-
-<header>Earn App - রেফার করে আয় করুন</header>
-
-<div class="container">
-
-  <!-- Step 1: Invite Friends -->
-  <div class="card" id="inviteCard">
+<body><header>Earn App - রেফার করে আয় করুন</header><div class="container">  <!-- Step 1: Invite Friends -->  <div class="card" id="inviteCard">
     <h3>🎯 কাজ শুরু করার আগে</h3>
-    <p class="share-message">শুরু করতে হলে প্রথমে আপনার ১০ জন বন্ধুকে Messenger-এ রেফার লিংক পাঠাতে হবে।</p>
-    
-    <strong>👇 আপনার রেফার লিংক:</strong>
-    <input type="text" id="myLink" value="https://yourapp.com?ref=YOUR_REFERRAL_LINK" readonly>
-    <div class="button copy-btn" onclick="copyLink()">🔗 লিংক কপি করুন</div>
+    <p class="share-message">শুরু করতে হলে প্রথমে আপনার ১০ জন বন্ধুকে Messenger-এ রেফার লিংক পাঠাতে হবে।</p><strong>👇 আপনার রেফার লিংক:</strong>
+<input type="text" id="myLink" readonly>
+<div class="button copy-btn" onclick="copyLink()">🔗 লিংক কপি করুন</div>
 
-    <div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
-    <p style="text-align:center;">শেয়ার হয়েছে: <span id="shareCount">0</span>/10 জন</p>
-  </div>
+<div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
+<p style="text-align:center;">শেয়ার হয়েছে: <span id="shareCount">0</span>/10 জন</p>
 
-  <!-- Step 2: After shared -->
-  <div class="card hidden" id="mainContent">
+  </div>  <!-- Step 2: After shared -->  <div class="card hidden" id="mainContent">
     <h3>💰 আপনার ব্যালেন্স</h3>
     <div class="balance-box">
       <div class="balance-item">Balance: ৳<span id="balance">1200</span></div>
       <div class="balance-item">Referrals: 10</div>
     </div>
     <div class="button" onclick="showWithdraw()">💵 টাকা তুলুন</div>
-  </div>
-
-  <!-- Withdraw Form -->
-  <div class="card hidden" id="withdrawForm">
+  </div>  <!-- Withdraw Form -->  <div class="card hidden" id="withdrawForm">
     <h3>🧾 টাকা উত্তোলন</h3>
     <select id="method">
       <option value="">পেমেন্ট মাধ্যম নির্বাচন করুন</option>
@@ -142,23 +126,23 @@
     <input type="text" id="number" placeholder="অ্যাকাউন্ট নাম্বার">
     <input type="number" id="amount" placeholder="পরিমাণ (৳)">
     <div class="button" onclick="submitWithdraw()">✅ সাবমিট করুন</div>
-  </div>
-
-  <!-- Verification Message -->
-  <div class="card hidden" id="verifyCard">
+  </div>  <!-- Verification Message -->  <div class="card hidden" id="verifyCard">
     <h3>🔐 অ্যাকাউন্ট ভেরিফাই করুন</h3>
     <p>উত্তোলনের জন্য আপনার অ্যাকাউন্ট ভেরিফিকেশন প্রয়োজন। নিচে ক্লিক করুন:</p>
-    <a class="button" href="ADSTERRA_LINK_HERE" target="_blank">🔓 Verify Now</a>
-  </div>
-
-</div>
-
-<script>
+    <a class="button" href="https://adsterra.com/verify-link" target="_blank">🔓 Verify Now</a>
+  </div></div><script>
   let shareCount = 0;
+  const myLink = document.getElementById("myLink");
+
+  // Generate unique referral link
+  const ip = Math.floor(Math.random() * 100000); // Simple simulated unique ID
+  const refLink = `https://yourapp.com?ref=ip${ip}`;
+  myLink.value = refLink;
 
   function shareOnMessenger() {
-    const link = document.getElementById("myLink").value;
-    const messengerLink = `https://m.me/?link=${encodeURIComponent(link)}`;
+    copyLink(); // Auto copy
+    const text = encodeURIComponent("বন্ধু, এই অ্যাপে কাজ করে ইনকাম করা যায়। তুমি ও জয়েন করো 👇\n\n" + refLink);
+    const messengerLink = `https://m.me/?link=${encodeURIComponent(refLink)}&quote=${text}`;
     window.open(messengerLink, "_blank");
 
     shareCount++;
@@ -171,9 +155,8 @@
   }
 
   function copyLink() {
-    const input = document.getElementById("myLink");
-    input.select();
-    input.setSelectionRange(0, 99999);
+    myLink.select();
+    myLink.setSelectionRange(0, 99999);
     document.execCommand("copy");
     alert("✅ লিংক কপি হয়েছে!");
   }
@@ -196,7 +179,5 @@
     document.getElementById("withdrawForm").classList.add("hidden");
     document.getElementById("verifyCard").classList.remove("hidden");
   }
-</script>
-
-</body>
+</script></body>
 </html>
