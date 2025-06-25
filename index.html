@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="bn">
+<!DOCTYPE html>
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>Earn App - রেফার করে প্রবেশ করুন</title>
+  <title>Earn App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -10,6 +11,7 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       background: #388e3c;
       color: white;
@@ -18,11 +20,13 @@
       font-size: 24px;
       font-weight: bold;
     }
+
     .container {
       padding: 20px;
       max-width: 600px;
       margin: auto;
     }
+
     .card {
       background: white;
       border-radius: 16px;
@@ -30,11 +34,13 @@
       padding: 20px;
       margin-bottom: 20px;
     }
+
     h3 {
       margin-top: 0;
       color: #2e7d32;
     }
-    input {
+
+    input, select {
       width: 100%;
       padding: 12px;
       margin-top: 10px;
@@ -42,6 +48,7 @@
       border-radius: 10px;
       font-size: 16px;
     }
+
     .button {
       background: #43a047;
       color: white;
@@ -53,52 +60,143 @@
       font-weight: bold;
       transition: background 0.3s ease;
     }
+
     .button:hover {
       background: #2e7d32;
     }
+
+    .copy-btn {
+      margin-top: 10px;
+      background: #00796b;
+    }
+
+    .copy-btn:hover {
+      background: #004d40;
+    }
+
     .hidden {
       display: none;
     }
+
+    .balance-box {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .balance-item {
+      background: #e0f2f1;
+      padding: 10px;
+      border-radius: 10px;
+      width: 48%;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .share-message {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #388e3c;
+      text-align: center;
+    }
   </style>
 </head>
-<body><header>Earn App - রেফার করে প্রবেশ করুন</header><div class="container">  <div class="card" id="referCard">
-    <h3>🔗 আপনার রেফার লিংক</h3>
-    <input type="text" id="refLink" value="https://yourapp.com?ref=demoUser" readonly>
-    <div class="button" onclick="copyLink()">📋 লিংক কপি করুন</div>
-    <a class="button" href="https://m.me" target="_blank">📨 Messenger খুলুন</a>
-    <p style="margin-top:10px">আপনার ১০ জন বন্ধু এই লিংকে ক্লিক করলে আপনি প্রবেশ করতে পারবেন।</p>
-    <p>রেফার কমপ্লিট: <span id="clickCount">0</span>/10</p>
-  </div>  <div class="card hidden" id="mainContent">
-    <h3>🎉 অভিনন্দন!</h3>
-    <p>আপনি সফলভাবে ১০টি রেফার সম্পন্ন করেছেন। এখন আপনি কাজ শুরু করতে পারেন।</p>
-    <div class="button">✅ কাজ শুরু করুন</div>
-  </div></div><script>
-  const refUser = "demoUser"; // এটি পরিবর্তন করুন আপনার ইউজার অনুযায়ী
-  const refLinkInput = document.getElementById("refLink");
-  const clickCountText = document.getElementById("clickCount");
+<body>
+
+<header>Earn App - রেফার করে আয় করুন</header>
+
+<div class="container">
+
+  <!-- Step 1: Invite Friends -->
+  <div class="card" id="inviteCard">
+    <h3>🎯 কাজ শুরু করার আগে</h3>
+    <p class="share-message">শুরু করতে হলে প্রথমে আপনার ১০ জন বন্ধুকে Messenger-এ রেফার লিংক পাঠাতে হবে।</p>
+    
+    <strong>👇 আপনার রেফার লিংক:</strong>
+    <input type="text" id="myLink" value="https://yourapp.com?ref=YOUR_REFERRAL_LINK" readonly>
+    <div class="button copy-btn" onclick="copyLink()">🔗 লিংক কপি করুন</div>
+
+    <div class="button" onclick="shareOnMessenger()">📩 Messenger-এ পাঠান</div>
+    <p style="text-align:center;">শেয়ার হয়েছে: <span id="shareCount">0</span>/10 জন</p>
+  </div>
+
+  <!-- Step 2: After shared -->
+  <div class="card hidden" id="mainContent">
+    <h3>💰 আপনার ব্যালেন্স</h3>
+    <div class="balance-box">
+      <div class="balance-item">Balance: ৳<span id="balance">1200</span></div>
+      <div class="balance-item">Referrals: 10</div>
+    </div>
+    <div class="button" onclick="showWithdraw()">💵 টাকা তুলুন</div>
+  </div>
+
+  <!-- Withdraw Form -->
+  <div class="card hidden" id="withdrawForm">
+    <h3>🧾 টাকা উত্তোলন</h3>
+    <select id="method">
+      <option value="">পেমেন্ট মাধ্যম নির্বাচন করুন</option>
+      <option value="bkash">Bkash</option>
+      <option value="nagad">Nagad</option>
+      <option value="rocket">Rocket</option>
+    </select>
+    <input type="text" id="number" placeholder="অ্যাকাউন্ট নাম্বার">
+    <input type="number" id="amount" placeholder="পরিমাণ (৳)">
+    <div class="button" onclick="submitWithdraw()">✅ সাবমিট করুন</div>
+  </div>
+
+  <!-- Verification Message -->
+  <div class="card hidden" id="verifyCard">
+    <h3>🔐 অ্যাকাউন্ট ভেরিফাই করুন</h3>
+    <p>উত্তোলনের জন্য আপনার অ্যাকাউন্ট ভেরিফিকেশন প্রয়োজন। নিচে ক্লিক করুন:</p>
+    <a class="button" href="ADSTERRA_LINK_HERE" target="_blank">🔓 Verify Now</a>
+  </div>
+
+</div>
+
+<script>
+  let shareCount = 0;
+
+  function shareOnMessenger() {
+    const link = document.getElementById("myLink").value;
+    const messengerLink = `https://m.me/?link=${encodeURIComponent(link)}`;
+    window.open(messengerLink, "_blank");
+
+    shareCount++;
+    document.getElementById("shareCount").innerText = shareCount;
+
+    if (shareCount >= 10) {
+      document.getElementById("inviteCard").classList.add("hidden");
+      document.getElementById("mainContent").classList.remove("hidden");
+    }
+  }
 
   function copyLink() {
-    refLinkInput.select();
+    const input = document.getElementById("myLink");
+    input.select();
+    input.setSelectionRange(0, 99999);
     document.execCommand("copy");
-    alert("✅ লিংক কপি হয়েছে! এখন Messenger-এ গিয়ে Send করুন।");
+    alert("✅ লিংক কপি হয়েছে!");
   }
 
-  // ক্লিক ট্র্যাকিং (localStorage এ সিমুলেশন)
-  const params = new URLSearchParams(window.location.search);
-  const ref = params.get("ref");
-  if (ref && ref !== refUser) {
-    let clicks = localStorage.getItem(`ref_clicks_${ref}`);
-    clicks = clicks ? parseInt(clicks) + 1 : 1;
-    localStorage.setItem(`ref_clicks_${ref}`, clicks);
+  function showWithdraw() {
+    document.getElementById("withdrawForm").classList.remove("hidden");
   }
 
-  // রেফারাল ক্লিক চেক করা (simulate)
-  let ownClicks = localStorage.getItem(`ref_clicks_${refUser}`) || 0;
-  clickCountText.innerText = ownClicks;
+  function submitWithdraw() {
+    const method = document.getElementById("method").value;
+    const number = document.getElementById("number").value;
+    const amount = document.getElementById("amount").value;
 
-  if (ownClicks >= 10) {
-    document.getElementById("referCard").classList.add("hidden");
-    document.getElementById("mainContent").classList.remove("hidden");
+    if (!method || !number || !amount) {
+      alert("⚠️ সব ঘর পূরণ করুন");
+      return;
+    }
+
+    // Simulate not verified
+    document.getElementById("withdrawForm").classList.add("hidden");
+    document.getElementById("verifyCard").classList.remove("hidden");
   }
-</script></body>
+</script>
+
+</body>
 </html>
