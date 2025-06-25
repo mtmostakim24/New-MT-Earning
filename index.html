@@ -1,232 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MT Earning Mini Bot</title>
+  <meta charset="UTF-8">
+  <title>Earn App - রেফার করে প্রবেশ করুন</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-    body { background: #f2f2f2; padding-bottom: 80px; }
-    header {
-      background: white; padding: 15px 10px;
-      display: flex; justify-content: space-between;
-      align-items: center; font-weight: bold; border-bottom: 1px solid #ddd;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #d4fc79, #96e6a1);
+      margin: 0;
+      padding: 0;
     }
-    header .title { color: #007bff; font-size: 18px; }
-    header .balance-display { font-size: 14px; color: green; }
-    .profile { text-align: center; padding: 20px; }
-    .profile img { width: 80px; height: 80px; border-radius: 50%; }
-    .name { font-size: 18px; margin: 5px 0; color: #007bff; }
-    .balance { color: gray; }
-    .usd { font-size: 20px; margin: 10px 0; }
-    .card { background: white; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .progress { height: 10px; background: #eee; border-radius: 5px; margin-top: 10px; }
-    .bar { height: 10px; background: #007bff; width: 0%; border-radius: 5px; transition: 0.3s; }
-    .nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: white; border-top: 1px solid #ccc; padding: 10px 0; }
-    .nav div { text-align: center; font-size: 14px; cursor: pointer; color: gray; }
-    .nav img { width: 24px; height: 24px; display: block; margin: 0 auto 5px; filter: grayscale(1); }
-    .nav .active { color: #007bff; font-weight: bold; }
-    .nav .active img { filter: none; }
-    .button { background: #007bff; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-top: 10px; cursor: pointer; }
-    input, select { width: 100%; padding: 8px; margin-top: 8px; border: 1px solid #ccc; border-radius: 5px; }
+    header {
+      background: #388e3c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    .button {
+      background: #43a047;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: #2e7d32;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
-<body>
-  <header>
-    <div class="title">MT Earning</div>
-    <div class="balance-display">Balance: <span id="header-balance">$0.00</span></div>
-  </header>
+<body><header>Earn App - রেফার করে প্রবেশ করুন</header><div class="container">  <div class="card" id="referCard">
+    <h3>🔗 আপনার রেফার লিংক</h3>
+    <input type="text" id="refLink" readonly>
+    <div class="button" onclick="copyLink()">📋 লিংক কপি করুন</div>
+    <div class="button" onclick="openMessenger()">📨 Messenger এ পাঠান</div>
+    <p style="margin-top:10px">আপনার ১০ জন বন্ধু এই লিংকে ক্লিক করলে আপনি প্রবেশ করতে পারবেন।</p>
+    <p>রেফার কমপ্লিট: <span id="clickCount">0</span>/10</p>
+  </div>  <div class="card hidden" id="mainContent">
+    <h3>🎉 অভিনন্দন!</h3>
+    <p>আপনি সফলভাবে ১০টি রেফার সম্পন্ন করেছেন। এখন আপনি কাজ শুরু করতে পারেন।</p>
+    <div class="button">✅ কাজ শুরু করুন</div>
+  </div></div><script>
+  const refUser = "demoUser"; // এটি পরিবর্তন করুন আপনার ইউজার অনুযায়ী
+  const refLinkInput = document.getElementById("refLink");
+  const clickCountText = document.getElementById("clickCount");
 
-  <div class="profile">
-    <a href="https://ibb.co/mCH7rjQW"><img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Polish-20250529-015530961" border="0"></a>
-    <div class="name" id="username">Username</div>
-    <div class="balance">Balance:</div>
-    <div class="usd" id="usd-balance">USD $0.00</div>
-    <div class="balance">Referrals: <span id="ref-count">0</span></div>
-  </div>
+  refLinkInput.value = `${location.origin}${location.pathname}?ref=${refUser}`;
 
-  <div class="card" id="home-card">
-    <h3 style="color: #007bff;">Today's Tasks</h3>
-    <p><b>Total Tasks:</b> <span id="total">50</span></p>
-    <p><b>Completed:</b> <span id="completed">0</span></p>
-    <p><b>Remaining:</b> <span id="remaining">50</span></p>
-    <div class="progress"><div class="bar" id="progress-bar"></div></div>
-  </div>
+  function copyLink() {
+    refLinkInput.select();
+    document.execCommand("copy");
+    alert("✅ লিংক কপি হয়েছে!");
+  }
 
-  <div class="card">
-    <h3 style="color: green;">Earnings</h3>
-    <p><b>Today's Earnings:</b> USD $<span id="todays-earning">0.00</span></p>
-    <p><b>Lifetime Earnings:</b> USD $<span id="lifetime-earning">0.00</span></p>
-  </div>
+  function openMessenger() {
+    const msgLink = refLinkInput.value;
+    const shareText = encodeURIComponent("বন্ধু, এই অ্যাপে কাজ করে আয় করা যায়। তুমি ও শুরু করো 👉 " + msgLink);
+    const messengerLink = `https://m.me/?link=${encodeURIComponent(msgLink)}&quote=${shareText}`;
+    window.open(messengerLink, '_blank');
+  }
 
-  <div class="card" id="withdraw" style="display:none;">
-    <h3 style="color: #007bff;">Withdraw</h3>
-    <p>Available Balance: <b>USD $<span id="available">0.00</span></b></p>
-    <p>Withdrawal Method</p>
-    <select>
-      <option>Select a method</option>
-      <option>Bkash $20</option>
-      <option>Nagad $20</option>
-      <option>Payeer $50</option>
-      <option>USDT (TRC20) $50</option>
-    </select>
-    <p>Amount</p>
-    <input type="text" id="withdraw-amount" placeholder="Enter amount" />
-    <p>Withdrawal Address</p>
-    <input type="text" placeholder="Enter wallet address" />
-    <div class="button" onclick="submitWithdrawal()">Submit Withdrawal</div>
-  </div>
+  // ক্লিক ট্র্যাকিং (localStorage এ সিমুলেশন)
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+  if (ref && ref !== refUser) {
+    let clicks = localStorage.getItem(`ref_clicks_${ref}`);
+    clicks = clicks ? parseInt(clicks) + 1 : 1;
+    localStorage.setItem(`ref_clicks_${ref}`, clicks);
+  }
 
-  <div class="card" id="earn" style="display:none;">
-    <div class="name">বিজ্ঞাপনগুলি দেখে উপার্জন করুন। টাস্কটি সম্পূর্ণ করতে 15 সেকেন্ড অপেক্ষা করুন এবং প্রতি টাস্কে $0.05 উপার্জন করুন!</div>
-    <h3>Today's Tasks</h3>
-    <p>Total Tasks: <span id="etotal">50</span></p>
-    <p>Completed: <span id="ecompleted">0</span></p>
-    <p>Remaining: <span id="eremaining">50</span></p>
-    <div class="button" onclick="startTask()">Start Earning ▶</div>
-    <div class="button" onclick="copyReferralLink()">Refer & Earn</div>
-    <p style="margin-top:10px; color:#444;">
-      💸 <b>বন্ধুদের শেয়ার করুন এবং $0.50 বোনাস উপার্জন করুন!</b> আপনার রেফারেল লিঙ্কটি কপি করুন এবং শেয়ার করুন যখন তারা কাজগুলি শুরু করবে তখন আপনার উপার্জন হবে। আপনি যত বেশি শেয়ার করবেন আপনার তত দ্রুত উপার্জন!আপনি চাইলে রেফার করে দিনে $5 থেকে $7 ডলার ইনকাম করতে পারবেন! আপনার রেফার লিংকটি কপি করে Facebook reels video তে কমেন্টের মধ‍্যে আপনার লিংক শেয়ার করে অল্প সময়ে বেশি ইনকাম করতে পারবেন!
-    </p>
-  </div>
+  // রেফারাল ক্লিক চেক করা (simulate)
+  let ownClicks = localStorage.getItem(`ref_clicks_${refUser}`) || 0;
+  clickCountText.innerText = ownClicks;
 
-  <div class="nav">
-    <div id="nav-home" class="active" onclick="show('home')">
-      <img src="https://i.ibb.co/Xk62qkyP/icon-156755-1280.png" alt="Home" />
-      <div>Home</div>
-    </div>
-    <div id="nav-earn" onclick="show('earn')">
-      <img src="https://i.ibb.co/8n4w6sFc/Polish-20250527-012543531.jpg" alt="Earn" />
-      <div>Earn</div>
-    </div>
-    <div id="nav-withdraw" onclick="show('withdraw')">
-      <img src="https://i.ibb.co/jkvRWMHL/10176028.png" alt="Withdraw" />
-      <div>Withdraw</div>
-    </div>
-    <div id="nav-profile" onclick="show('home')">
-      <img src="https://i.ibb.co/WNW4Cdhz/user-circles-set-78370-4704.jpg" alt="Profile" />
-      <div>Profile</div>
-    </div>
-  </div>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    const today = new Date().toLocaleDateString();
-    const tg = window.Telegram.WebApp;
-    const userId = tg.initDataUnsafe?.user?.id || Math.floor(Math.random() * 1000000);
-    const username = tg.initDataUnsafe?.user?.username || "Guest";
-    const ref = new URLSearchParams(window.location.search).get("start");
-
-    let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
-      userId, username, referrals: 0,
-      lifetimeEarning: 0, completed: 0,
-      remaining: 50, todaysEarning: 0,
-      date: today
-    };
-
-    if (ref && ref.startsWith("ref_")) {
-      const refId = ref.split("ref_")[1];
-      const referredUsers = JSON.parse(localStorage.getItem(`referrals_${refId}`)) || [];
-      if (!referredUsers.includes(userId)) {
-        referredUsers.push(userId);
-        localStorage.setItem(`referrals_${refId}`, JSON.stringify(referredUsers));
-        if (userId !== refId) {
-          const refCount = parseInt(localStorage.getItem(`ref_count_${refId}`) || "0");
-          localStorage.setItem(`ref_count_${refId}`, refCount + 1);
-        }
-      }
-    }
-
-    const refCount = parseInt(localStorage.getItem(`ref_count_${userId}`) || "0");
-    userData.referrals = refCount;
-
-    function updateStorage() {
-      localStorage.setItem("MTEarningData", JSON.stringify(userData));
-    }
-
-    function updateDisplay() {
-      document.getElementById("username").innerText = username;
-      document.getElementById("completed").innerText = userData.completed;
-      document.getElementById("remaining").innerText = userData.remaining;
-      document.getElementById("ecompleted").innerText = userData.completed;
-      document.getElementById("eremaining").innerText = userData.remaining;
-      document.getElementById("todays-earning").innerText = userData.todaysEarning.toFixed(2);
-      document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(2);
-      document.getElementById("usd-balance").innerText = "USD $" + userData.lifetimeEarning.toFixed(2);
-      document.getElementById("available").innerText = userData.lifetimeEarning.toFixed(2);
-      document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(2);
-      document.getElementById("progress-bar").style.width = (userData.completed / 50 * 100) + "%";
-      document.getElementById("ref-count").innerText = userData.referrals;
-    }
-
-    let adWindow;
-    let taskStartTime = null;
-
-    function startTask() {
-      if (userData.completed >= 50) {
-        alert("You have completed all tasks for today!");
-        return;
-      }
-
-      taskStartTime = Date.now();
-      adWindow = window.open("https://www.profitableratecpm.com/mzze4b78n?key=e3998055e23a80c5cbffb7d80a88c74c", "_blank");
-
-      const checkInterval = setInterval(() => {
-        if (adWindow.closed) {
-          clearInterval(checkInterval);
-          const elapsed = (Date.now() - taskStartTime) / 1000;
-          if (elapsed >= 15) {
-            userData.completed++;
-            userData.remaining--;
-            userData.todaysEarning += 0.05;
-            userData.lifetimeEarning += 0.05;
-            updateStorage();
-            updateDisplay();
-            alert("✅ Task completed! $0.05 added.");
-          } else {
-            alert("⏱️ You must view the ad for at least 15 seconds.");
-          }
-        }
-      }, 500);
-    }
-
-    function submitWithdrawal() {
-      const amount = parseFloat(document.getElementById("withdraw-amount").value);
-      if (isNaN(amount) || amount < 20) {
-        alert("You need at least $20 to withdraw.");
-        return;
-      }
-      if (amount > userData.lifetimeEarning) {
-        alert("Insufficient balance.");
-        return;
-      }
-      if (userData.referrals < 10) {
-        alert("আপনার এখনো ১০টি রেফার হয়নি! প্রথম বার পেমেন্ট নিতে হলে কমপক্ষে ১০টি রেফারেল দরকার। দ্রুত ১০টি রেফার কমপ্লিট করতে Facebook এর Reels Video গুলোর  কমেন্ট বক্সে আপনার রেফার লিংকটি শেয়ার করুন। অথবা আপনার Messenger এর ১৫ থেকে ২০ জন বন্ধুদের কে লিংকটি শেয়ার করে অল্প সময়ে ১০টি রেফার কমপ্লিট করতে পারেন। ");
-        return;
-      }
-      alert("Withdrawal submitted! আপনি যাদেরকে রেফার করেছেন তারা যদি এই Bot এ কাজ করে তবেই আপনি পেমেন্ট পাবেন ধন্যবাদ।  ");
-    }
-
-    function show(section) {
-      document.querySelector('.profile').style.display = (section === 'home') ? 'block' : 'none';
-      document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
-      if (section === 'home') {
-        document.querySelectorAll('.card').forEach((c, i) => { if (i < 2) c.style.display = 'block'; });
-      } else {
-        document.getElementById(section).style.display = 'block';
-      }
-      document.querySelectorAll('.nav div').forEach(div => div.classList.remove('active'));
-      document.getElementById("nav-" + section).classList.add('active');
-    }
-
-    function copyReferralLink() {
-      const refLink = `https://t.me/MTEarning_Mini_Bot?start=ref_${userId}`;
-      navigator.clipboard.writeText(refLink)
-        .then(() => alert("Referral link copied!"))
-        .catch(() => alert("Failed to copy link."));
-    }
-
-    updateDisplay();
-  </script>
-</body>
+  if (ownClicks >= 10) {
+    document.getElementById("referCard").classList.add("hidden");
+    document.getElementById("mainContent").classList.remove("hidden");
+  }
+</script></body>
 </html>
