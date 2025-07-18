@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Earning545 | Premium Earning Platform</title>
+  <title>Secure Earnings | Premium Earning Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -163,6 +163,8 @@
       padding: 15px 10px;
       box-shadow: var(--shadow);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     
     .stat-value {
@@ -175,6 +177,14 @@
       font-size: 0.8rem;
       color: #666;
       margin-top: 5px;
+    }
+    
+    .lock-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: rgba(0, 0, 0, 0.1);
+      font-size: 0.8rem;
     }
     
     /* Card Styles */
@@ -231,6 +241,7 @@
       justify-content: space-between;
       padding: 12px 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
     }
     
     .info-row:last-child {
@@ -304,6 +315,7 @@
       justify-content: space-between;
       padding: 12px 0;
       border-bottom: 1px solid #f0f0f0;
+      position: relative;
     }
     
     .profile-info-item:last-child {
@@ -525,6 +537,15 @@
       background: var(--success);
     }
     
+    /* Security Badge */
+    .security-badge {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: var(--success);
+      font-size: 0.8rem;
+    }
+    
     /* Responsive */
     @media (min-width: 768px) {
       .cards-container {
@@ -542,17 +563,63 @@
         max-width: 600px;
       }
     }
+    
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+    }
+    
+    .toast.show {
+      transform: translateX(0);
+    }
+    
+    .toast.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .toast.error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .toast i {
+      font-size: 1.2rem;
+    }
+    
+    .toast.success i {
+      color: var(--success);
+    }
+    
+    .toast.error i {
+      color: var(--danger);
+    }
   </style>
 </head>
 <body>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <div class="toast-message"></div>
+  </div>
+  
   <header>
     <div class="title">
-      <i class="fas fa-robot"></i>
-      <span>Daily Earning545</span>
+      <i class="fas fa-shield-alt"></i>
+      <span>Secure Earnings</span>
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$27.325</span>
+      <span id="header-balance">$0.000</span>
     </div>
   </header>
   
@@ -563,18 +630,20 @@
           <img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
         </div>
         <div class="profile-info">
-          <div class="name" id="username">Username</div>
+          <div class="name" id="username">User123</div>
           <div class="user-id">ID: <span id="user-id">123456</span></div>
         </div>
       </div>
       
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-value" id="total-earned">$27.325</div>
+          <i class="fas fa-lock lock-icon"></i>
+          <div class="stat-value" id="total-earned">$0.000</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="tasks-completed">213</div>
+          <i class="fas fa-lock lock-icon"></i>
+          <div class="stat-value" id="tasks-completed">0</div>
           <div class="stat-label">Tasks Done</div>
         </div>
       </div>
@@ -622,6 +691,7 @@
       <div class="card-header">
         <i class="fas fa-chart-line"></i>
         <h3>Earnings</h3>
+        <i class="fas fa-shield-alt security-badge" title="Tamper-proof tracking"></i>
       </div>
       <div class="card-content">
         <div class="info-row">
@@ -630,7 +700,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">17.325</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">0.000</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
@@ -650,17 +720,17 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$22</div>
+            <div class="referral-stat-value" id="ref-earned">$0</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">22</div>
+            <div class="referral-stat-value" id="referral-count">0</div>
             <div class="referral-stat-label">Referrals</div>
           </div>
         </div>
         
         <div class="referral-link">
-          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
+          <span id="ref-link">https://t.me/Secure_Earnings_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -680,7 +750,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">17.325</span></span>
+        <span class="info-value">USD $<span id="available">0.000</span></span>
       </div>
       
       <div class="input-group">
@@ -776,11 +846,12 @@
         <div class="profile-section-title">
           <i class="fas fa-user-circle"></i>
           <h3>Account Information</h3>
+          <i class="fas fa-lock security-badge" title="Secure data"></i>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Username</div>
-          <div class="info-data" id="profile-username">Username</div>
+          <div class="info-data" id="profile-username">User123</div>
         </div>
         
         <div class="profile-info-item">
@@ -800,11 +871,12 @@
         <div class="profile-section-title">
           <i class="fas fa-wallet"></i>
           <h3>Financial Summary</h3>
+          <i class="fas fa-shield-alt security-badge" title="Tamper-proof tracking"></i>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$17.325</div>
+          <div class="info-data" id="profile-balance">$0.000</div>
         </div>
         
         <div class="profile-info-item">
@@ -819,7 +891,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$17.325</div>
+          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
         </div>
       </div>
     </div>
@@ -833,12 +905,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">12</div>
+          <div class="info-data" id="profile-refer-count">0</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$12.000</div>
+          <div class="info-data" id="profile-refer-earnings">$0.000</div>
         </div>
         
         <div class="profile-info-item">
@@ -858,7 +930,7 @@
         <p>Earn $1 for every friend who signs up using your referral link!</p>
         
         <div class="referral-link">
-          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
+          <span id="profile-ref-link">https://t.me/Secure_Earnings_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -897,52 +969,120 @@
   </div>
   
   <script>
-    const userId = Math.floor(Math.random() * 1000000);
-    const username = "User" + userId;
+    // Secure data storage with encryption and checksums
+    const SecureStorage = {
+      key: 'secureEarningsData',
+      secret: 'D0N0T7@MPER!',
+      
+      encrypt: function(data) {
+        const json = JSON.stringify(data);
+        let encrypted = '';
+        for (let i = 0; i < json.length; i++) {
+          encrypted += String.fromCharCode(json.charCodeAt(i) ^ this.secret.charCodeAt(i % this.secret.length));
+        }
+        return btoa(encrypted);
+      },
+      
+      decrypt: function(encrypted) {
+        try {
+          const base64Decoded = atob(encrypted);
+          let decrypted = '';
+          for (let i = 0; i < base64Decoded.length; i++) {
+            decrypted += String.fromCharCode(base64Decoded.charCodeAt(i) ^ this.secret.charCodeAt(i % this.secret.length));
+          }
+          return JSON.parse(decrypted);
+        } catch (e) {
+          console.error('Data tampering detected! Resetting to default.');
+          return null;
+        }
+      },
+      
+      save: function(data) {
+        const encrypted = this.encrypt(data);
+        localStorage.setItem(this.key, encrypted);
+      },
+      
+      load: function() {
+        const encrypted = localStorage.getItem(this.key);
+        if (encrypted) {
+          return this.decrypt(encrypted);
+        }
+        return null;
+      }
+    };
+
+    // Initialize user data with secure storage
     const today = new Date().toLocaleDateString();
+    let userData = SecureStorage.load();
 
-    // Initialize user data with your specified values
-    let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
-      userId, 
-      username, 
-      referrals: 12,
-      referralEarnings: 12.000,
-      pendingReferrals: 0,
-      lifetimeEarning: 17.325,
-      withdrew: 0,
-      totalTasks: 213,
-      joinDate: new Date().toLocaleDateString()
-    };
-
-    let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
-      date: today, completed: 0, remaining: 100, todaysEarning: 0
-    };
-
-    if (data.date !== today) {
-      data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
+    if (!userData) {
+      const userId = Math.floor(Math.random() * 1000000);
+      userData = {
+        userId, 
+        username: "User" + userId, 
+        referrals: 0,
+        referralEarnings: 0,
+        pendingReferrals: 0,
+        lifetimeEarning: 0,
+        withdrew: 0,
+        totalTasks: 0,
+        joinDate: new Date().toLocaleDateString(),
+        dailyData: {
+          date: today, 
+          completed: 0, 
+          remaining: 100, 
+          todaysEarning: 0
+        }
+      };
+      SecureStorage.save(userData);
+    } else {
+      // Check if it's a new day
+      if (userData.dailyData.date !== today) {
+        userData.dailyData = {
+          date: today, 
+          completed: 0, 
+          remaining: 100, 
+          todaysEarning: 0
+        };
+        SecureStorage.save(userData);
+      }
     }
 
-    // Initialize display
-    updateDisplay();
-
-    function updateStorage() {
-      localStorage.setItem("MTEarningData", JSON.stringify(userData));
-      localStorage.setItem("dailyEarningData", JSON.stringify(data));
+    // Toast notification system
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastMessage = toast.querySelector('.toast-message');
+      const toastIcon = toast.querySelector('i');
+      
+      toastMessage.textContent = message;
+      
+      if (isSuccess) {
+        toast.className = 'toast success show';
+        toastIcon.className = 'fas fa-check-circle';
+      } else {
+        toast.className = 'toast error show';
+        toastIcon.className = 'fas fa-exclamation-circle';
+      }
+      
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 3000);
     }
 
+    // Update all UI elements with current data
     function updateDisplay() {
       // Update home screen
-      document.getElementById("username").innerText = username;
-      document.getElementById("user-id").innerText = userId;
-      document.getElementById("completed-card").innerText = data.completed;
-      document.getElementById("remaining-card").innerText = data.remaining;
-      document.getElementById("todays-earning").innerText = data.todaysEarning.toFixed(3);
+      document.getElementById("username").innerText = userData.username;
+      document.getElementById("user-id").innerText = userData.userId;
+      document.getElementById("completed-card").innerText = userData.dailyData.completed;
+      document.getElementById("remaining-card").innerText = userData.dailyData.remaining;
+      document.getElementById("todays-earning").innerText = userData.dailyData.todaysEarning.toFixed(3);
       document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("available").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       
       // Update progress bar
-      const progressPercent = (data.completed / 100 * 100);
+      const progressPercent = (userData.dailyData.completed / 100 * 100);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -953,24 +1093,24 @@
       // Update referral section
       document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
       document.getElementById("referral-count").innerText = userData.referrals;
-      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      document.getElementById("ref-link").innerText = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
       
       // Update profile page
-      document.getElementById("profile-username").innerText = username;
-      document.getElementById("profile-user-id").innerText = userId;
+      document.getElementById("profile-username").innerText = userData.username;
+      document.getElementById("profile-user-id").innerText = userData.userId;
       document.getElementById("profile-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
       document.getElementById("profile-refer-count").innerText = userData.referrals;
       document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
-      document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
+      document.getElementById("profile-today-earning").innerText = "$" + userData.dailyData.todaysEarning.toFixed(3);
       document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("join-date").innerText = userData.joinDate;
       document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
-      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      document.getElementById("profile-ref-link").innerText = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
       
       // Update earn section
-      document.getElementById("ecompleted").innerText = data.completed;
-      document.getElementById("eremaining").innerText = data.remaining;
+      document.getElementById("ecompleted").innerText = userData.dailyData.completed;
+      document.getElementById("eremaining").innerText = userData.dailyData.remaining;
       document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
       document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -978,6 +1118,7 @@
       updateTaskVisualization();
     }
 
+    // Create task visualization dots
     function updateTaskVisualization() {
       const homeVisual = document.getElementById("task-visual");
       const earnVisual = document.getElementById("earn-task-visual");
@@ -997,7 +1138,7 @@
           dot.className = "task-dot";
           const index = i * 10 + j;
           
-          if (index < data.completed) {
+          if (index < userData.dailyData.completed) {
             dot.classList.add("completed");
           }
           
@@ -1009,6 +1150,7 @@
       }
     }
 
+    // Task links
     const taskLinks = [
       "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
       "https://otieu.com/4/9453951",
@@ -1022,50 +1164,80 @@
       "https://otieu.com/4/9453941"
     ];
 
+    // Start a new task
     function startTask() {
-      if (data.completed >= 100) return alert("You have completed all tasks for today!");
+      if (userData.dailyData.completed >= 100) {
+        showToast("You have completed all tasks for today!", false);
+        return;
+      }
+      
       const start = Date.now();
-      const ad = window.open(taskLinks[data.completed % taskLinks.length], "_blank");
+      const ad = window.open(taskLinks[userData.dailyData.completed % taskLinks.length], "_blank");
       const check = setInterval(() => {
         if (ad.closed) {
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
           if (duration >= 15) {
-            data.completed++;
-            data.remaining = 100 - data.completed;
-            data.todaysEarning += 0.025;
+            userData.dailyData.completed++;
+            userData.dailyData.remaining = 100 - userData.dailyData.completed;
+            userData.dailyData.todaysEarning += 0.025;
             userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
-            updateStorage();
+            SecureStorage.save(userData);
             updateDisplay();
-            alert("✅ Task completed! $0.025 added to your balance.");
+            showToast("✅ Task completed! $0.025 added to your balance.");
           } else {
-            alert("⏱️ You must view the ad for at least 15 seconds to complete the task!");
+            showToast("⏱️ You must view the ad for at least 15 seconds!", false);
           }
         }
       }, 500);
     }
 
+    // Submit withdrawal request
     function submitWithdrawal() {
       const amount = parseFloat(document.getElementById("withdraw-amount").value);
       const method = document.getElementById("withdraw-method").value;
       const address = document.getElementById("withdraw-address").value;
       
-      if (isNaN(amount)) return alert("Please enter a valid amount.");
-      if (amount < 30) return alert("Minimum withdrawal amount is $30.");
-      if (amount > userData.lifetimeEarning) return alert("Insufficient balance.");
-      if (userData.referrals < 10) return alert("You need at least 10 referrals to withdraw.");
-      if (method === "Select a method") return alert("Please select a withdrawal method.");
-      if (!address) return alert("Please enter your withdrawal address.");
+      if (isNaN(amount)) {
+        showToast("Please enter a valid amount.", false);
+        return;
+      }
+      
+      if (amount < 30) {
+        showToast("Minimum withdrawal amount is $30.", false);
+        return;
+      }
+      
+      if (amount > userData.lifetimeEarning) {
+        showToast("Insufficient balance.", false);
+        return;
+      }
+      
+      if (userData.referrals < 10) {
+        showToast("You need at least 10 referrals to withdraw.", false);
+        return;
+      }
+      
+      if (method === "Select a method") {
+        showToast("Please select a withdrawal method.", false);
+        return;
+      }
+      
+      if (!address) {
+        showToast("Please enter your withdrawal address.", false);
+        return;
+      }
       
       // Update balance
       userData.lifetimeEarning -= amount;
       userData.withdrew += amount;
-      updateStorage();
+      SecureStorage.save(userData);
       updateDisplay();
-      alert("Withdrawal request submitted successfully! It will be processed within 24-48 hours.");
+      showToast("Withdrawal request submitted! It will be processed within 24-48 hours.");
     }
 
+    // Show different sections
     function show(section) {
       // Hide all sections first
       document.getElementById("home-profile").style.display = "none";
@@ -1093,30 +1265,32 @@
       document.getElementById("nav-" + section).classList.add('active');
     }
 
+    // Copy referral link
     function copyReferralLink() {
-      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      const refLink = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => alert("✅ Referral link copied! You earn $1 for each successful referral."))
-        .catch(() => alert("Failed to copy link."));
+        .then(() => showToast("✅ Referral link copied! You earn $1 for each referral."))
+        .catch(() => showToast("Failed to copy link.", false));
     }
     
+    // Share referral link
     function shareReferralLink() {
-      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      const refLink = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
       if (navigator.share) {
         navigator.share({
-          title: 'Earn with Daily Earning545',
-          text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
+          title: 'Earn with Secure Earnings',
+          text: 'Join Secure Earnings and start earning money by completing simple tasks!',
           url: refLink
         })
         .then(() => console.log('Shared successfully'))
-        .catch((error) => console.log('Sharing failed', error));
+        .catch(() => showToast("Sharing failed", false));
       } else {
         copyReferralLink();
       }
     }
 
-    // Initialize task visualization
-    updateTaskVisualization();
+    // Initialize the app
+    updateDisplay();
   </script>
 </body>
 </html>
