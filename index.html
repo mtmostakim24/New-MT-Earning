@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Earnings | Premium Earning Platform</title>
+  <title>Daily Earning545 | Premium Earning Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -163,8 +163,6 @@
       padding: 15px 10px;
       box-shadow: var(--shadow);
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
     
     .stat-value {
@@ -177,14 +175,6 @@
       font-size: 0.8rem;
       color: #666;
       margin-top: 5px;
-    }
-    
-    .lock-icon {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      color: rgba(0, 0, 0, 0.1);
-      font-size: 0.8rem;
     }
     
     /* Card Styles */
@@ -241,7 +231,6 @@
       justify-content: space-between;
       padding: 12px 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      position: relative;
     }
     
     .info-row:last-child {
@@ -315,7 +304,6 @@
       justify-content: space-between;
       padding: 12px 0;
       border-bottom: 1px solid #f0f0f0;
-      position: relative;
     }
     
     .profile-info-item:last-child {
@@ -537,13 +525,37 @@
       background: var(--success);
     }
     
-    /* Security Badge */
-    .security-badge {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      color: var(--success);
-      font-size: 0.8rem;
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .notification.error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .notification.warning {
+      border-left: 4px solid var(--warning);
     }
     
     /* Responsive */
@@ -563,63 +575,22 @@
         max-width: 600px;
       }
     }
-    
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transform: translateX(150%);
-      transition: transform 0.3s ease;
-    }
-    
-    .toast.show {
-      transform: translateX(0);
-    }
-    
-    .toast.success {
-      border-left: 4px solid var(--success);
-    }
-    
-    .toast.error {
-      border-left: 4px solid var(--danger);
-    }
-    
-    .toast i {
-      font-size: 1.2rem;
-    }
-    
-    .toast.success i {
-      color: var(--success);
-    }
-    
-    .toast.error i {
-      color: var(--danger);
-    }
   </style>
 </head>
 <body>
-  <div class="toast" id="toast">
+  <div class="notification" id="notification">
     <i class="fas fa-check-circle"></i>
-    <div class="toast-message"></div>
+    <span id="notification-message">Notification message</span>
   </div>
   
   <header>
     <div class="title">
-      <i class="fas fa-shield-alt"></i>
-      <span>Secure Earnings</span>
+      <i class="fas fa-robot"></i>
+      <span>Daily Earning545</span>
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$0.000</span>
+      <span id="header-balance">$32.350</span>
     </div>
   </header>
   
@@ -630,20 +601,18 @@
           <img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
         </div>
         <div class="profile-info">
-          <div class="name" id="username">User123</div>
+          <div class="name" id="username">Username</div>
           <div class="user-id">ID: <span id="user-id">123456</span></div>
         </div>
       </div>
       
       <div class="stats-container">
         <div class="stat-card">
-          <i class="fas fa-lock lock-icon"></i>
-          <div class="stat-value" id="total-earned">$0.000</div>
+          <div class="stat-value" id="total-earned">$32.350</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
-          <i class="fas fa-lock lock-icon"></i>
-          <div class="stat-value" id="tasks-completed">0</div>
+          <div class="stat-value" id="tasks-completed">614</div>
           <div class="stat-label">Tasks Done</div>
         </div>
       </div>
@@ -691,7 +660,6 @@
       <div class="card-header">
         <i class="fas fa-chart-line"></i>
         <h3>Earnings</h3>
-        <i class="fas fa-shield-alt security-badge" title="Tamper-proof tracking"></i>
       </div>
       <div class="card-content">
         <div class="info-row">
@@ -700,7 +668,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">0.000</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">32.350</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
@@ -720,17 +688,17 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$0</div>
+            <div class="referral-stat-value" id="ref-earned">$17</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">0</div>
+            <div class="referral-stat-value" id="referral-count">17</div>
             <div class="referral-stat-label">Referrals</div>
           </div>
         </div>
         
         <div class="referral-link">
-          <span id="ref-link">https://t.me/Secure_Earnings_Bot?start=ref_123456</span>
+          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -750,7 +718,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">0.000</span></span>
+        <span class="info-value">USD $<span id="available">32.350</span></span>
       </div>
       
       <div class="input-group">
@@ -846,12 +814,11 @@
         <div class="profile-section-title">
           <i class="fas fa-user-circle"></i>
           <h3>Account Information</h3>
-          <i class="fas fa-lock security-badge" title="Secure data"></i>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Username</div>
-          <div class="info-data" id="profile-username">User123</div>
+          <div class="info-data" id="profile-username">Username</div>
         </div>
         
         <div class="profile-info-item">
@@ -871,12 +838,11 @@
         <div class="profile-section-title">
           <i class="fas fa-wallet"></i>
           <h3>Financial Summary</h3>
-          <i class="fas fa-shield-alt security-badge" title="Tamper-proof tracking"></i>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$0.000</div>
+          <div class="info-data" id="profile-balance">$32.350</div>
         </div>
         
         <div class="profile-info-item">
@@ -891,7 +857,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
+          <div class="info-data" id="profile-lifetime-earning">$32.350</div>
         </div>
       </div>
     </div>
@@ -905,12 +871,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">0</div>
+          <div class="info-data" id="profile-refer-count">17</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$0.000</div>
+          <div class="info-data" id="profile-refer-earnings">$17.000</div>
         </div>
         
         <div class="profile-info-item">
@@ -930,7 +896,7 @@
         <p>Earn $1 for every friend who signs up using your referral link!</p>
         
         <div class="referral-link">
-          <span id="profile-ref-link">https://t.me/Secure_Earnings_Bot?start=ref_123456</span>
+          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -969,120 +935,78 @@
   </div>
   
   <script>
-    // Secure data storage with encryption and checksums
-    const SecureStorage = {
-      key: 'secureEarningsData',
-      secret: 'D0N0T7@MPER!',
-      
-      encrypt: function(data) {
-        const json = JSON.stringify(data);
-        let encrypted = '';
-        for (let i = 0; i < json.length; i++) {
-          encrypted += String.fromCharCode(json.charCodeAt(i) ^ this.secret.charCodeAt(i % this.secret.length));
+    // Generate persistent user ID and username
+    let userId = localStorage.getItem("userId");
+    let username = localStorage.getItem("username");
+    
+    // If not stored, generate new values
+    if (!userId) {
+      userId = Math.floor(Math.random() * 1000000);
+      localStorage.setItem("userId", userId);
+    }
+    
+    if (!username) {
+      // Check if we're in Telegram environment
+      if (window.Telegram && window.Telegram.WebApp) {
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        if (user && user.username) {
+          username = user.username;
+        } else if (user && user.first_name) {
+          username = user.first_name;
+          if (user.last_name) username += " " + user.last_name;
+        } else {
+          username = "User" + userId;
         }
-        return btoa(encrypted);
-      },
-      
-      decrypt: function(encrypted) {
-        try {
-          const base64Decoded = atob(encrypted);
-          let decrypted = '';
-          for (let i = 0; i < base64Decoded.length; i++) {
-            decrypted += String.fromCharCode(base64Decoded.charCodeAt(i) ^ this.secret.charCodeAt(i % this.secret.length));
-          }
-          return JSON.parse(decrypted);
-        } catch (e) {
-          console.error('Data tampering detected! Resetting to default.');
-          return null;
-        }
-      },
-      
-      save: function(data) {
-        const encrypted = this.encrypt(data);
-        localStorage.setItem(this.key, encrypted);
-      },
-      
-      load: function() {
-        const encrypted = localStorage.getItem(this.key);
-        if (encrypted) {
-          return this.decrypt(encrypted);
-        }
-        return null;
+      } else {
+        username = "User" + userId;
       }
+      localStorage.setItem("username", username);
+    }
+    
+    const today = new Date().toLocaleDateString();
+
+    // Initialize user data with updated values
+    let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
+      userId, 
+      username, 
+      referrals: 17,
+      referralEarnings: 17.000,
+      pendingReferrals: 0,
+      lifetimeEarning: 32.350,
+      withdrew: 0,
+      totalTasks: 614,
+      joinDate: new Date().toLocaleDateString()
     };
 
-    // Initialize user data with secure storage
-    const today = new Date().toLocaleDateString();
-    let userData = SecureStorage.load();
+    let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
+      date: today, completed: 0, remaining: 100, todaysEarning: 0
+    };
 
-    if (!userData) {
-      const userId = Math.floor(Math.random() * 1000000);
-      userData = {
-        userId, 
-        username: "User" + userId, 
-        referrals: 0,
-        referralEarnings: 0,
-        pendingReferrals: 0,
-        lifetimeEarning: 0,
-        withdrew: 0,
-        totalTasks: 0,
-        joinDate: new Date().toLocaleDateString(),
-        dailyData: {
-          date: today, 
-          completed: 0, 
-          remaining: 100, 
-          todaysEarning: 0
-        }
-      };
-      SecureStorage.save(userData);
-    } else {
-      // Check if it's a new day
-      if (userData.dailyData.date !== today) {
-        userData.dailyData = {
-          date: today, 
-          completed: 0, 
-          remaining: 100, 
-          todaysEarning: 0
-        };
-        SecureStorage.save(userData);
-      }
+    if (data.date !== today) {
+      data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
     }
 
-    // Toast notification system
-    function showToast(message, isSuccess = true) {
-      const toast = document.getElementById('toast');
-      const toastMessage = toast.querySelector('.toast-message');
-      const toastIcon = toast.querySelector('i');
-      
-      toastMessage.textContent = message;
-      
-      if (isSuccess) {
-        toast.className = 'toast success show';
-        toastIcon.className = 'fas fa-check-circle';
-      } else {
-        toast.className = 'toast error show';
-        toastIcon.className = 'fas fa-exclamation-circle';
-      }
-      
-      setTimeout(() => {
-        toast.className = 'toast';
-      }, 3000);
+    // Initialize display
+    updateDisplay();
+
+    function updateStorage() {
+      localStorage.setItem("MTEarningData", JSON.stringify(userData));
+      localStorage.setItem("dailyEarningData", JSON.stringify(data));
     }
 
-    // Update all UI elements with current data
     function updateDisplay() {
       // Update home screen
-      document.getElementById("username").innerText = userData.username;
-      document.getElementById("user-id").innerText = userData.userId;
-      document.getElementById("completed-card").innerText = userData.dailyData.completed;
-      document.getElementById("remaining-card").innerText = userData.dailyData.remaining;
-      document.getElementById("todays-earning").innerText = userData.dailyData.todaysEarning.toFixed(3);
+      document.getElementById("username").innerText = username;
+      document.getElementById("user-id").innerText = userId;
+      document.getElementById("completed-card").innerText = data.completed;
+      document.getElementById("remaining-card").innerText = data.remaining;
+      document.getElementById("todays-earning").innerText = data.todaysEarning.toFixed(3);
       document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("available").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       
       // Update progress bar
-      const progressPercent = (userData.dailyData.completed / 100 * 100);
+      const progressPercent = (data.completed / 100 * 100);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -1091,26 +1015,27 @@
       document.getElementById("tasks-completed").innerText = userData.totalTasks;
       
       // Update referral section
-      document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
+      document.getElementById("ref-earned").innerText = "$" + (userData.referralEarnings % 1 === 0 ? 
+        userData.referralEarnings.toFixed(0) : userData.referralEarnings.toFixed(2));
       document.getElementById("referral-count").innerText = userData.referrals;
-      document.getElementById("ref-link").innerText = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
+      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
       // Update profile page
-      document.getElementById("profile-username").innerText = userData.username;
-      document.getElementById("profile-user-id").innerText = userData.userId;
+      document.getElementById("profile-username").innerText = username;
+      document.getElementById("profile-user-id").innerText = userId;
       document.getElementById("profile-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
       document.getElementById("profile-refer-count").innerText = userData.referrals;
       document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
-      document.getElementById("profile-today-earning").innerText = "$" + userData.dailyData.todaysEarning.toFixed(3);
+      document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
       document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("join-date").innerText = userData.joinDate;
       document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
-      document.getElementById("profile-ref-link").innerText = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
+      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
       // Update earn section
-      document.getElementById("ecompleted").innerText = userData.dailyData.completed;
-      document.getElementById("eremaining").innerText = userData.dailyData.remaining;
+      document.getElementById("ecompleted").innerText = data.completed;
+      document.getElementById("eremaining").innerText = data.remaining;
       document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
       document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -1118,7 +1043,6 @@
       updateTaskVisualization();
     }
 
-    // Create task visualization dots
     function updateTaskVisualization() {
       const homeVisual = document.getElementById("task-visual");
       const earnVisual = document.getElementById("earn-task-visual");
@@ -1138,7 +1062,7 @@
           dot.className = "task-dot";
           const index = i * 10 + j;
           
-          if (index < userData.dailyData.completed) {
+          if (index < data.completed) {
             dot.classList.add("completed");
           }
           
@@ -1150,94 +1074,197 @@
       }
     }
 
-    // Task links
+    // FIXED taskLinks array with commas
     const taskLinks = [
       "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://otieu.com/4/9453951",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
       "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453932",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
       "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453955",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/tnpemkqn?key=5ce84b7862885391706a11f242e362f3",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
       "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453941"
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/zcvyfj5md8?key=892745830204099910a06facd9d7fa6c",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qki7bggmk?key=56448aae30c57c1a12884f48d1015b73",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qeahx1upk?key=ce615990c30e5a16cc8301547305a246",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qnjxdqt3z?key=93c8806797078a796dc98a600961ff64",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/wjifpat1?key=7d669885fc30f22ef9766bb1579ed6e2",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/zek655f0s3?key=2fc1d23d8628baa3803f3af51f00ff87",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ssqv9iem?key=05b99b8807c55b5d695f4d07c9d035a6",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ua0pj08kvt?key=551ca16550e661f9f4b92ab5c91c7da8",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/rirczvye57?key=148793959a44b361194b7091f1bbe01a",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ve2tefiez1?key=193f2b2d26235e306bf83538e615fed1",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/tnpemkqn?key=5ce84b7862885391706a11f242e362f3",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/zcvyfj5md8?key=892745830204099910a06facd9d7fa6c",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qki7bggmk?key=56448aae30c57c1a12884f48d1015b73",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qeahx1upk?key=ce615990c30e5a16cc8301547305a246",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/qnjxdqt3z?key=93c8806797078a796dc98a600961ff64",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/wjifpat1?key=7d669885fc30f22ef9766bb1579ed6e2",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/zek655f0s3?key=2fc1d23d8628baa3803f3af51f00ff87",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ssqv9iem?key=05b99b8807c55b5d695f4d07c9d035a6",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ua0pj08kvt?key=551ca16550e661f9f4b92ab5c91c7da8",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/rirczvye57?key=148793959a44b361194b7091f1bbe01a",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/ve2tefiez1?key=193f2b2d26235e306bf83538e615fed1",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      "https://www.profitableratecpm.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
+      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
+      
     ];
 
-    // Start a new task
+    function showNotification(message, type) {
+      const notification = document.getElementById("notification");
+      const messageElement = document.getElementById("notification-message");
+      
+      messageElement.textContent = message;
+      notification.className = "notification " + type;
+      notification.classList.add("show");
+      
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 3000);
+    }
+
     function startTask() {
-      if (userData.dailyData.completed >= 100) {
-        showToast("You have completed all tasks for today!", false);
+      if (data.completed >= 100) {
+        showNotification("You have completed all tasks for today!", "warning");
         return;
       }
       
       const start = Date.now();
-      const ad = window.open(taskLinks[userData.dailyData.completed % taskLinks.length], "_blank");
+      const ad = window.open(taskLinks[data.completed % taskLinks.length], "_blank");
+      
+      if (!ad) {
+        showNotification("Please allow popups to complete tasks", "error");
+        return;
+      }
+      
       const check = setInterval(() => {
         if (ad.closed) {
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
+          
           if (duration >= 15) {
-            userData.dailyData.completed++;
-            userData.dailyData.remaining = 100 - userData.dailyData.completed;
-            userData.dailyData.todaysEarning += 0.025;
+            data.completed++;
+            data.remaining = 100 - data.completed;
+            data.todaysEarning += 0.025;
             userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
-            SecureStorage.save(userData);
+            updateStorage();
             updateDisplay();
-            showToast("✅ Task completed! $0.025 added to your balance.");
+            showNotification("✅ Task completed! $0.025 added to your balance.", "success");
           } else {
-            showToast("⏱️ You must view the ad for at least 15 seconds!", false);
+            showNotification("⏱️ You must view the ad for at least 15 seconds to complete the task!", "error");
           }
         }
       }, 500);
     }
 
-    // Submit withdrawal request
     function submitWithdrawal() {
       const amount = parseFloat(document.getElementById("withdraw-amount").value);
       const method = document.getElementById("withdraw-method").value;
       const address = document.getElementById("withdraw-address").value;
       
       if (isNaN(amount)) {
-        showToast("Please enter a valid amount.", false);
+        showNotification("Please enter a valid amount", "error");
         return;
       }
-      
       if (amount < 30) {
-        showToast("Minimum withdrawal amount is $30.", false);
+        showNotification("Minimum withdrawal amount is $30", "error");
         return;
       }
-      
       if (amount > userData.lifetimeEarning) {
-        showToast("Insufficient balance.", false);
+        showNotification("Insufficient balance", "error");
         return;
       }
-      
       if (userData.referrals < 10) {
-        showToast("You need at least 10 referrals to withdraw.", false);
+        showNotification("You need at least 10 referrals to withdraw", "error");
         return;
       }
-      
       if (method === "Select a method") {
-        showToast("Please select a withdrawal method.", false);
+        showNotification("Please select a withdrawal method", "error");
         return;
       }
-      
       if (!address) {
-        showToast("Please enter your withdrawal address.", false);
+        showNotification("Please enter your withdrawal address", "error");
         return;
       }
       
       // Update balance
       userData.lifetimeEarning -= amount;
       userData.withdrew += amount;
-      SecureStorage.save(userData);
+      updateStorage();
       updateDisplay();
-      showToast("Withdrawal request submitted! It will be processed within 24-48 hours.");
+      showNotification("Withdrawal request submitted successfully! It will be processed within 24-48 hours.", "success");
     }
 
-    // Show different sections
     function show(section) {
       // Hide all sections first
       document.getElementById("home-profile").style.display = "none";
@@ -1265,32 +1292,44 @@
       document.getElementById("nav-" + section).classList.add('active');
     }
 
-    // Copy referral link
     function copyReferralLink() {
-      const refLink = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
+      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => showToast("✅ Referral link copied! You earn $1 for each referral."))
-        .catch(() => showToast("Failed to copy link.", false));
+        .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
+        .catch(() => showNotification("Failed to copy link", "error"));
     }
     
-    // Share referral link
     function shareReferralLink() {
-      const refLink = `https://t.me/Secure_Earnings_Bot?start=ref_${userData.userId}`;
-      if (navigator.share) {
+      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      
+      // Check if we're in a Telegram environment
+      if (window.Telegram && window.Telegram.WebApp) {
+        // Use Telegram's share functionality
+        window.Telegram.WebApp.share(refLink, { title: 'Earn with Daily Earning545' }, (success) => {
+          if (!success) {
+            // Fallback to copy if sharing fails
+            copyReferralLink();
+          }
+        });
+      } else if (navigator.share) {
+        // Use Web Share API for browsers that support it
         navigator.share({
-          title: 'Earn with Secure Earnings',
-          text: 'Join Secure Earnings and start earning money by completing simple tasks!',
+          title: 'Earn with Daily Earning545',
+          text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
           url: refLink
         })
-        .then(() => console.log('Shared successfully'))
-        .catch(() => showToast("Sharing failed", false));
+        .catch((error) => {
+          console.error('Sharing failed:', error);
+          copyReferralLink();
+        });
       } else {
+        // Fallback to copying the link
         copyReferralLink();
       }
     }
 
-    // Initialize the app
-    updateDisplay();
+    // Initialize task visualization
+    updateTaskVisualization();
   </script>
 </body>
 </html>
