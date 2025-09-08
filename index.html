@@ -969,12 +969,12 @@
     let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
       userId, 
       username, 
-      referrals: 17,
-      referralEarnings: 17.000,
+      referrals: 78,
+      referralEarnings: 27.000,
       pendingReferrals: 0,
-      lifetimeEarning: 32.350,
+      lifetimeEarning: 124.350,
       withdrew: 0,
-      totalTasks: 614,
+      totalTasks: 1258,
       joinDate: new Date().toLocaleDateString()
     };
 
@@ -1049,18 +1049,18 @@
       homeVisual.innerHTML = "";
       earnVisual.innerHTML = "";
       
-      // Create 100 dots (10 rows of 10)
-      for (let i = 0; i < 10; i++) {
+      // Create 100 dots (45 rows of 45)
+      for (let i = 0; i < 45; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
         row.style.justifyContent = "center";
         row.style.gap = "5px";
         row.style.marginBottom = "5px";
         
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 45; j++) {
           const dot = document.createElement("div");
           dot.className = "task-dot";
-          const index = i * 10 + j;
+          const index = i * 45 + j;
           
           if (index < data.completed) {
             dot.classList.add("completed");
