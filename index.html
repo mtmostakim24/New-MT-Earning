@@ -590,7 +590,7 @@
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$39.350</span>
+      <span id="header-balance">$27.875</span>
     </div>
   </header>
   
@@ -608,11 +608,11 @@
       
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-value" id="total-earned">$39.350</div>
+          <div class="stat-value" id="total-earned">$27.875</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="tasks-completed">614</div>
+          <div class="stat-value" id="tasks-completed">2795</div>
           <div class="stat-label">Tasks Done</div>
         </div>
       </div>
@@ -668,7 +668,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">32.350</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">147.875</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
@@ -688,11 +688,11 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$17</div>
+            <div class="referral-stat-value" id="ref-earned">$78</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">17</div>
+            <div class="referral-stat-value" id="referral-count">78</div>
             <div class="referral-stat-label">Referrals</div>
           </div>
         </div>
@@ -718,7 +718,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">32.350</span></span>
+        <span class="info-value">USD $<span id="available">27.875</span></span>
       </div>
       
       <div class="input-group">
@@ -842,12 +842,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$32.350</div>
+          <div class="info-data" id="profile-balance">$27.875</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Total Withdrew</div>
-          <div class="info-data" id="profile-withdrew">$0.000</div>
+          <div class="info-data" id="profile-withdrew">$120.000</div>
         </div>
         
         <div class="profile-info-item">
@@ -857,7 +857,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$32.350</div>
+          <div class="info-data" id="profile-lifetime-earning">$147.875</div>
         </div>
       </div>
     </div>
@@ -871,12 +871,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">17</div>
+          <div class="info-data" id="profile-refer-count">78</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$17.000</div>
+          <div class="info-data" id="profile-refer-earnings">$78.000</div>
         </div>
         
         <div class="profile-info-item">
@@ -970,11 +970,11 @@
       userId, 
       username, 
       referrals: 78,
-      referralEarnings: 27.000,
+      referralEarnings: 78.000,
       pendingReferrals: 0,
-      lifetimeEarning: 124.350,
-      withdrew: 0,
-      totalTasks: 1258,
+      lifetimeEarning: 147.875,
+      withdrew: 120,
+      totalTasks: 2795,
       joinDate: new Date().toLocaleDateString()
     };
 
@@ -1050,17 +1050,17 @@
       earnVisual.innerHTML = "";
       
       // Create 100 dots (45 rows of 45)
-      for (let i = 0; i < 45; i++) {
+      for (let i = 0; i < 10; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
         row.style.justifyContent = "center";
         row.style.gap = "5px";
         row.style.marginBottom = "5px";
         
-        for (let j = 0; j < 45; j++) {
+        for (let j = 0; j < 10; j++) {
           const dot = document.createElement("div");
           dot.className = "task-dot";
-          const index = i * 45 + j;
+          const index = i * 10 + j;
           
           if (index < data.completed) {
             dot.classList.add("completed");
@@ -1211,7 +1211,7 @@
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
           
-          if (duration >= 15) {
+          if (duration >= 45) {
             data.completed++;
             data.remaining = 100 - data.completed;
             data.todaysEarning += 0.025;
@@ -1221,7 +1221,7 @@
             updateDisplay();
             showNotification("✅ Task completed! $0.025 added to your balance.", "success");
           } else {
-            showNotification("⏱️ You must view the ad for at least 15 seconds to complete the task!", "error");
+            showNotification("⏱️ You must view the ad for at least 45 seconds to complete the task!", "error");
           }
         }
       }, 500);
