@@ -590,7 +590,7 @@
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$27.875</span>
+      <span id="header-balance">$0.000</span>
     </div>
   </header>
   
@@ -608,11 +608,11 @@
       
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-value" id="total-earned">$27.875</div>
+          <div class="stat-value" id="total-earned">$0.000</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="tasks-completed">2795</div>
+          <div class="stat-value" id="tasks-completed">0</div>
           <div class="stat-label">Tasks Done</div>
         </div>
       </div>
@@ -629,7 +629,7 @@
       <div class="card-content">
         <div class="info-row">
           <span class="info-label">Total Tasks</span>
-          <span class="info-value" id="total">100</span>
+          <span class="info-value" id="total">150</span>
         </div>
         <div class="info-row">
           <span class="info-label">Completed</span>
@@ -637,7 +637,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Remaining</span>
-          <span class="info-value" id="remaining-card">100</span>
+          <span class="info-value" id="remaining-card">150</span>
         </div>
         
         <div class="progress-container">
@@ -668,11 +668,11 @@
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">147.875</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">0.000</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
-          <span class="info-value">$0.025</span>
+          <span class="info-value">$0.020</span>
         </div>
       </div>
     </div>
@@ -688,11 +688,11 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$78</div>
+            <div class="referral-stat-value" id="ref-earned">$0</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">78</div>
+            <div class="referral-stat-value" id="referral-count">0</div>
             <div class="referral-stat-label">Referrals</div>
           </div>
         </div>
@@ -718,7 +718,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">27.875</span></span>
+        <span class="info-value">USD $<span id="available">0.000</span></span>
       </div>
       
       <div class="input-group">
@@ -760,12 +760,12 @@
       </div>
       <div class="card-content">
         <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.025 per task!
+          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 30 seconds to complete a task and earn $0.020 per task!
         </p>
         
         <div class="task-counter">
           <div class="counter-item">
-            <div class="counter-value" id="etotal">100</div>
+            <div class="counter-value" id="etotal">150</div>
             <div class="counter-label">Total Tasks</div>
           </div>
           <div class="counter-item">
@@ -773,7 +773,7 @@
             <div class="counter-label">Completed</div>
           </div>
           <div class="counter-item">
-            <div class="counter-value" id="eremaining">100</div>
+            <div class="counter-value" id="eremaining">150</div>
             <div class="counter-label">Remaining</div>
           </div>
         </div>
@@ -828,7 +828,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Join Date</div>
-          <div class="info-data" id="join-date">2023-10-15</div>
+          <div class="info-data" id="join-date">2025-07-15</div>
         </div>
       </div>
     </div>
@@ -842,12 +842,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$27.875</div>
+          <div class="info-data" id="profile-balance">$0.000</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Total Withdrew</div>
-          <div class="info-data" id="profile-withdrew">$120.000</div>
+          <div class="info-data" id="profile-withdrew">$0.00</div>
         </div>
         
         <div class="profile-info-item">
@@ -857,7 +857,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$147.875</div>
+          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
         </div>
       </div>
     </div>
@@ -871,12 +871,12 @@
         
         <div class="profile-info-item">
           <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">78</div>
+          <div class="info-data" id="profile-refer-count">0</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$78.000</div>
+          <div class="info-data" id="profile-refer-earnings">$0.00</div>
         </div>
         
         <div class="profile-info-item">
@@ -969,21 +969,21 @@
     let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
       userId, 
       username, 
-      referrals: 78,
-      referralEarnings: 78.000,
+      referrals: 0,
+      referralEarnings: 0.00,
       pendingReferrals: 0,
-      lifetimeEarning: 147.875,
-      withdrew: 120,
-      totalTasks: 2795,
+      lifetimeEarning: 0.000,
+      withdrew: 0,
+      totalTasks: 0,
       joinDate: new Date().toLocaleDateString()
     };
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
-      date: today, completed: 0, remaining: 100, todaysEarning: 0
+      date: today, completed: 0, remaining: 150, todaysEarning: 0
     };
 
     if (data.date !== today) {
-      data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
+      data = { date: today, completed: 0, remaining: 150, todaysEarning: 0 };
     }
 
     // Initialize display
@@ -1057,10 +1057,10 @@
         row.style.gap = "5px";
         row.style.marginBottom = "5px";
         
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 15; j++) {
           const dot = document.createElement("div");
           dot.className = "task-dot";
-          const index = i * 10 + j;
+          const index = i * 15 + j;
           
           if (index < data.completed) {
             dot.classList.add("completed");
@@ -1077,104 +1077,6 @@
     // FIXED taskLinks array with commas
     const taskLinks = [
       "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/tnpemkqn?key=5ce84b7862885391706a11f242e362f3",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/zcvyfj5md8?key=892745830204099910a06facd9d7fa6c",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qki7bggmk?key=56448aae30c57c1a12884f48d1015b73",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qeahx1upk?key=ce615990c30e5a16cc8301547305a246",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qnjxdqt3z?key=93c8806797078a796dc98a600961ff64",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/wjifpat1?key=7d669885fc30f22ef9766bb1579ed6e2",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/zek655f0s3?key=2fc1d23d8628baa3803f3af51f00ff87",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ssqv9iem?key=05b99b8807c55b5d695f4d07c9d035a6",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ua0pj08kvt?key=551ca16550e661f9f4b92ab5c91c7da8",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/rirczvye57?key=148793959a44b361194b7091f1bbe01a",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ve2tefiez1?key=193f2b2d26235e306bf83538e615fed1",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/tnpemkqn?key=5ce84b7862885391706a11f242e362f3",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/zcvyfj5md8?key=892745830204099910a06facd9d7fa6c",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qki7bggmk?key=56448aae30c57c1a12884f48d1015b73",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qeahx1upk?key=ce615990c30e5a16cc8301547305a246",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/qnjxdqt3z?key=93c8806797078a796dc98a600961ff64",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/wjifpat1?key=7d669885fc30f22ef9766bb1579ed6e2",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/zek655f0s3?key=2fc1d23d8628baa3803f3af51f00ff87",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ssqv9iem?key=05b99b8807c55b5d695f4d07c9d035a6",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ua0pj08kvt?key=551ca16550e661f9f4b92ab5c91c7da8",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/rirczvye57?key=148793959a44b361194b7091f1bbe01a",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/ve2tefiez1?key=193f2b2d26235e306bf83538e615fed1",
-      "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
-      "https://www.profitableratecpm.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
       "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
       
     ];
@@ -1193,7 +1095,7 @@
     }
 
     function startTask() {
-      if (data.completed >= 100) {
+      if (data.completed >= 150) {
         showNotification("You have completed all tasks for today!", "warning");
         return;
       }
@@ -1211,11 +1113,11 @@
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
           
-          if (duration >= 45) {
+          if (duration >= 4) {
             data.completed++;
-            data.remaining = 100 - data.completed;
-            data.todaysEarning += 0.025;
-            userData.lifetimeEarning += 0.025;
+            data.remaining = 150 - data.completed;
+            data.todaysEarning += 0.020;
+            userData.lifetimeEarning += 0.020;
             userData.totalTasks++;
             updateStorage();
             updateDisplay();
