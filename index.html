@@ -602,7 +602,7 @@
         </div>
         <div class="profile-info">
           <div class="name" id="username">Username</div>
-          <div class="user-id">ID: <span id="user-id">12345678</span></div>
+          <div class="user-id">ID: <span id="user-id">123456</span></div>
         </div>
       </div>
       
@@ -629,7 +629,7 @@
       <div class="card-content">
         <div class="info-row">
           <span class="info-label">Total Tasks</span>
-          <span class="info-value" id="total">150</span>
+          <span class="info-value" id="total">200</span>
         </div>
         <div class="info-row">
           <span class="info-label">Completed</span>
@@ -637,7 +637,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Remaining</span>
-          <span class="info-value" id="remaining-card">150</span>
+          <span class="info-value" id="remaining-card">200</span>
         </div>
         
         <div class="progress-container">
@@ -684,7 +684,7 @@
       </div>
       
       <div class="referral-content">
-        <p>Invite friends and earn $1 for each successful referral. Share your link and start earning!</p>
+        <p>Invite friends and earn $0.50 for each successful referral. Share your link and start earning!</p>
         
         <div class="referral-stats">
           <div class="referral-stat">
@@ -698,7 +698,7 @@
         </div>
         
         <div class="referral-link">
-          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_12345678</span>
+          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -725,12 +725,12 @@
         <label>Withdrawal Method</label>
         <select id="withdraw-method">
           <option>Select a method</option>
-          <option>Bkash $30</option>
-          <option>Nagad $30</option>
+          <option>Bkash $35</option>
+          <option>Nagad $35</option>
           <option>Payeer $50</option>
           <option>USDT (TRC20) $50</option>
-          <option>Skrill $30</option>
-          <option>Neteller $30</option>
+          <option>Skrill $35</option>
+          <option>Neteller $35</option>
           <option>Perfect Money $50</option>
         </select>
       </div>
@@ -765,7 +765,7 @@
         
         <div class="task-counter">
           <div class="counter-item">
-            <div class="counter-value" id="etotal">150</div>
+            <div class="counter-value" id="etotal">200</div>
             <div class="counter-label">Total Tasks</div>
           </div>
           <div class="counter-item">
@@ -773,7 +773,7 @@
             <div class="counter-label">Completed</div>
           </div>
           <div class="counter-item">
-            <div class="counter-value" id="eremaining">150</div>
+            <div class="counter-value" id="eremaining">200</div>
             <div class="counter-label">Remaining</div>
           </div>
         </div>
@@ -823,7 +823,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">User ID</div>
-          <div class="info-data" id="profile-user-id">12345678</div>
+          <div class="info-data" id="profile-user-id">123456</div>
         </div>
         
         <div class="profile-info-item">
@@ -893,10 +893,10 @@
       </div>
       
       <div class="referral-content">
-        <p>Earn $1 for every friend who signs up using your referral link!</p>
+        <p>Earn $0.50 for every friend who signs up using your referral link!</p>
         
         <div class="referral-link">
-          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_12345678</span>
+          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
           <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
@@ -955,7 +955,7 @@
           username = user.first_name;
           if (user.last_name) username += " " + user.last_name;
         } else {
-          username = "User" + username;
+          username = "User" + userId;
         }
       } else {
         username = "User" + userId;
@@ -979,11 +979,11 @@
     };
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
-      date: today, completed: 0, remaining: 150, todaysEarning: 0
+      date: today, completed: 0, remaining: 200, todaysEarning: 0
     };
 
     if (data.date !== today) {
-      data = { date: today, completed: 0, remaining: 150, todaysEarning: 0 };
+      data = { date: today, completed: 0, remaining: 200, todaysEarning: 0 };
     }
 
     // Initialize display
@@ -1006,7 +1006,7 @@
       document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       
       // Update progress bar
-      const progressPercent = (data.completed / 150 * 150);
+      const progressPercent = (data.completed / 100 * 100);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -1048,18 +1048,18 @@
       homeVisual.innerHTML = "";
       earnVisual.innerHTML = "";
       
-      // Create 150 dots (10 rows of 15)
-      for (let i = 0; i < 10; i++) {
+      // Create 200 dots (20 rows of 10)
+      for (let i = 0; i < 20; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
         row.style.justifyContent = "center";
         row.style.gap = "5px";
         row.style.marginBottom = "5px";
         
-        for (let j = 0; j < 15; j++) {
+        for (let j = 0; j < 10; j++) {
           const dot = document.createElement("div");
           dot.className = "task-dot";
-          const index = i * 15 + j;
+          const index = i * 10 + j;
           
           if (index < data.completed) {
             dot.classList.add("completed");
@@ -1075,8 +1075,8 @@
 
     // FIXED taskLinks array with commas
     const taskLinks = [
-      "https://www.revenuecpmgate.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",    
-      
+      "https://www.revenuecpmgate.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
+    
     ];
 
     function showNotification(message, type) {
@@ -1093,7 +1093,7 @@
     }
 
     function startTask() {
-      if (data.completed >= 150) {
+      if (data.completed >= 200) {
         showNotification("You have completed all tasks for today!", "warning");
         return;
       }
@@ -1113,7 +1113,7 @@
           
           if (duration >= 2) {
             data.completed++;
-            data.remaining = 150 - data.completed;
+            data.remaining = 200 - data.completed;
             data.todaysEarning += 0.021;
             userData.lifetimeEarning += 0.021;
             userData.totalTasks++;
@@ -1136,8 +1136,8 @@
         showNotification("Please enter a valid amount", "error");
         return;
       }
-      if (amount < 30) {
-        showNotification("Minimum withdrawal amount is $30", "error");
+      if (amount < 35) {
+        showNotification("Minimum withdrawal amount is $35", "error");
         return;
       }
       if (amount > userData.lifetimeEarning) {
@@ -1252,39 +1252,5 @@
       console.error("Geo API Error:", error);
     });
   </script>
-   <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open in Chrome</title>
-  <style>
-    body { display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;text-align:center;background:#f5f5f5; }
-    .box { background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    a.btn { display:inline-block;margin-top:15px;padding:12px 20px;background:#4285F4;color:#fff;font-weight:bold;border-radius:8px;text-decoration:none; }
-  </style>
-</head>
-<body>
-<div class="box">
-  <h2>⚠ এই সাইট শুধুই Google Chrome-এ কাজ করে</h2>
-  <p>Chrome ব্যবহার করে এই সাইট খুলুন ভালো অভিজ্ঞতার জন্য।</p>
-  <a class="btn" id="openChrome">Open in Chrome</a>
-</div>
-
-<script>
-  document.getElementById("openChrome").addEventListener("click", function () {
-    const currentUrl = location.href;
-    const ua = navigator.userAgent;
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-
-    if (isAndroid) {
-      window.location.href = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-    } else if (isIOS) {
-      window.location.href = 'googlechrome://' + currentUrl.replace(/^https?:\/\//, '');
-    } else {
-      alert("Please open this site manually in Google Chrome.");
-    }
-  });
-</script>
-</body>
 </body>
 </html>
