@@ -1008,7 +1008,7 @@
       // Update progress bar
       const progressPercent = (data.completed / 150 * 150);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
-      document.getElementById("progress-percent").innerText = progressPercent.toFixed(150) + "%";
+      document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
       // Update profile stats
       document.getElementById("total-earned").innerText = "$" + userData.lifetimeEarning.toFixed(3);
@@ -1036,7 +1036,7 @@
       document.getElementById("ecompleted").innerText = data.completed;
       document.getElementById("eremaining").innerText = data.remaining;
       document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
-      document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(150) + "%";
+      document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
       // Update task visualization
       updateTaskVisualization();
@@ -1048,7 +1048,7 @@
       homeVisual.innerHTML = "";
       earnVisual.innerHTML = "";
       
-      // Create 100 dots (10 rows of 15)
+      // Create 150 dots (10 rows of 15)
       for (let i = 0; i < 10; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
