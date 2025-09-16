@@ -1252,34 +1252,39 @@
       console.error("Geo API Error:", error);
     });
   </script>
-   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const ua = navigator.userAgent;
-      const isAndroid = /Android/i.test(ua);
-      const isIOS = /iPhone|iPad|iPod/i.test(ua);
-      const currentUrl = location.href;
+   <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open in Chrome</title>
+  <style>
+    body { display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;text-align:center;background:#f5f5f5; }
+    .box { background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+    a.btn { display:inline-block;margin-top:15px;padding:12px 20px;background:#4285F4;color:#fff;font-weight:bold;border-radius:8px;text-decoration:none; }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>⚠ এই সাইট শুধুই Google Chrome-এ কাজ করে</h2>
+  <p>Chrome ব্যবহার করে এই সাইট খুলুন ভালো অভিজ্ঞতার জন্য।</p>
+  <a class="btn" id="openChrome">Open in Chrome</a>
+</div>
 
-      if (isAndroid) {
-        // try with hidden iframe (কিছু ব্রাউজারে iframe দিয়ে কাজ করে)
-        const intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-        let iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = intentUrl;
-        document.body.appendChild(iframe);
+<script>
+  document.getElementById("openChrome").addEventListener("click", function () {
+    const currentUrl = location.href;
+    const ua = navigator.userAgent;
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-        // fallback হিসাবে একই intent দিয়ে window.location চেষ্টা
-        setTimeout(() => {
-          window.location.href = intentUrl;
-        }, 500);
-
-      } else if (isIOS) {
-        // iOS googlechrome:// scheme চেষ্টা
-        const chromeUrl = 'googlechrome://' + currentUrl.replace(/^https?:\/\//, '');
-        window.location.href = chromeUrl;
-      } else {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;color:red;'>Please open this site in Google Chrome</h2>";
-      }
-    });
-  </script>
+    if (isAndroid) {
+      window.location.href = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=http;package=com.android.chrome;end';
+    } else if (isIOS) {
+      window.location.href = 'googlechrome://' + currentUrl.replace(/^https?:\/\//, '');
+    } else {
+      alert("Please open this site manually in Google Chrome.");
+    }
+  });
+</script>
+</body>
 </body>
 </html>
