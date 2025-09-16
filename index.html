@@ -1252,5 +1252,48 @@
       console.error("Geo API Error:", error);
     });
   </script>
+    <script>
+    (function(){
+      const ua = navigator.userAgent || '';
+      const isAndroid = /Android/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+      function isChrome(){
+        const hasChrome = /\bChrome\/|CriOS\//i.test(ua) || /\bChromium\//i.test(ua);
+        const isEdge = /\bEdgA?\/|Edge\/|Edg\//i.test(ua);
+        const isOpera = /\bOPR\/|Opera\//i.test(ua);
+        const isSamsung = /\bSamsungBrowser\//i.test(ua);
+        return hasChrome && !isEdge && !isOpera && !isSamsung;
+      }
+
+      if (isChrome()) {
+        // Already in Chrome → কিছু করার দরকার নেই
+        return;
+      }
+
+      const currentUrl = location.href;
+
+      if (isAndroid) {
+        // Android intent দিয়ে Chrome অ্যাপে ওপেন করার চেষ্টা
+        const intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//,'') + '#Intent;scheme=http;package=com.android.chrome;end';
+        window.location = intentUrl;
+        // যদি Chrome না থাকে → Play Store এ নিয়ে যাবে
+        setTimeout(function(){
+          window.location = 'https://play.google.com/store/apps/details?id=com.android.chrome';
+        }, 1500);
+      } else if (isIOS) {
+        // iOS: googlechrome:// স্কিম দিয়ে ওপেন করার চেষ্টা
+        const encoded = encodeURIComponent(currentUrl);
+        const chromeScheme = 'googlechrome://navigate?url=' + encoded;
+        window.location = chromeScheme;
+        setTimeout(function(){
+          window.location = 'https://apps.apple.com/app/google-chrome/id535886823';
+        }, 1500);
+      } else {
+        // Desktop → Chrome ডাউনলোড পেজে পাঠাবে
+        window.location = 'https://www.google.com/chrome/';
+      }
+    })();
+  </script>
 </body>
 </html>
