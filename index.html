@@ -629,7 +629,7 @@
       <div class="card-content">
         <div class="info-row">
           <span class="info-label">Total Tasks</span>
-          <span class="info-value" id="total">200</span>
+          <span class="info-value" id="total">100</span>
         </div>
         <div class="info-row">
           <span class="info-label">Completed</span>
@@ -637,7 +637,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Remaining</span>
-          <span class="info-value" id="remaining-card">200</span>
+          <span class="info-value" id="remaining-card">100</span>
         </div>
         
         <div class="progress-container">
@@ -672,7 +672,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
-          <span class="info-value">$0.021</span>
+          <span class="info-value">$0.025</span>
         </div>
       </div>
     </div>
@@ -725,12 +725,12 @@
         <label>Withdrawal Method</label>
         <select id="withdraw-method">
           <option>Select a method</option>
-          <option>Bkash $35</option>
-          <option>Nagad $35</option>
+          <option>Bkash $30</option>
+          <option>Nagad $30</option>
           <option>Payeer $50</option>
           <option>USDT (TRC20) $50</option>
-          <option>Skrill $35</option>
-          <option>Neteller $35</option>
+          <option>Skrill $30</option>
+          <option>Neteller $30</option>
           <option>Perfect Money $50</option>
         </select>
       </div>
@@ -760,12 +760,12 @@
       </div>
       <div class="card-content">
         <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 30 seconds to complete a task and earn $0.021 per task!
+          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 45 seconds to complete a task and earn $0.025 per task!
         </p>
         
         <div class="task-counter">
           <div class="counter-item">
-            <div class="counter-value" id="etotal">200</div>
+            <div class="counter-value" id="etotal">100</div>
             <div class="counter-label">Total Tasks</div>
           </div>
           <div class="counter-item">
@@ -773,7 +773,7 @@
             <div class="counter-label">Completed</div>
           </div>
           <div class="counter-item">
-            <div class="counter-value" id="eremaining">200</div>
+            <div class="counter-value" id="eremaining">100</div>
             <div class="counter-label">Remaining</div>
           </div>
         </div>
@@ -979,11 +979,11 @@
     };
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
-      date: today, completed: 0, remaining: 200, todaysEarning: 0
+      date: today, completed: 0, remaining: 100, todaysEarning: 0
     };
 
     if (data.date !== today) {
-      data = { date: today, completed: 0, remaining: 200, todaysEarning: 0 };
+      data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
     }
 
     // Initialize display
@@ -1006,7 +1006,7 @@
       document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       
       // Update progress bar
-      const progressPercent = (data.completed / 200 * 200);
+      const progressPercent = (data.completed / 100 * 100);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
@@ -1048,8 +1048,8 @@
       homeVisual.innerHTML = "";
       earnVisual.innerHTML = "";
       
-      // Create 200 dots (20 rows of 10)
-      for (let i = 0; i < 20; i++) {
+      // Create 150 dots (10 rows of 15)
+      for (let i = 0; i < 10; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
         row.style.justifyContent = "center";
@@ -1075,8 +1075,107 @@
 
     // FIXED taskLinks array with commas
     const taskLinks = [
-      "https://www.revenuecpmgate.com/wb68w1x1e?key=e8de87a8e6327e4a790c89fe6f1f41e3",
-    
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      "https://premium-sm-offer.vercel.app",
+      "https://tomake-chai-vlona.vercel.app",
+      
     ];
 
     function showNotification(message, type) {
@@ -1093,7 +1192,7 @@
     }
 
     function startTask() {
-      if (data.completed >= 200) {
+      if (data.completed >= 100) {
         showNotification("You have completed all tasks for today!", "warning");
         return;
       }
@@ -1111,17 +1210,17 @@
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
           
-          if (duration >= 2) {
+          if (duration >= 45) {
             data.completed++;
-            data.remaining = 200 - data.completed;
-            data.todaysEarning += 0.021;
-            userData.lifetimeEarning += 0.021;
+            data.remaining = 100 - data.completed;
+            data.todaysEarning += 0.025;
+            userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
             updateStorage();
             updateDisplay();
-            showNotification("✅ Task completed! $0.021 added to your balance.", "success");
+            showNotification("✅ Task completed! $0.025 added to your balance.", "success");
           } else {
-            showNotification("⏱️ You must view the ad for at least 30 seconds to complete the task!", "error");
+            showNotification("⏱️ You must view the ad for at least 45 seconds to complete the task!", "error");
           }
         }
       }, 500);
@@ -1136,8 +1235,8 @@
         showNotification("Please enter a valid amount", "error");
         return;
       }
-      if (amount < 35) {
-        showNotification("Minimum withdrawal amount is $35", "error");
+      if (amount < 30) {
+        showNotification("Minimum withdrawal amount is $30", "error");
         return;
       }
       if (amount > userData.lifetimeEarning) {
@@ -1195,7 +1294,7 @@
     function copyReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
+        .then(() => showNotification("✅ Referral link copied! You earn $0.50 for each successful referral.", "success"))
         .catch(() => showNotification("Failed to copy link", "error"));
     }
     
