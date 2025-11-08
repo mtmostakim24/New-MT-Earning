@@ -195,7 +195,7 @@
       left: 0;
       height: 5px;
       width: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--primary), var(--secondary);
     }
     
     .card-header {
@@ -266,7 +266,7 @@
     
     .progress-bar {
       height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--primary), var(--secondary);
       border-radius: 10px;
       transition: var(--transition);
     }
@@ -558,6 +558,55 @@
       border-left: 4px solid var(--warning);
     }
     
+    /* Referral History Table */
+    .referral-history {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .referral-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .referral-table th,
+    .referral-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .referral-table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+    
+    .referral-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .referral-table tr:hover {
+      background: #f8fafc;
+    }
+    
+    .status-pending {
+      color: var(--warning);
+      font-weight: 600;
+    }
+    
+    .status-completed {
+      color: var(--success);
+      font-weight: 600;
+    }
+    
     /* Responsive */
     @media (min-width: 768px) {
       .cards-container {
@@ -705,6 +754,24 @@
         <button class="button" onclick="shareReferralLink()">
           <i class="fas fa-share-alt"></i> Share Referral Link
         </button>
+        
+        <!-- Referral History -->
+        <div class="referral-history">
+          <h4 style="margin: 20px 0 10px 0; color: white;">Referral History</h4>
+          <table class="referral-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Bonus</th>
+              </tr>
+            </thead>
+            <tbody id="referral-history-body">
+              <!-- Referral history will be populated here -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -883,6 +950,24 @@
           <div class="info-title">Pending Referrals</div>
           <div class="info-data" id="profile-pending-refs">0</div>
         </div>
+        
+        <!-- Referral History in Profile -->
+        <div class="referral-history" style="margin-top: 20px;">
+          <h4 style="margin-bottom: 15px; color: var(--primary);">Referral History</h4>
+          <table class="referral-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Bonus</th>
+              </tr>
+            </thead>
+            <tbody id="profile-referral-history">
+              <!-- Referral history will be populated here -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     
@@ -965,7 +1050,7 @@
     
     const today = new Date().toLocaleDateString();
 
-    // Initialize user data
+    // Initialize user data with referral system
     let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
       userId, 
       username, 
@@ -975,7 +1060,8 @@
       lifetimeEarning: 0,
       withdrew: 0,
       totalTasks: 0,
-      joinDate: new Date().toLocaleDateString()
+      joinDate: new Date().toLocaleDateString(),
+      referralHistory: []
     };
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
@@ -986,8 +1072,61 @@
       data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
     }
 
+    // Check for referral parameter in URL
+    function checkReferral() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const refCode = urlParams.get('ref');
+      
+      if (refCode && refCode !== userId.toString()) {
+        // Check if this referral is already processed
+        const existingRef = userData.referralHistory.find(ref => ref.referrerId === refCode);
+        
+        if (!existingRef) {
+          // Add new referral
+          const newReferral = {
+            id: Date.now().toString(),
+            referrerId: refCode,
+            referredId: userId,
+            date: new Date().toLocaleDateString(),
+            status: 'pending',
+            bonus: 0.50,
+            referredName: username
+          };
+          
+          userData.referralHistory.push(newReferral);
+          userData.pendingReferrals++;
+          updateStorage();
+          showNotification("🎉 Referral detected! You will earn $0.50 when you complete your first task.", "success");
+        }
+      }
+      
+      // Process pending referrals when tasks are completed
+      processReferralBonuses();
+    }
+
+    // Process referral bonuses when conditions are met
+    function processReferralBonuses() {
+      const pendingRefs = userData.referralHistory.filter(ref => ref.status === 'pending');
+      
+      pendingRefs.forEach(ref => {
+        if (data.completed >= 1) {
+          ref.status = 'completed';
+          userData.pendingReferrals--;
+          userData.referrals++;
+          userData.referralEarnings += ref.bonus;
+          userData.lifetimeEarning += ref.bonus;
+          
+          showNotification(`🎊 Referral bonus: $${ref.bonus} earned from ${ref.referredName || 'referred user'}!`, "success");
+        }
+      });
+      
+      updateStorage();
+      updateDisplay();
+    }
+
     // Initialize display
     updateDisplay();
+    checkReferral();
 
     function updateStorage() {
       localStorage.setItem("MTEarningData", JSON.stringify(userData));
@@ -1040,6 +1179,35 @@
       
       // Update task visualization
       updateTaskVisualization();
+      
+      // Update referral history
+      updateReferralHistory();
+    }
+
+    function updateReferralHistory() {
+      const historyBody = document.getElementById("referral-history-body");
+      const profileHistoryBody = document.getElementById("profile-referral-history");
+      
+      historyBody.innerHTML = "";
+      profileHistoryBody.innerHTML = "";
+      
+      if (userData.referralHistory.length === 0) {
+        historyBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #666;">No referral history yet</td></tr>`;
+        profileHistoryBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #666;">No referral history yet</td></tr>`;
+        return;
+      }
+      
+      userData.referralHistory.forEach(ref => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${ref.referredName || 'User' + ref.referredId}</td>
+          <td>${ref.date}</td>
+          <td class="status-${ref.status}">${ref.status === 'completed' ? 'Completed' : 'Pending'}</td>
+          <td>$${ref.bonus.toFixed(2)}</td>
+        `;
+        historyBody.appendChild(row.cloneNode(true));
+        profileHistoryBody.appendChild(row);
+      });
     }
 
     function updateTaskVisualization() {
@@ -1048,7 +1216,7 @@
       homeVisual.innerHTML = "";
       earnVisual.innerHTML = "";
       
-      // Create 150 dots (10 rows of 15)
+      // Create 100 dots (10 rows of 10)
       for (let i = 0; i < 10; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
@@ -1075,8 +1243,6 @@
 
     // FIXED taskLinks array with commas
     const taskLinks = [
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
       "https://premium-sm-offer.vercel.app",
       "https://tomake-chai-vlona.vercel.app",
       "https://premium-sm-offer.vercel.app",
@@ -1216,6 +1382,10 @@
             data.todaysEarning += 0.025;
             userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
+            
+            // Process referral bonuses when tasks are completed
+            processReferralBonuses();
+            
             updateStorage();
             updateDisplay();
             showNotification("✅ Task completed! $0.025 added to your balance.", "success");
@@ -1327,8 +1497,9 @@
       }
     }
 
-    // Initialize task visualization
+    // Initialize task visualization and referral history
     updateTaskVisualization();
+    updateReferralHistory();
   </script>
   
    <script>
