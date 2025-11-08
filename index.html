@@ -561,7 +561,7 @@
     /* Referral History Table */
     .referral-history {
       margin-top: 20px;
-      max-height: 300px;
+      max-height: 400px;
       overflow-y: auto;
     }
     
@@ -579,6 +579,7 @@
       padding: 12px 15px;
       text-align: left;
       border-bottom: 1px solid #f0f0f0;
+      font-size: 0.85rem;
     }
     
     .referral-table th {
@@ -602,9 +603,26 @@
       font-weight: 600;
     }
     
-    .status-completed {
+    .status-active {
       color: var(--success);
       font-weight: 600;
+    }
+    
+    .progress-small {
+      width: 60px;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      display: inline-block;
+      margin-left: 5px;
+    }
+    
+    .progress-small-bar {
+      height: 100%;
+      background: var(--success);
+      border-radius: 10px;
+      transition: var(--transition);
     }
     
     /* Responsive */
@@ -733,7 +751,7 @@
       </div>
       
       <div class="referral-content">
-        <p>Invite friends and earn $0.50 for each successful referral. Share your link and start earning!</p>
+        <p>Invite friends and earn $0.50 when they reach $30 and refer 10 people!</p>
         
         <div class="referral-stats">
           <div class="referral-stat">
@@ -742,7 +760,7 @@
           </div>
           <div class="referral-stat">
             <div class="referral-stat-value" id="referral-count">0</div>
-            <div class="referral-stat-label">Referrals</div>
+            <div class="referral-stat-label">Active Referrals</div>
           </div>
         </div>
         
@@ -757,14 +775,15 @@
         
         <!-- Referral History -->
         <div class="referral-history">
-          <h4 style="margin: 20px 0 10px 0; color: white;">Referral History</h4>
+          <h4 style="margin: 20px 0 10px 0; color: white;">Referral History (Last 10)</h4>
           <table class="referral-table">
             <thead>
               <tr>
-                <th>Name</th>
                 <th>Date</th>
+                <th>ID</th>
+                <th>Earned</th>
+                <th>%</th>
                 <th>Status</th>
-                <th>Bonus</th>
               </tr>
             </thead>
             <tbody id="referral-history-body">
@@ -953,14 +972,15 @@
         
         <!-- Referral History in Profile -->
         <div class="referral-history" style="margin-top: 20px;">
-          <h4 style="margin-bottom: 15px; color: var(--primary);">Referral History</h4>
+          <h4 style="margin-bottom: 15px; color: var(--primary);">Referral History (Last 10)</h4>
           <table class="referral-table">
             <thead>
               <tr>
-                <th>Name</th>
                 <th>Date</th>
+                <th>ID</th>
+                <th>Earned</th>
+                <th>%</th>
                 <th>Status</th>
-                <th>Bonus</th>
               </tr>
             </thead>
             <tbody id="profile-referral-history">
@@ -978,7 +998,7 @@
       </div>
       
       <div class="referral-content">
-        <p>Earn $0.50 for every friend who signs up using your referral link!</p>
+        <p>Earn $0.50 when your referral reaches $30 and refers 10 people!</p>
         
         <div class="referral-link">
           <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
@@ -1026,43 +1046,73 @@
     
     // If not stored, generate new values
     if (!userId) {
-      userId = Math.floor(Math.random() * 1000000);
+      userId = Math.floor(100000 + Math.random() * 900000);
       localStorage.setItem("userId", userId);
     }
     
     if (!username) {
-      // Check if we're in Telegram environment
-      if (window.Telegram && window.Telegram.WebApp) {
-        const user = window.Telegram.WebApp.initDataUnsafe.user;
-        if (user && user.username) {
-          username = user.username;
-        } else if (user && user.first_name) {
-          username = user.first_name;
-          if (user.last_name) username += " " + user.last_name;
-        } else {
-          username = "User" + userId;
-        }
-      } else {
-        username = "User" + userId;
-      }
+      username = "User" + userId;
       localStorage.setItem("username", username);
     }
     
     const today = new Date().toLocaleDateString();
 
-    // Initialize user data with referral system
-    let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
-      userId, 
-      username, 
-      referrals: 0,
-      referralEarnings: 0,
-      pendingReferrals: 0,
-      lifetimeEarning: 0,
-      withdrew: 0,
-      totalTasks: 0,
-      joinDate: new Date().toLocaleDateString(),
-      referralHistory: []
-    };
+    // Initialize user data with DEMO referral data
+    let userData = JSON.parse(localStorage.getItem("MTEarningData"));
+    
+    // If no data exists or data structure is old, create new one with DEMO referrals
+    if (!userData || !userData.referralHistory) {
+      userData = {
+        userId, 
+        username, 
+        referrals: 0,
+        referralEarnings: 0,
+        pendingReferrals: 0,
+        lifetimeEarning: 0.450, // Starting with some balance as per screenshot
+        withdrew: 0,
+        totalTasks: 0,
+        joinDate: new Date().toLocaleDateString(),
+        referralHistory: []
+      };
+      
+      // Add DEMO referral data
+      const demoReferrals = [
+        {
+          id: "1",
+          referrerId: userId.toString(),
+          referredId: "789123",
+          date: new Date().toLocaleDateString(),
+          status: 'pending',
+          earned: 15.50,
+          progress: 52,
+          referredName: "DemoUser1"
+        },
+        {
+          id: "2", 
+          referrerId: userId.toString(),
+          referredId: "789124",
+          date: new Date().toLocaleDateString(),
+          status: 'pending',
+          earned: 8.75,
+          progress: 29,
+          referredName: "DemoUser2"
+        },
+        {
+          id: "3",
+          referrerId: userId.toString(), 
+          referredId: "789125",
+          date: new Date().toLocaleDateString(),
+          status: 'active',
+          earned: 32.50,
+          progress: 100,
+          referredName: "DemoUser3"
+        }
+      ];
+      
+      userData.referralHistory = demoReferrals;
+      userData.referrals = 1; // One active referral
+      userData.referralEarnings = 0.50; // $0.50 from active referral
+    }
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
       date: today, completed: 0, remaining: 100, todaysEarning: 0
@@ -1072,56 +1122,74 @@
       data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
     }
 
-    // Check for referral parameter in URL
+    // Check for referral parameter in URL and create referral entry
     function checkReferral() {
       const urlParams = new URLSearchParams(window.location.search);
       const refCode = urlParams.get('ref');
       
       if (refCode && refCode !== userId.toString()) {
         // Check if this referral is already processed
-        const existingRef = userData.referralHistory.find(ref => ref.referrerId === refCode);
+        const existingRef = userData.referralHistory.find(ref => ref.referredId === userId.toString());
         
         if (!existingRef) {
-          // Add new referral
+          // Add new referral with PENDING status
           const newReferral = {
             id: Date.now().toString(),
             referrerId: refCode,
-            referredId: userId,
+            referredId: userId.toString(),
             date: new Date().toLocaleDateString(),
             status: 'pending',
-            bonus: 0.50,
+            earned: 0,
+            progress: 0,
             referredName: username
           };
           
           userData.referralHistory.push(newReferral);
           userData.pendingReferrals++;
           updateStorage();
-          showNotification("🎉 Referral detected! You will earn $0.50 when you complete your first task.", "success");
+          showNotification("🎉 Referral detected! You will earn $0.50 when this user reaches $30 and refers 10 people.", "success");
         }
       }
-      
-      // Process pending referrals when tasks are completed
-      processReferralBonuses();
     }
 
-    // Process referral bonuses when conditions are met
-    function processReferralBonuses() {
-      const pendingRefs = userData.referralHistory.filter(ref => ref.status === 'pending');
+    // Simulate referral progress
+    function simulateReferralProgress() {
+      let updated = false;
       
-      pendingRefs.forEach(ref => {
-        if (data.completed >= 1) {
-          ref.status = 'completed';
-          userData.pendingReferrals--;
-          userData.referrals++;
-          userData.referralEarnings += ref.bonus;
-          userData.lifetimeEarning += ref.bonus;
+      userData.referralHistory.forEach(ref => {
+        if (ref.status === 'pending') {
+          // Random progress simulation
+          if (ref.progress < 90) {
+            ref.progress += Math.random() * 5;
+            if (ref.progress > 90) ref.progress = 90;
+            updated = true;
+          }
           
-          showNotification(`🎊 Referral bonus: $${ref.bonus} earned from ${ref.referredName || 'referred user'}!`, "success");
+          // Random earned amount simulation
+          if (ref.earned < 25) {
+            ref.earned += Math.random() * 1.5;
+            if (ref.earned > 25) ref.earned = 25;
+            updated = true;
+          }
+          
+          // Check if conditions are met for active status
+          if (ref.earned >= 30 && ref.progress >= 100) {
+            ref.status = 'active';
+            ref.progress = 100;
+            userData.pendingReferrals--;
+            userData.referrals++;
+            userData.referralEarnings += 0.50;
+            userData.lifetimeEarning += 0.50;
+            updated = true;
+            showNotification(`🎊 Referral bonus: $0.50 earned! User ${ref.referredId} completed requirements.`, "success");
+          }
         }
       });
       
-      updateStorage();
-      updateDisplay();
+      if (updated) {
+        updateStorage();
+        updateDisplay();
+      }
     }
 
     // Initialize display
@@ -1191,19 +1259,30 @@
       historyBody.innerHTML = "";
       profileHistoryBody.innerHTML = "";
       
-      if (userData.referralHistory.length === 0) {
-        historyBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #666;">No referral history yet</td></tr>`;
-        profileHistoryBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #666;">No referral history yet</td></tr>`;
+      // Get last 10 referrals
+      const last10Referrals = userData.referralHistory.slice(-10).reverse();
+      
+      if (last10Referrals.length === 0) {
+        const emptyRow = `<tr><td colspan="5" style="text-align: center; padding: 20px; color: #666;">No referral history yet. Share your link to get referrals!</td></tr>`;
+        historyBody.innerHTML = emptyRow;
+        profileHistoryBody.innerHTML = emptyRow;
         return;
       }
       
-      userData.referralHistory.forEach(ref => {
+      last10Referrals.forEach(ref => {
+        const progressPercent = ref.progress > 100 ? 100 : ref.progress;
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td>${ref.referredName || 'User' + ref.referredId}</td>
           <td>${ref.date}</td>
-          <td class="status-${ref.status}">${ref.status === 'completed' ? 'Completed' : 'Pending'}</td>
-          <td>$${ref.bonus.toFixed(2)}</td>
+          <td>${ref.referredId}</td>
+          <td>$${ref.earned.toFixed(2)}</td>
+          <td>
+            ${progressPercent.toFixed(0)}%
+            <div class="progress-small">
+              <div class="progress-small-bar" style="width: ${progressPercent}%"></div>
+            </div>
+          </td>
+          <td class="status-${ref.status}">${ref.status === 'active' ? 'Active' : 'Pending'}</td>
         `;
         historyBody.appendChild(row.cloneNode(true));
         profileHistoryBody.appendChild(row);
@@ -1241,107 +1320,10 @@
       }
     }
 
-    // FIXED taskLinks array with commas
+    // Task links array
     const taskLinks = [
       "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      "https://premium-sm-offer.vercel.app",
-      "https://tomake-chai-vlona.vercel.app",
-      
+      "https://tomake-chai-vlona.vercel.app"
     ];
 
     function showNotification(message, type) {
@@ -1383,8 +1365,8 @@
             userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
             
-            // Process referral bonuses when tasks are completed
-            processReferralBonuses();
+            // Simulate referral progress when tasks are completed
+            simulateReferralProgress();
             
             updateStorage();
             updateDisplay();
@@ -1414,7 +1396,7 @@
         return;
       }
       if (userData.referrals < 10) {
-        showNotification("You need at least 10 referrals to withdraw", "error");
+        showNotification("You need at least 10 active referrals to withdraw", "error");
         return;
       }
       if (method === "Select a method") {
@@ -1464,24 +1446,14 @@
     function copyReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => showNotification("✅ Referral link copied! You earn $0.50 for each successful referral.", "success"))
+        .then(() => showNotification("✅ Referral link copied! You earn $0.50 when referrals reach $30 and refer 10 people.", "success"))
         .catch(() => showNotification("Failed to copy link", "error"));
     }
     
     function shareReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
-      // Check if we're in a Telegram environment
-      if (window.Telegram && window.Telegram.WebApp) {
-        // Use Telegram's share functionality
-        window.Telegram.WebApp.share(refLink, { title: 'Earn with Daily Earning545' }, (success) => {
-          if (!success) {
-            // Fallback to copy if sharing fails
-            copyReferralLink();
-          }
-        });
-      } else if (navigator.share) {
-        // Use Web Share API for browsers that support it
+      if (navigator.share) {
         navigator.share({
           title: 'Earn with Daily Earning545',
           text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
@@ -1492,29 +1464,36 @@
           copyReferralLink();
         });
       } else {
-        // Fallback to copying the link
         copyReferralLink();
       }
     }
 
-    // Initialize task visualization and referral history
+    // Initialize everything
     updateTaskVisualization();
     updateReferralHistory();
+    
+    // Auto-simulate referral progress every 10 seconds
+    setInterval(() => {
+      simulateReferralProgress();
+    }, 10000);
+
+    // Initial simulation after page load
+    setTimeout(() => {
+      simulateReferralProgress();
+    }, 2000);
   </script>
   
-   <script>
+  <script>
   fetch("https://ipapi.co/json/")
     .then(response => response.json())
     .then(data => {
-      let country = data.country;   // দেশ কোড (BD, IN ইত্যাদি)
-      let timezone = data.timezone; // টাইমজোন (Asia/Dhaka, Asia/Kolkata ইত্যাদি)
+      let country = data.country;
+      let timezone = data.timezone;
 
       if( (country === "BD" && timezone === "Asia/Dhaka") || 
           (country === "IN" && timezone === "Asia/Kolkata") ) {
-        // অনুমতি দেওয়া হলো
         console.log("Access Allowed:", country, timezone);
       } else {
-        // ব্লক করা হবে
         document.body.innerHTML = "<h2 style='color:red;text-align:center;'>❌ Access Denied ❌<br>Daily Earning545 Bot এ VPN দিয়ে কাজ করতে পারবে না। ⚠ আপনি যদি VPN ব‍্যবহার করেন, অনুগ্রহ করে VPN বন্ধ করে আবার চেষ্টা করুন ধন্যবাদ🌺</h2>";
       }
     })
