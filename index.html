@@ -195,7 +195,7 @@
       left: 0;
       height: 5px;
       width: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary);
+      background: linear-gradient(to right, var(--primary), var(--secondary));
     }
     
     .card-header {
@@ -266,7 +266,7 @@
     
     .progress-bar {
       height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary);
+      background: linear-gradient(to right, var(--primary), var(--secondary));
       border-radius: 10px;
       transition: var(--transition);
     }
@@ -557,67 +557,62 @@
     .notification.warning {
       border-left: 4px solid var(--warning);
     }
-    
-    /* Referral History Table */
+
+    /* Referral History Styles */
     .referral-history {
       margin-top: 20px;
-      max-height: 400px;
-      overflow-y: auto;
     }
-    
+
     .referral-table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: var(--shadow);
     }
-    
+
     .referral-table th,
     .referral-table td {
-      padding: 12px 15px;
+      padding: 10px 12px;
       text-align: left;
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 0.85rem;
-    }
-    
-    .referral-table th {
-      background: var(--primary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       color: white;
-      font-weight: 600;
-      position: sticky;
-      top: 0;
+      font-size: 0.75rem;
     }
-    
+
+    .referral-table th {
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+    }
+
     .referral-table tr:last-child td {
       border-bottom: none;
     }
-    
-    .referral-table tr:hover {
-      background: #f8fafc;
-    }
-    
+
     .status-pending {
       color: var(--warning);
       font-weight: 600;
     }
-    
+
     .status-active {
       color: var(--success);
       font-weight: 600;
     }
-    
+
+    .progress-cell {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
     .progress-small {
-      width: 60px;
-      height: 8px;
-      background: #e2e8f0;
+      width: 40px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 10px;
       overflow: hidden;
-      display: inline-block;
-      margin-left: 5px;
     }
-    
+
     .progress-small-bar {
       height: 100%;
       background: var(--success);
@@ -641,6 +636,12 @@
       .profile {
         max-width: 600px;
       }
+
+      .referral-table th,
+      .referral-table td {
+        font-size: 0.8rem;
+        padding: 12px 15px;
+      }
     }
   </style>
 </head>
@@ -657,7 +658,7 @@
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$0.000</span>
+      <span id="header-balance">$0.450</span>
     </div>
   </header>
   
@@ -675,7 +676,7 @@
       
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-value" id="total-earned">$0.000</div>
+          <div class="stat-value" id="total-earned">$0.450</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
@@ -735,7 +736,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">0.000</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">0.450</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
@@ -755,11 +756,11 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$0</div>
+            <div class="referral-stat-value" id="ref-earned">$0.50</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">0</div>
+            <div class="referral-stat-value" id="referral-count">1</div>
             <div class="referral-stat-label">Active Referrals</div>
           </div>
         </div>
@@ -772,16 +773,16 @@
         <button class="button" onclick="shareReferralLink()">
           <i class="fas fa-share-alt"></i> Share Referral Link
         </button>
-        
-        <!-- Referral History -->
+
+        <!-- Referral History Table -->
         <div class="referral-history">
           <h4 style="margin: 20px 0 10px 0; color: white;">Referral History (Last 10)</h4>
           <table class="referral-table">
             <thead>
               <tr>
-                <th>Date</th>
                 <th>ID</th>
                 <th>Earned</th>
+                <th>Refer</th>
                 <th>%</th>
                 <th>Status</th>
               </tr>
@@ -804,7 +805,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">0.000</span></span>
+        <span class="info-value">USD $<span id="available">0.450</span></span>
       </div>
       
       <div class="input-group">
@@ -928,7 +929,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$0.000</div>
+          <div class="info-data" id="profile-balance">$0.450</div>
         </div>
         
         <div class="profile-info-item">
@@ -943,7 +944,7 @@
         
         <div class="profile-info-item">
           <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
+          <div class="info-data" id="profile-lifetime-earning">$0.450</div>
         </div>
       </div>
     </div>
@@ -957,30 +958,30 @@
         
         <div class="profile-info-item">
           <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">0</div>
+          <div class="info-data" id="profile-refer-count">1</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$0.000</div>
+          <div class="info-data" id="profile-refer-earnings">$0.50</div>
         </div>
         
         <div class="profile-info-item">
           <div class="info-title">Pending Referrals</div>
-          <div class="info-data" id="profile-pending-refs">0</div>
+          <div class="info-data" id="profile-pending-refs">2</div>
         </div>
-        
+
         <!-- Referral History in Profile -->
         <div class="referral-history" style="margin-top: 20px;">
           <h4 style="margin-bottom: 15px; color: var(--primary);">Referral History (Last 10)</h4>
-          <table class="referral-table">
+          <table class="referral-table" style="background: #f8fafc;">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>ID</th>
-                <th>Earned</th>
-                <th>%</th>
-                <th>Status</th>
+                <th style="color: var(--dark);">ID</th>
+                <th style="color: var(--dark);">Earned</th>
+                <th style="color: var(--dark);">Refer</th>
+                <th style="color: var(--dark);">%</th>
+                <th style="color: var(--dark);">Status</th>
               </tr>
             </thead>
             <tbody id="profile-referral-history">
@@ -1057,7 +1058,7 @@
     
     const today = new Date().toLocaleDateString();
 
-    // Initialize user data with DEMO referral data
+    // Initialize user data with NEW referral system
     let userData = JSON.parse(localStorage.getItem("MTEarningData"));
     
     // If no data exists or data structure is old, create new one with DEMO referrals
@@ -1068,14 +1069,14 @@
         referrals: 0,
         referralEarnings: 0,
         pendingReferrals: 0,
-        lifetimeEarning: 0.450, // Starting with some balance as per screenshot
+        lifetimeEarning: 0.450,
         withdrew: 0,
         totalTasks: 0,
         joinDate: new Date().toLocaleDateString(),
         referralHistory: []
       };
       
-      // Add DEMO referral data
+      // Add DEMO referral data with your exact requirements
       const demoReferrals = [
         {
           id: "1",
@@ -1084,7 +1085,8 @@
           date: new Date().toLocaleDateString(),
           status: 'pending',
           earned: 15.50,
-          progress: 52,
+          referrals: 3,
+          progress: 45,
           referredName: "DemoUser1"
         },
         {
@@ -1094,7 +1096,8 @@
           date: new Date().toLocaleDateString(),
           status: 'pending',
           earned: 8.75,
-          progress: 29,
+          referrals: 1,
+          progress: 22,
           referredName: "DemoUser2"
         },
         {
@@ -1104,6 +1107,7 @@
           date: new Date().toLocaleDateString(),
           status: 'active',
           earned: 32.50,
+          referrals: 12,
           progress: 100,
           referredName: "DemoUser3"
         }
@@ -1112,6 +1116,7 @@
       userData.referralHistory = demoReferrals;
       userData.referrals = 1; // One active referral
       userData.referralEarnings = 0.50; // $0.50 from active referral
+      userData.pendingReferrals = 2; // Two pending referrals
     }
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
@@ -1140,6 +1145,7 @@
             date: new Date().toLocaleDateString(),
             status: 'pending',
             earned: 0,
+            referrals: 0,
             progress: 0,
             referredName: username
           };
@@ -1158,22 +1164,27 @@
       
       userData.referralHistory.forEach(ref => {
         if (ref.status === 'pending') {
-          // Random progress simulation
-          if (ref.progress < 90) {
-            ref.progress += Math.random() * 5;
-            if (ref.progress > 90) ref.progress = 90;
-            updated = true;
-          }
-          
-          // Random earned amount simulation
+          // Random progress simulation for earned amount
           if (ref.earned < 25) {
             ref.earned += Math.random() * 1.5;
             if (ref.earned > 25) ref.earned = 25;
             updated = true;
           }
           
+          // Random progress simulation for referrals
+          if (ref.referrals < 8) {
+            ref.referrals += Math.random() > 0.7 ? 1 : 0;
+            if (ref.referrals > 8) ref.referrals = 8;
+            updated = true;
+          }
+          
+          // Calculate overall progress percentage
+          const earnedProgress = (ref.earned / 30) * 50; // 50% weight for earnings
+          const referralProgress = (ref.referrals / 10) * 50; // 50% weight for referrals
+          ref.progress = Math.min(earnedProgress + referralProgress, 90);
+          
           // Check if conditions are met for active status
-          if (ref.earned >= 30 && ref.progress >= 100) {
+          if (ref.earned >= 30 && ref.referrals >= 10) {
             ref.status = 'active';
             ref.progress = 100;
             userData.pendingReferrals--;
@@ -1232,7 +1243,7 @@
       document.getElementById("profile-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
       document.getElementById("profile-refer-count").innerText = userData.referrals;
-      document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
+      document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(2);
       document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
       document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("join-date").innerText = userData.joinDate;
@@ -1270,22 +1281,41 @@
       }
       
       last10Referrals.forEach(ref => {
-        const progressPercent = ref.progress > 100 ? 100 : ref.progress;
+        const progressPercent = ref.progress > 100 ? 100 : Math.round(ref.progress);
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td>${ref.date}</td>
           <td>${ref.referredId}</td>
           <td>$${ref.earned.toFixed(2)}</td>
+          <td>${ref.referrals}/10</td>
           <td>
-            ${progressPercent.toFixed(0)}%
-            <div class="progress-small">
-              <div class="progress-small-bar" style="width: ${progressPercent}%"></div>
+            <div class="progress-cell">
+              ${progressPercent}%
+              <div class="progress-small">
+                <div class="progress-small-bar" style="width: ${progressPercent}%"></div>
+              </div>
             </div>
           </td>
           <td class="status-${ref.status}">${ref.status === 'active' ? 'Active' : 'Pending'}</td>
         `;
         historyBody.appendChild(row.cloneNode(true));
-        profileHistoryBody.appendChild(row);
+        
+        // For profile page with different styling
+        const profileRow = document.createElement("tr");
+        profileRow.innerHTML = `
+          <td style="color: var(--dark);">${ref.referredId}</td>
+          <td style="color: var(--dark);">$${ref.earned.toFixed(2)}</td>
+          <td style="color: var(--dark);">${ref.referrals}/10</td>
+          <td style="color: var(--dark);">
+            <div class="progress-cell">
+              ${progressPercent}%
+              <div class="progress-small">
+                <div class="progress-small-bar" style="width: ${progressPercent}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="status-${ref.status}">${ref.status === 'active' ? 'Active' : 'Pending'}</td>
+        `;
+        profileHistoryBody.appendChild(profileRow);
       });
     }
 
