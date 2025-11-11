@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Tycoon bot | Premium Earning Platform</title>
+  <title>Task Tycoon Bot | Premium Earning Platform</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -419,6 +419,96 @@
     .loading i {
       margin-right: 10px;
     }
+
+    /* Referral History Styles */
+    .referral-history {
+      margin-top: 20px;
+    }
+
+    .history-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .history-id {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .history-earned {
+      font-size: 12px;
+    }
+
+    .history-progress {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .progress-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: conic-gradient(#4CAF50 0%, #2c3e50 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      position: relative;
+    }
+
+    .progress-circle-inner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #1a2a6c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: bold;
+    }
+
+    .history-status {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      background: #ff9800;
+      color: #000;
+    }
+
+    .status-active {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .empty-history {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
@@ -784,6 +874,25 @@
         <span class="profile-info-value">0</span>
       </div>
     </div>
+
+    <!-- Referral History Section -->
+    <div class="profile-section">
+      <div class="profile-section-title">
+        <i class="fas fa-history"></i>
+        <h3>Referral History</h3>
+      </div>
+      <div class="referral-history">
+        <div class="history-header">
+          <div>ID</div>
+          <div>Earned</div>
+          <div>%</div>
+          <div>Status</div>
+        </div>
+        <div id="referral-history-list">
+          <!-- Referral history items will be generated here -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="nav">
@@ -815,6 +924,7 @@
 
   <script>
     // Telegram Bot API Configuration
+    const BOT_TOKEN = "8172603278:AAFSNtamd71DfRBgyaoMEWNG-3VwmxZ1r-0";
     const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
     // Global variables
@@ -889,7 +999,8 @@
           lifetimeEarning: 0.000,
           withdrew: 0,
           totalTasks: 0,
-          joinDate: today
+          joinDate: today,
+          referralHistory: [] // Array to store referral history
         };
         
         data = {
@@ -962,9 +1073,17 @@
         
         if (storedReferrerData) {
           const referrerData = JSON.parse(storedReferrerData);
-          referrerData.referrals += 1;
-          referrerData.referralEarnings += 1.00;
-          referrerData.lifetimeEarning += 1.00;
+          
+          // Add to referral history
+          const newReferral = {
+            id: referredUserId,
+            earned: 0,
+            progress: 0,
+            status: 'pending'
+          };
+          
+          referrerData.referralHistory.push(newReferral);
+          referrerData.pendingReferrals += 1;
           
           // Save updated referrer data
           localStorage.setItem(referrerDataKey, JSON.stringify(referrerData));
@@ -977,12 +1096,75 @@
             },
             body: JSON.stringify({
               chat_id: referrerId,
-              text: `💰 You earned $1.00 from a new referral! Total referrals: ${referrerData.referrals}`
+              text: `🎉 New referral added! User ID: ${referredUserId}. They need to earn $30 to activate your bonus.`
             })
           });
         }
       } catch (error) {
         console.error("Error updating referrer data:", error);
+      }
+    }
+
+    // Update referral progress when referred user earns
+    function updateReferralProgress(referredUserId, amountEarned) {
+      // Find all users who have this user as a referral
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('MTEarningData_')) {
+          const userDataStr = localStorage.getItem(key);
+          if (userDataStr) {
+            const userData = JSON.parse(userDataStr);
+            
+            // Check if this user has the referred user in their history
+            if (userData.referralHistory) {
+              const referralIndex = userData.referralHistory.findIndex(ref => ref.id == referredUserId);
+              
+              if (referralIndex !== -1) {
+                // Update the referral progress
+                userData.referralHistory[referralIndex].earned += amountEarned;
+                userData.referralHistory[referralIndex].progress = Math.min(100, (userData.referralHistory[referralIndex].earned / 30) * 100);
+                
+                // Check if referral is now active
+                if (userData.referralHistory[referralIndex].earned >= 30 && userData.referralHistory[referralIndex].status === 'pending') {
+                  userData.referralHistory[referralIndex].status = 'active';
+                  userData.pendingReferrals -= 1;
+                  userData.referrals += 1;
+                  userData.referralEarnings += 1.00;
+                  userData.lifetimeEarning += 1.00;
+                  
+                  // Send notification
+                  sendReferralActivationNotification(userData.userId, referredUserId);
+                }
+                
+                // Save updated user data
+                localStorage.setItem(key, JSON.stringify(userData));
+                
+                // Update display if this is the current user
+                if (userData.userId === (telegramUser ? telegramUser.id : 220376)) {
+                  updateDisplay();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Send notification when referral becomes active
+    async function sendReferralActivationNotification(userId, referredUserId) {
+      try {
+        await fetch(`${API_BASE}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: userId,
+            text: `💰 Congratulations! Your referral (ID: ${referredUserId}) has earned $30 and is now active! You received $1.00 bonus.`
+          })
+        });
+      } catch (error) {
+        console.error("Error sending activation notification:", error);
       }
     }
 
@@ -1024,12 +1206,12 @@
       document.getElementById("profile-withdrew").innerText = userData.withdrew.toFixed(3);
       document.getElementById("profile-tasks-completed").innerText = userData.totalTasks;
       
-      // Update referral section
+      // Update referral section - CHANGED TO NEW BOT LINK
       document.getElementById("ref-earned").innerText = userData.referralEarnings.toFixed(3);
       document.getElementById("referral-count").innerText = userData.referrals;
-      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userData.userId}`;
+      document.getElementById("ref-link").innerText = `https://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
       
-      // Update profile page
+      // Update profile page - CHANGED TO NEW BOT LINK
       document.getElementById("profile-username").innerText = userData.firstName || userData.username;
       document.getElementById("profile-user-id").innerText = userData.userId;
       document.getElementById("profile-refer-count").innerText = userData.referrals;
@@ -1038,7 +1220,7 @@
       document.getElementById("profile-lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("join-date").innerText = userData.joinDate;
       document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
-      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userData.userId}`;
+      document.getElementById("profile-ref-link").innerText = `https://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
       document.getElementById("profile-tasks-today").innerText = `${data.completed}/100`;
       
       // Update earn section
@@ -1047,8 +1229,44 @@
       document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
       document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
+      // Update referral history
+      updateReferralHistoryDisplay();
+      
       // Update task visualization
       updateTaskVisualization();
+    }
+
+    // Update referral history display
+    function updateReferralHistoryDisplay() {
+      const historyList = document.getElementById("referral-history-list");
+      
+      if (!userData.referralHistory || userData.referralHistory.length === 0) {
+        historyList.innerHTML = '<div class="empty-history">No referral history yet</div>';
+        return;
+      }
+      
+      historyList.innerHTML = '';
+      
+      userData.referralHistory.forEach(referral => {
+        const historyItem = document.createElement("div");
+        historyItem.className = "history-item";
+        
+        const progressPercentage = Math.min(100, (referral.earned / 30) * 100);
+        const progressColor = referral.status === 'active' ? '#4CAF50' : '#ff9800';
+        
+        historyItem.innerHTML = `
+          <div class="history-id">${referral.id}</div>
+          <div class="history-earned">$${referral.earned.toFixed(2)}</div>
+          <div class="history-progress">
+            <div class="progress-circle" style="background: conic-gradient(${progressColor} ${progressPercentage}%, #2c3e50 ${progressPercentage}%)">
+              <div class="progress-circle-inner">${Math.round(progressPercentage)}%</div>
+            </div>
+          </div>
+          <div class="history-status ${referral.status === 'active' ? 'status-active' : 'status-pending'}">${referral.status}</div>
+        `;
+        
+        historyList.appendChild(historyItem);
+      });
     }
 
     function updateTaskVisualization() {
@@ -1086,7 +1304,6 @@
       "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
       "https://data741.click/0f0bc5daed7efe886efb/cc525ceb6d/?placementName=default",
       "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      // ... other links (shortened for brevity)
     ];
 
     function showNotification(message, type) {
@@ -1127,6 +1344,10 @@
             data.todaysEarning += 0.025;
             userData.lifetimeEarning += 0.025;
             userData.totalTasks++;
+            
+            // Update referral progress for this user
+            updateReferralProgress(userData.userId, 0.025);
+            
             updateStorage();
             updateDisplay();
             showNotification("✅ Task completed! $0.025 added to your balance.", "success");
@@ -1237,7 +1458,8 @@
     function copyReferralLink() {
       if (!userData) return;
       
-      const refLink = `http://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
+      // UPDATED TO NEW BOT LINK
+      const refLink = `https://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
       navigator.clipboard.writeText(refLink)
         .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
         .catch(() => showNotification("Failed to copy link", "error"));
@@ -1246,7 +1468,8 @@
     function shareReferralLink() {
       if (!userData) return;
       
-      const refLink = `http://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
+      // UPDATED TO NEW BOT LINK
+      const refLink = `https://t.me/TaskTycoon_bot?start=ref_${userData.userId}`;
       
       // Check if we're in a Telegram environment
       if (window.Telegram && window.Telegram.WebApp) {
