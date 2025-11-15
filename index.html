@@ -279,6 +279,10 @@
       background: linear-gradient(135deg, #2196F3, #0D47A1);
     }
 
+    .btn-telegram {
+      background: linear-gradient(135deg, #0088cc, #005580);
+    }
+
     .form-group {
       margin-bottom: 15px;
     }
@@ -510,14 +514,14 @@
       opacity: 0.7;
     }
 
-    /* Registration Form Styles */
-    .registration-container {
+    /* Login Form Styles */
+    .login-container {
       max-width: 500px;
       margin: 0 auto;
       padding: 20px;
     }
 
-    .registration-card {
+    .login-card {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       padding: 25px;
@@ -525,23 +529,23 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
 
-    .registration-header {
+    .login-header {
       text-align: center;
       margin-bottom: 25px;
     }
 
-    .registration-header i {
+    .login-header i {
       font-size: 40px;
       color: #fdbb2d;
       margin-bottom: 15px;
     }
 
-    .registration-header h2 {
+    .login-header h2 {
       font-size: 24px;
       margin-bottom: 10px;
     }
 
-    .registration-header p {
+    .login-header p {
       opacity: 0.8;
       font-size: 14px;
     }
@@ -570,22 +574,110 @@
       border-color: #fdbb2d;
     }
 
-    .terms {
-      font-size: 12px;
-      text-align: center;
-      margin-top: 20px;
-      opacity: 0.7;
-    }
-
-    .login-link {
+    .register-link {
       text-align: center;
       margin-top: 20px;
       font-size: 14px;
     }
 
-    .login-link a {
+    .register-link a {
       color: #fdbb2d;
       text-decoration: none;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      margin-bottom: 25px;
+    }
+
+    .hero-section h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #fdbb2d;
+    }
+
+    .hero-section p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .feature-item i {
+      font-size: 24px;
+      color: #4CAF50;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    /* Video Section */
+    .video-section {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .video-section h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #fdbb2d;
+    }
+
+    .video-placeholder {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 40px 20px;
+      margin-bottom: 15px;
+    }
+
+    .video-placeholder i {
+      font-size: 50px;
+      color: #fdbb2d;
+      margin-bottom: 15px;
+    }
+
+    .video-placeholder p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Telegram Proof Section */
+    .telegram-proof {
+      text-align: center;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .telegram-proof h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .telegram-proof p {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -595,47 +687,122 @@
     <span id="notification-message">Notification message</span>
   </div>
 
-  <!-- Registration Section -->
-  <div id="registration-section" class="registration-container">
-    <div class="registration-card">
-      <div class="registration-header">
+  <!-- Login Section -->
+  <div id="login-section" class="login-container">
+    <div class="login-card">
+      <div class="hero-section">
+        <h1>Task Tycoon Vercel App</h1>
+        <p>আপনার আয়ের যাত্রা শুরু করুন আজই! সহজ টাস্ক সম্পন্ন করে উপার্জন করুন</p>
+        
+        <div class="features">
+          <div class="feature-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <p>প্রতিদিন $1.5 পর্যন্ত আয়</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-user-friends"></i>
+            <p>রেফারেল থেকে অতিরিক্ত আয়</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-gift"></i>
+            <p>বোনাস এবং রিওয়ার্ড</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <p>১০০% সুরক্ষিত পেমেন্ট</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="login-header">
         <i class="fas fa-robot"></i>
-        <h2>Task Tycoon Vercel App</h2>
-        <p>Create your account to start earning</p>
+        <h2>লগইন করুন</h2>
+        <p>আপনার অ্যাকাউন্টে অ্যাক্সেস পান</p>
+      </div>
+      
+      <form id="login-form">
+        <div class="form-control">
+          <label for="mobile">মোবাইল নম্বর</label>
+          <input type="tel" id="mobile" placeholder="আপনার মোবাইল নম্বর দিন" required>
+        </div>
+        
+        <div class="form-control">
+          <label for="password">পাসওয়ার্ড</label>
+          <input type="password" id="password" placeholder="আপনার পাসওয়ার্ড দিন" required>
+        </div>
+        
+        <button type="submit" class="btn">
+          <i class="fas fa-sign-in-alt"></i> লগইন করুন
+        </button>
+        
+        <div class="register-link">
+          অ্যাকাউন্ট নেই? <a href="#" id="show-register">রেজিস্ট্রেশন করুন</a>
+        </div>
+      </form>
+
+      <div class="video-section">
+        <h3>কিভাবে কাজ করবেন?</h3>
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle"></i>
+          <p>টাস্ক টাইকুন ব্যবহার করার সম্পূর্ণ গাইড</p>
+          <p>ভিডিওটি দেখে শিখুন কিভাবে সর্বোচ্চ আয় করবেন</p>
+        </div>
+        <button class="btn btn-secondary">
+          <i class="fas fa-play"></i> ভিডিও টিউটোরিয়াল দেখুন
+        </button>
+      </div>
+
+      <div class="telegram-proof">
+        <h3>পেমেন্ট প্রুফ</h3>
+        <p>আমাদের টেলিগ্রাম চ্যানেলে দেখুন সফল পেমেন্ট প্রুফ</p>
+        <button class="btn btn-telegram">
+          <i class="fab fa-telegram"></i> টেলিগ্রাম চ্যানেল জয়েন করুন
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration Section -->
+  <div id="registration-section" class="login-container" style="display:none;">
+    <div class="login-card">
+      <div class="login-header">
+        <i class="fas fa-user-plus"></i>
+        <h2>রেজিস্ট্রেশন করুন</h2>
+        <p>আপনার নতুন অ্যাকাউন্ট তৈরি করুন</p>
       </div>
       
       <form id="registration-form">
         <div class="form-control">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" placeholder="Enter your full name" required>
+          <label for="name">পুরো নাম</label>
+          <input type="text" id="name" placeholder="আপনার পুরো নাম দিন" required>
         </div>
         
         <div class="form-control">
-          <label for="mobile">Mobile Number</label>
-          <input type="tel" id="mobile" placeholder="Enter your mobile number" required>
+          <label for="mobile">মোবাইল নম্বর</label>
+          <input type="tel" id="reg-mobile" placeholder="আপনার মোবাইল নম্বর দিন" required>
         </div>
         
         <div class="form-control">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Create a password" required>
+          <label for="password">পাসওয়ার্ড</label>
+          <input type="password" id="reg-password" placeholder="একটি পাসওয়ার্ড তৈরি করুন" required>
         </div>
         
         <div class="form-control">
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+          <label for="confirm-password">পাসওয়ার্ড নিশ্চিত করুন</label>
+          <input type="password" id="confirm-password" placeholder="পাসওয়ার্ড আবার দিন" required>
         </div>
         
         <div class="form-control">
-          <label for="referral-code">Referral Code (Optional)</label>
-          <input type="text" id="referral-code" placeholder="Enter referral code if any">
+          <label for="referral-code">রেফারেল কোড (ঐচ্ছিক)</label>
+          <input type="text" id="referral-code" placeholder="রেফারেল কোড থাকলে দিন">
         </div>
         
         <button type="submit" class="btn">
-          <i class="fas fa-user-plus"></i> Register Now
+          <i class="fas fa-user-plus"></i> রেজিস্ট্রেশন করুন
         </button>
         
-        <div class="terms">
-          By registering, you agree to our Terms of Service and Privacy Policy
+        <div class="register-link">
+          ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#" id="show-login">লগইন করুন</a>
         </div>
       </form>
     </div>
@@ -777,136 +944,6 @@
       </div>
     </div>
 
-    <!-- Withdraw Section -->
-    <div class="cards-container" id="withdraw" style="display:none;">
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-money-bill-wave"></i>
-          <h3>Withdraw Funds</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Available Balance</span>
-            <span class="info-value">USD $<span id="available">0.000</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Total Withdrew</span>
-            <span class="info-value">USD $<span id="total-withdrew">0.000</span></span>
-          </div>
-          <div class="form-group">
-            <label for="withdraw-amount">Withdrawal Amount (Min: $18) Admin Fee 20%</label>
-            <input type="number" id="withdraw-amount" placeholder="Enter amount" min="30" step="0.001">
-          </div>
-          <div class="form-group">
-            <label for="withdraw-method">Withdrawal Method</label>
-            <select id="withdraw-method">
-              <option>Select a method</option>
-              <option>Bkash</option>
-              <option>Skrill</option>
-              <option>Nagad</option>
-              <option>Payoneer</option>
-              <option>Bitcoin</option>
-              <option>Ethereum</option>
-              <option>USDT (TRC20)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="withdraw-address">Withdrawal Address</label>
-            <input type="text" id="withdraw-address" placeholder="Enter your wallet address">
-          </div>
-          <button class="btn" onclick="submitWithdrawal()">
-            <i class="fas fa-paper-plane"></i> Submit Withdrawal Request
-          </button>
-          <div class="info-row" style="margin-top: 15px;">
-            <span class="info-label" style="font-size: 12px; text-align: center; width: 100%;">
-              <i class="fas fa-info-circle"></i> Withdrawal processing time: 24-48 hours
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-history"></i>
-          <h3>Withdrawal History</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Total Withdrawals</span>
-            <span class="info-value">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Last Withdrawal</span>
-            <span class="info-value">$0.000</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Last Withdrawal Date</span>
-            <span class="info-value">0000-00-00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Earn Section -->
-    <div class="cards-container" id="earn" style="display:none;">
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-coins"></i>
-          <h3>Earn Money</h3>
-        </div>
-        <div class="card-content">
-          <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-            <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.015 per task!
-          </p>
-          <div class="info-row">
-            <span class="info-label">Tasks Completed Today</span>
-            <span class="info-value" id="ecompleted">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Tasks Remaining Today</span>
-            <span class="info-value" id="eremaining">100</span>
-          </div>
-          <div class="progress-container">
-            <div class="progress-bar" id="earn-progress-bar" style="width: 0%"></div>
-          </div>
-          <div class="progress-info">
-            <span>Progress</span>
-            <span id="earn-progress-percent">0%</span>
-          </div>
-          <div class="task-visual" id="earn-task-visual">
-            <!-- Task dots will be generated here -->
-          </div>
-          <button class="btn" onclick="startTask()">
-            <i class="fas fa-play"></i> Start Task Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-gift"></i>
-          <h3>Bonus Opportunities</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Daily Login Bonus</span>
-            <span class="info-value">$0.05</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Referral Bonus</span>
-            <span class="info-value">$1.00 per referral</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Completion Bonus (100 tasks)</span>
-            <span class="info-value">$0.10</span>
-          </div>
-          <button class="btn btn-secondary" onclick="claimDailyBonus()">
-            <i class="fas fa-gift"></i> Claim Daily Bonus
-          </button>
-        </div>
-      </div>
-    </div>
-
     <!-- Profile Page -->
     <div class="profile-card" id="profile-page" style="display:none;">
       <div class="profile-section">
@@ -995,10 +1032,6 @@
           <span class="profile-info-label">Tasks Today</span>
           <span class="profile-info-value" id="profile-tasks-today">0/100</span>
         </div>
-        <div class="profile-info-item">
-          <span class="profile-info-label">Average Daily Tasks</span>
-          <span class="profile-info-value">0</span>
-        </div>
       </div>
 
       <!-- Referral History Section -->
@@ -1050,15 +1083,7 @@
   </div>
 
   <script>
-    // Telegram Bot API Configuration
-    const BOT_TOKEN = "8172603278:AAFSNtamd71DfRBgyaoMEWNG-3VwmxZ1r-0";
-    const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
-    
-    // 🔥 ADMIN USER ID - REPLACE WITH YOUR ACTUAL TELEGRAM USER ID 🔥
-    const ADMIN_USER_ID = 6584468904; // Change this to your actual Telegram user ID
-
     // Global variables
-    let telegramUser = null;
     let userData = null;
     let data = null;
     let currentUser = null;
@@ -1084,11 +1109,27 @@
       return users.hasOwnProperty(mobile);
     }
 
+    // Get user IP address (simulated)
+    function getUserIP() {
+      return "192.168." + Math.floor(Math.random() * 255) + "." + Math.floor(Math.random() * 255);
+    }
+
+    // Check if IP address already has an account
+    function isIPRegistered(ip) {
+      const ipUsers = JSON.parse(localStorage.getItem('ipUsers') || '{}');
+      return ipUsers.hasOwnProperty(ip);
+    }
+
     // Register new user
     function registerUser(userData) {
       const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
       users[userData.mobile] = userData;
       localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      // Store IP address to prevent multiple accounts
+      const ipUsers = JSON.parse(localStorage.getItem('ipUsers') || '{}');
+      ipUsers[userData.ip] = userData.mobile;
+      localStorage.setItem('ipUsers', JSON.stringify(ipUsers));
       
       // Set current user
       localStorage.setItem('currentUser', JSON.stringify(userData));
@@ -1145,15 +1186,15 @@
       // Update display
       updateDisplay();
       
-      // Check for referral
+      // Check for referral and update referrer's data
       if (user.referredBy) {
-        checkForReferral(userId, user.referredBy);
+        updateReferrerData(user.referredBy, userId);
       }
     }
 
-    // Check if user was referred
-    async function checkForReferral(userId, referrerCode) {
-      console.log(`User ${userId} was referred by ${referrerCode}`);
+    // ✅ FIXED: Update referrer's data - COMPLETELY REWRITTEN
+    function updateReferrerData(referrerCode, referredUserId) {
+      console.log("🔄 Updating referrer data for code:", referrerCode, "Referred user:", referredUserId);
       
       // Find referrer by code
       const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
@@ -1167,33 +1208,14 @@
       }
       
       if (referrer) {
-        // Store who referred this user
-        userData.referredBy = referrer.id;
-        localStorage.setItem(`MTEarningData_${userId}`, JSON.stringify(userData));
+        console.log("✅ Found referrer:", referrer.name);
         
-        // Update referrer's data
-        await updateReferrerData(referrer.id, userId);
-        showNotification("🎉 Welcome! You joined via referral link.", "success");
-      }
-    }
-
-    // Update referrer's data
-    async function updateReferrerData(referrerId, referredUserId) {
-      try {
-        // Get referrer's data from localStorage
-        const referrerDataKey = `MTEarningData_${referrerId}`;
+        // Get referrer's data
+        const referrerDataKey = `MTEarningData_${referrer.id}`;
         const storedReferrerData = localStorage.getItem(referrerDataKey);
         
         if (storedReferrerData) {
           const referrerData = JSON.parse(storedReferrerData);
-          
-          // Add to referral history
-          const newReferral = {
-            id: referredUserId,
-            earned: 0,
-            progress: 0,
-            status: 'pending'
-          };
           
           // Initialize referralHistory if it doesn't exist
           if (!referrerData.referralHistory) {
@@ -1203,21 +1225,85 @@
           // Check if referral already exists to avoid duplicates
           const existingReferral = referrerData.referralHistory.find(ref => ref.id === referredUserId);
           if (!existingReferral) {
+            // Add new referral
+            const newReferral = {
+              id: referredUserId,
+              earned: 0,
+              progress: 0,
+              status: 'pending'
+            };
+            
             referrerData.referralHistory.push(newReferral);
             referrerData.pendingReferrals = (referrerData.pendingReferrals || 0) + 1;
             
             // Save updated referrer data
             localStorage.setItem(referrerDataKey, JSON.stringify(referrerData));
             
-            console.log(`Referral added: ${referredUserId} referred by ${referrerId}`);
+            console.log("✅ Referral added successfully!");
+            showNotification("🎉 Referral added! You'll earn $1 when they complete $15 in tasks.", "success");
+            
+            // Update display if referrer is current user
+            if (currentUser && referrerData.userId === currentUser.id) {
+              updateDisplay();
+            }
           } else {
-            console.log(`Referral already exists: ${referredUserId}`);
+            console.log("ℹ️ Referral already exists");
           }
         } else {
-          console.log(`Referrer data not found for ID: ${referrerId}`);
+          console.log("❌ Referrer data not found");
         }
-      } catch (error) {
-        console.error("Error updating referrer data:", error);
+      } else {
+        console.log("❌ Referrer not found with code:", referrerCode);
+        showNotification("Invalid referral code", "warning");
+      }
+    }
+
+    // ✅ FIXED: Update referral progress when referred user earns
+    function updateReferralProgress(referredUserId, amountEarned) {
+      console.log("🔄 Updating referral progress for:", referredUserId, "Amount:", amountEarned);
+      
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
+      
+      for (const mobile in users) {
+        const user = users[mobile];
+        const userDataKey = `MTEarningData_${user.id}`;
+        const storedUserData = localStorage.getItem(userDataKey);
+        
+        if (storedUserData) {
+          const userData = JSON.parse(storedUserData);
+          
+          if (userData.referralHistory && userData.referralHistory.length > 0) {
+            const referralIndex = userData.referralHistory.findIndex(ref => ref.id == referredUserId);
+            
+            if (referralIndex !== -1) {
+              console.log("✅ Found referral in user's history:", userData.userId);
+              
+              // Update the referral progress
+              userData.referralHistory[referralIndex].earned += amountEarned;
+              userData.referralHistory[referralIndex].progress = Math.min(100, (userData.referralHistory[referralIndex].earned / 15) * 100);
+              
+              // Check if referral is now active
+              if (userData.referralHistory[referralIndex].earned >= 15 && userData.referralHistory[referralIndex].status === 'pending') {
+                userData.referralHistory[referralIndex].status = 'active';
+                userData.pendingReferrals = Math.max(0, (userData.pendingReferrals || 0) - 1);
+                userData.referrals = (userData.referrals || 0) + 1;
+                userData.referralEarnings = (userData.referralEarnings || 0) + 1.00;
+                userData.lifetimeEarning = (userData.lifetimeEarning || 0) + 1.00;
+                
+                console.log("🎉 Referral activated! Bonus added.");
+                showNotification("💰 Referral bonus! $1.00 added to your balance.", "success");
+              }
+              
+              // Save updated user data
+              localStorage.setItem(userDataKey, JSON.stringify(userData));
+              
+              // Update display if this is the current user
+              if (currentUser && userData.userId === currentUser.id) {
+                updateDisplay();
+              }
+            }
+          }
+        }
       }
     }
 
@@ -1231,17 +1317,37 @@
         currentUser = JSON.parse(storedCurrentUser);
         loadUserData(currentUser);
       } else {
-        // User is not registered, show registration form
-        document.getElementById('registration-section').style.display = 'block';
+        // User is not registered, show login form
+        document.getElementById('login-section').style.display = 'block';
         document.getElementById('main-app').style.display = 'none';
+        
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const mobile = document.getElementById('mobile').value;
+          const password = document.getElementById('password').value;
+          
+          // Validate login
+          const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
+          if (users[mobile] && users[mobile].password === password) {
+            // Login successful
+            localStorage.setItem('currentUser', JSON.stringify(users[mobile]));
+            currentUser = users[mobile];
+            loadUserData(currentUser);
+            showNotification("Login successful!", "success");
+          } else {
+            showNotification("Invalid mobile number or password", "error");
+          }
+        });
         
         // Handle registration form submission
         document.getElementById('registration-form').addEventListener('submit', function(e) {
           e.preventDefault();
           
           const name = document.getElementById('name').value;
-          const mobile = document.getElementById('mobile').value;
-          const password = document.getElementById('password').value;
+          const mobile = document.getElementById('reg-mobile').value;
+          const password = document.getElementById('reg-password').value;
           const confirmPassword = document.getElementById('confirm-password').value;
           const referralCode = document.getElementById('referral-code').value;
           
@@ -1256,6 +1362,13 @@
             return;
           }
           
+          // Check IP address
+          const userIP = getUserIP();
+          if (isIPRegistered(userIP)) {
+            showNotification("Only one account per device is allowed", "error");
+            return;
+          }
+          
           // Generate user ID and referral code
           const userId = Math.floor(100000 + Math.random() * 900000);
           const userReferralCode = generateReferralCode();
@@ -1267,11 +1380,25 @@
             mobile: mobile,
             password: password,
             referralCode: userReferralCode,
-            referredBy: referralCode || null
+            referredBy: referralCode || null,
+            ip: userIP
           };
           
           // Register user
           registerUser(newUser);
+        });
+        
+        // Toggle between login and registration
+        document.getElementById('show-register').addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('registration-section').style.display = 'block';
+        });
+        
+        document.getElementById('show-login').addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('registration-section').style.display = 'none';
+          document.getElementById('login-section').style.display = 'block';
         });
         
         // Check URL for referral code
@@ -1279,7 +1406,18 @@
         const refCode = urlParams.get('ref');
         if (refCode) {
           document.getElementById('referral-code').value = refCode;
+          showNotification("Referral code detected from URL!", "success");
         }
+        
+        // Telegram channel button
+        document.querySelector('.btn-telegram').addEventListener('click', function() {
+          window.open('https://t.me/your_channel_link', '_blank');
+        });
+        
+        // Video tutorial button
+        document.querySelector('.btn-secondary').addEventListener('click', function() {
+          showNotification("Video tutorial will be available soon!", "success");
+        });
       }
     });
 
@@ -1313,6 +1451,7 @@
       }
       
       // Hide loading and show content
+      document.getElementById('login-section').style.display = 'none';
       document.getElementById('registration-section').style.display = 'none';
       document.getElementById('main-app').style.display = 'block';
       document.getElementById('loading').style.display = 'none';
@@ -1321,120 +1460,6 @@
       
       // Update display
       updateDisplay();
-    }
-
-    // Update referral progress when referred user earns
-    function updateReferralProgress(referredUserId, amountEarned) {
-      console.log(`Updating referral progress for ${referredUserId}: $${amountEarned}`);
-      
-      // Find all users who have this user as a referral
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('MTEarningData_')) {
-          const userDataStr = localStorage.getItem(key);
-          if (userDataStr) {
-            const userData = JSON.parse(userDataStr);
-            
-            // Check if this user has the referred user in their history
-            if (userData.referralHistory && userData.referralHistory.length > 0) {
-              const referralIndex = userData.referralHistory.findIndex(ref => ref.id == referredUserId);
-              
-              if (referralIndex !== -1) {
-                console.log(`Found referral in user ${userData.userId}'s history`);
-                
-                // Update the referral progress
-                userData.referralHistory[referralIndex].earned += amountEarned;
-                userData.referralHistory[referralIndex].progress = Math.min(100, (userData.referralHistory[referralIndex].earned / 15) * 100);
-                
-                // Check if referral is now active
-                if (userData.referralHistory[referralIndex].earned >= 15 && userData.referralHistory[referralIndex].status === 'pending') {
-                  userData.referralHistory[referralIndex].status = 'active';
-                  userData.pendingReferrals = Math.max(0, (userData.pendingReferrals || 0) - 1);
-                  userData.referrals = (userData.referrals || 0) + 1;
-                  userData.referralEarnings = (userData.referralEarnings || 0) + 1.00;
-                  userData.lifetimeEarning = (userData.lifetimeEarning || 0) + 1.00;
-                  
-                  console.log(`Referral ${referredUserId} is now active!`);
-                  
-                  // Send notification
-                  sendReferralActivationNotification(userData.userId, referredUserId);
-                }
-                
-                // Save updated user data
-                localStorage.setItem(key, JSON.stringify(userData));
-                
-                // Update display if this is the current user
-                if (userData.userId === currentUser.id) {
-                  console.log("Updating display for referrer");
-                  updateDisplay();
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Send notification when referral becomes active
-    async function sendReferralActivationNotification(userId, referredUserId) {
-      try {
-        await fetch(`${API_BASE}/sendMessage`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id: userId,
-            text: `💰 Congratulations! Your referral (ID: ${referredUserId}) has earned $15 and is now active! You received $1.00 bonus.`
-          })
-        });
-      } catch (error) {
-        console.error("Error sending activation notification:", error);
-      }
-    }
-
-    // 🔥 NEW FUNCTION: Send withdrawal notification to admin 🔥
-    async function sendWithdrawalNotificationToAdmin(withdrawalData) {
-      try {
-        const message = `
-🔄 **NEW WITHDRAWAL REQUEST** 🔄
-
-👤 **User Information:**
-- Name: ${withdrawalData.userName}
-- ID: ${withdrawalData.userId}
-- Username: @${withdrawalData.userUsername}
-
-💰 **Withdrawal Details:**
-- Amount: $${withdrawalData.amount}
-- Method: ${withdrawalData.method}
-- Address: ${withdrawalData.address}
-
-📊 **User Stats:**
-- Balance: $${withdrawalData.userBalance}
-- Total Earned: $${withdrawalData.totalEarned}
-- Total Withdrawn: $${withdrawalData.totalWithdrawn}
-- Referrals: ${withdrawalData.referrals}
-- Tasks Completed: ${withdrawalData.tasksCompleted}
-
-⏰ **Time:** ${new Date().toLocaleString()}
-        `;
-        
-        await fetch(`${API_BASE}/sendMessage`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id: ADMIN_USER_ID,
-            text: message,
-            parse_mode: 'Markdown'
-          })
-        });
-        
-        console.log("Withdrawal notification sent to admin");
-      } catch (error) {
-        console.error("Error sending withdrawal notification to admin:", error);
-      }
     }
 
     function updateStorage() {
@@ -1456,8 +1481,6 @@
       document.getElementById("lifetime-earning-card").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("current-balance").innerText = (userData.lifetimeEarning - userData.withdrew).toFixed(3);
       document.getElementById("header-balance").innerText = "$" + (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      document.getElementById("available").innerText = (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      document.getElementById("total-withdrew").innerText = userData.withdrew.toFixed(3);
       
       // Update stats grid
       document.getElementById("total-earned").innerText = "$" + (userData.lifetimeEarning - userData.withdrew).toFixed(3);
@@ -1491,12 +1514,6 @@
       document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals || 0;
       document.getElementById("profile-ref-link").innerText = `https://task-tycoon.vercel.app/?ref=${userData.referralCode}`;
       document.getElementById("profile-tasks-today").innerText = `${data.completed}/100`;
-      
-      // Update earn section
-      document.getElementById("ecompleted").innerText = data.completed;
-      document.getElementById("eremaining").innerText = data.remaining;
-      document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
-      document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
       // Update referral history
       updateReferralHistoryDisplay();
@@ -1540,9 +1557,7 @@
 
     function updateTaskVisualization() {
       const homeVisual = document.getElementById("task-visual");
-      const earnVisual = document.getElementById("earn-task-visual");
       homeVisual.innerHTML = "";
-      earnVisual.innerHTML = "";
       
       // Create 100 dots (10 rows of 10)
       for (let i = 0; i < 10; i++) {
@@ -1564,8 +1579,7 @@
           row.appendChild(dot);
         }
         
-        homeVisual.appendChild(row.cloneNode(true));
-        earnVisual.appendChild(row.cloneNode(true));
+        homeVisual.appendChild(row);
       }
     }
 
@@ -1613,7 +1627,7 @@
             userData.lifetimeEarning += 0.015;
             userData.totalTasks++;
             
-            // Update referral progress for this user
+            // ✅ FIXED: Update referral progress for this user
             updateReferralProgress(userData.userId, 0.015);
             
             updateStorage();
@@ -1634,101 +1648,16 @@
       }, 500);
     }
 
-    function claimDailyBonus() {
-      // Check if already claimed today
-      const lastBonusDate = localStorage.getItem(`lastBonusDate_${userData.userId}`);
-      const today = new Date().toLocaleDateString();
-      
-      if (lastBonusDate === today) {
-        showNotification("You've already claimed your daily bonus today!", "warning");
-        return;
-      }
-      
-      // Award bonus
-      userData.lifetimeEarning += 0.05;
-      data.todaysEarning += 0.05;
-      localStorage.setItem(`lastBonusDate_${userData.userId}`, today);
-      updateStorage();
-      updateDisplay();
-      showNotification("🎁 Daily bonus claimed! $0.05 added to your balance.", "success");
-    }
-
-    function submitWithdrawal() {
-      const amount = parseFloat(document.getElementById("withdraw-amount").value);
-      const method = document.getElementById("withdraw-method").value;
-      const address = document.getElementById("withdraw-address").value;
-      const availableBalance = userData.lifetimeEarning - userData.withdrew;
-      
-      if (isNaN(amount)) {
-        showNotification("Please enter a valid amount", "error");
-        return;
-      }
-      if (amount < 0.001) {
-        showNotification("Minimum withdrawal amount is $18", "error");
-        return;
-      }
-      if (amount > availableBalance) {
-        showNotification("Insufficient balance", "error");
-        return;
-      }
-      if ((userData.referrals || 0) < 00) {
-        showNotification("You need at least 10 referrals to withdraw", "error");
-        return;
-      }
-      if (method === "Select a method") {
-        showNotification("Please select a withdrawal method", "error");
-        return;
-      }
-      if (!address) {
-        showNotification("Please enter your withdrawal address", "error");
-        return;
-      }
-      
-      // Update balance
-      userData.withdrew += amount;
-      updateStorage();
-      updateDisplay();
-      showNotification("Withdrawal request submitted successfully! It will be processed within 24-48 hours.", "success");
-      
-      // 🔥 Send notification to admin about the withdrawal request 🔥
-      const withdrawalData = {
-        userId: userData.userId,
-        userName: userData.firstName || userData.username,
-        userUsername: userData.username || "No username",
-        amount: amount.toFixed(3),
-        method: method,
-        address: address,
-        userBalance: (userData.lifetimeEarning - userData.withdrew).toFixed(3),
-        totalEarned: userData.lifetimeEarning.toFixed(3),
-        totalWithdrawn: userData.withdrew.toFixed(3),
-        referrals: userData.referrals || 0,
-        tasksCompleted: userData.totalTasks
-      };
-      
-      sendWithdrawalNotificationToAdmin(withdrawalData);
-      
-      // Reset form
-      document.getElementById("withdraw-amount").value = "";
-      document.getElementById("withdraw-method").value = "Select a method";
-      document.getElementById("withdraw-address").value = "";
-    }
-
     function show(section) {
       // Hide all sections first
       document.getElementById("home-profile").style.display = "none";
       document.getElementById("home-content").style.display = "none";
-      document.getElementById("withdraw").style.display = "none";
-      document.getElementById("earn").style.display = "none";
       document.getElementById("profile-page").style.display = "none";
       
       // Show appropriate section
       if (section === 'home') {
         document.getElementById("home-profile").style.display = "block";
         document.getElementById("home-content").style.display = "block";
-      } else if (section === 'withdraw') {
-        document.getElementById("withdraw").style.display = "block";
-      } else if (section === 'earn') {
-        document.getElementById("earn").style.display = "block";
       } else if (section === 'profile') {
         document.getElementById("profile-page").style.display = "block";
       }
@@ -1754,12 +1683,7 @@
       
       const refLink = `https://new-mt-earning.vercel.app/?ref=${userData.referralCode}`;
       
-      // Check if we're in a Telegram environment
-      if (window.Telegram && window.Telegram.WebApp) {
-        // Use Telegram's share functionality
-        Telegram.WebApp.openTelegramLink(refLink);
-      } else if (navigator.share) {
-        // Use Web Share API for browsers that support it
+      if (navigator.share) {
         navigator.share({
           title: 'Earn with Task Tycoon Vercel App',
           text: 'Join Task Tycoon Vercel App and start earning money by completing simple tasks!',
@@ -1770,7 +1694,6 @@
           copyReferralLink();
         });
       } else {
-        // Fallback to copying the link
         copyReferralLink();
       }
     }
