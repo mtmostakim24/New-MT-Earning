@@ -1743,7 +1743,7 @@
     function copyReferralLink() {
       if (!userData) return;
       
-      const refLink = `https://task-tycoon.vercel.app/?ref=${userData.referralCode}`;
+      const refLink = `https://new-mt-earning.vercel.app/?ref=${userData.referralCode}`;
       navigator.clipboard.writeText(refLink)
         .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
         .catch(() => showNotification("Failed to copy link", "error"));
@@ -1752,7 +1752,7 @@
     function shareReferralLink() {
       if (!userData) return;
       
-      const refLink = `https://task-tycoon.vercel.app/?ref=${userData.referralCode}`;
+      const refLink = `https://new-mt-earning.vercel.app/?ref=${userData.referralCode}`;
       
       // Check if we're in a Telegram environment
       if (window.Telegram && window.Telegram.WebApp) {
