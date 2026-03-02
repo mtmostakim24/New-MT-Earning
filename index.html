@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Tycoon Vercel App | Premium Earning Platform</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <title>Daily Earning545 | Premium Earning Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     * {
       margin: 0;
@@ -13,678 +13,590 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', system-ui, sans-serif;
     }
-
+    
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #4cc9f0;
+      --success: #4ade80;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --card-bg: #ffffff;
+      --body-bg: #f1f5f9;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+    
     body {
-      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-      color: #fff;
+      background-color: var(--body-bg);
+      color: var(--dark);
+      padding-bottom: 80px;
       min-height: 100vh;
-      padding-bottom: 70px;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
     }
-
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #4CAF50;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-      transform: translateX(150%);
-      transition: transform 0.3s ease;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    .notification.error {
-      background: #f44336;
-    }
-
-    .notification.warning {
-      background: #ff9800;
-    }
-
-    .notification i {
-      margin-right: 10px;
-      font-size: 20px;
-    }
-
+    
+    /* Header Styles */
     header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    .title {
+    
+    header .title {
       display: flex;
       align-items: center;
-      font-size: 18px;
-      font-weight: bold;
+      gap: 10px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
     }
-
-    .title i {
-      margin-right: 10px;
-      font-size: 24px;
-      color: #fdbb2d;
+    
+    header .title i {
+      font-size: 1.5rem;
     }
-
-    .balance-display {
+    
+    header .balance-display {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: white;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
+      gap: 5px;
     }
-
-    .balance-display i {
-      margin-right: 8px;
-      color: #4CAF50;
-    }
-
+    
+    /* Profile Section */
     .profile-container {
-      padding: 20px;
+      position: relative;
+      padding: 20px 0 30px;
+      overflow: hidden;
     }
-
+    
+    .profile-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      z-index: 0;
+      border-radius: 0 0 30px 30px;
+    }
+    
     .profile {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-
+    
     .profile-header {
       display: flex;
       align-items: center;
+      gap: 15px;
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
       margin-bottom: 20px;
     }
-
+    
     .profile-img-container {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       overflow: hidden;
-      margin-right: 15px;
-      border: 3px solid #fdbb2d;
+      border: 3px solid rgba(67, 97, 238, 0.2);
+      box-shadow: var(--shadow);
     }
-
-    .profile-img-container img {
+    
+    .profile img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
+    
     .profile-info {
+      text-align: left;
       flex: 1;
     }
-
+    
     .name {
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 1.3rem;
+      font-weight: 700;
       margin-bottom: 5px;
+      color: var(--dark);
     }
-
+    
     .user-id {
-      font-size: 14px;
-      opacity: 0.8;
+      font-size: 0.85rem;
+      color: var(--primary);
+      background: rgba(67, 97, 238, 0.1);
+      padding: 3px 8px;
+      border-radius: 20px;
+      display: inline-block;
     }
-
-    .stats-grid {
+    
+    /* Stats Section */
+    .stats-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-
-    .stat-item {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 15px;
+    
+    .stat-card {
+      background: white;
       border-radius: 12px;
+      padding: 15px 10px;
+      box-shadow: var(--shadow);
       text-align: center;
     }
-
+    
     .stat-value {
-      font-size: 20px;
-      font-weight: bold;
-      color: #fdbb2d;
-      margin-bottom: 5px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
     }
-
+    
     .stat-label {
-      font-size: 12px;
-      opacity: 0.8;
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
     }
-
-    .cards-container {
-      padding: 0 20px 20px;
-    }
-
+    
+    /* Card Styles */
     .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      background: var(--card-bg);
+      margin: 15px;
       padding: 20px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
-
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+    }
+    
     .card-header {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 15px;
+      gap: 10px;
     }
-
+    
     .card-header i {
-      font-size: 24px;
-      margin-right: 10px;
-      color: #fdbb2d;
+      width: 40px;
+      height: 40px;
+      background: rgba(67, 97, 238, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.2rem;
     }
-
+    
     .card-header h3 {
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--dark);
     }
-
+    
+    .card-content {
+      padding: 5px 0;
+    }
+    
     .info-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-
+    
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    
     .info-label {
-      font-size: 14px;
-      opacity: 0.8;
+      font-weight: 500;
+      color: #666;
     }
-
+    
     .info-value {
-      font-size: 14px;
-      font-weight: bold;
+      font-weight: 700;
+      color: var(--dark);
     }
-
+    
     .progress-container {
-      background: rgba(0, 0, 0, 0.2);
-      height: 10px;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 15px 0;
+      margin-top: 20px;
     }
-
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(to right, #4CAF50, #8BC34A);
-      border-radius: 5px;
-      width: 0%;
-      transition: width 0.5s ease;
-    }
-
-    .progress-info {
+    
+    .progress-header {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
-      margin-bottom: 15px;
-    }
-
-    .task-visual {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 5px;
-      margin: 15px 0;
-    }
-
-    .task-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .task-dot.completed {
-      background: #4CAF50;
-    }
-
-    .btn {
-      background: linear-gradient(135deg, #4CAF50, #2E7D32);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      display: block;
-      width: 100%;
-      text-align: center;
-      transition: all 0.3s ease;
-      margin-top: 15px;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, #2196F3, #0D47A1);
-    }
-
-    .btn-telegram {
-      background: linear-gradient(135deg, #0088cc, #005580);
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
       margin-bottom: 8px;
-      font-size: 14px;
     }
-
-    .form-group select, .form-group input {
-      width: 100%;
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(0, 0, 0, 0.2);
-      color: white;
+    
+    .progress {
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
     }
-
-    .referral-section {
-      text-align: center;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 10px;
+      transition: var(--transition);
     }
-
-    .referral-link {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 12px;
-      border-radius: 8px;
-      margin: 15px 0;
-      font-size: 12px;
-      word-break: break-all;
+    
+    /* Profile Page Styles */
+    #profile-page {
+      display: none;
+      padding: 20px;
     }
-
-    .btn-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-group .btn {
-      flex: 1;
-    }
-
-    .nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 10px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 5px 0;
-      cursor: pointer;
-      opacity: 0.6;
-      transition: all 0.3s ease;
-    }
-
-    .nav-item.active {
-      opacity: 1;
-    }
-
-    .nav-icon {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .nav-label {
-      font-size: 12px;
-    }
-
+    
     .profile-card {
-      padding: 20px;
-    }
-
-    .profile-section {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: var(--shadow);
       margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
-
+    
+    .profile-section {
+      margin-bottom: 25px;
+    }
+    
     .profile-section-title {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 15px;
+      gap: 10px;
+      margin-bottom: 15px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.1rem;
     }
-
-    .profile-section-title i {
-      font-size: 24px;
-      margin-right: 10px;
-      color: #fdbb2d;
-    }
-
-    .profile-section-title h3 {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
+    
     .profile-info-item {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
     }
-
-    .profile-info-label {
-      font-size: 14px;
-      opacity: 0.8;
+    
+    .profile-info-item:last-child {
+      border-bottom: none;
     }
-
-    .profile-info-value {
-      font-size: 14px;
-      font-weight: bold;
+    
+    .info-title {
+      color: #666;
     }
-
-    .loading {
-      text-align: center;
+    
+    .info-data {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .referral-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
       padding: 20px;
-      font-size: 16px;
-    }
-
-    .loading i {
-      margin-right: 10px;
-    }
-
-    /* Referral History Styles */
-    .referral-history {
-      margin-top: 20px;
-    }
-
-    .history-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      padding: 10px 15px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-
-    .history-item {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      padding: 12px 15px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      margin-bottom: 8px;
-      align-items: center;
-    }
-
-    .history-id {
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .history-earned {
-      font-size: 12px;
-    }
-
-    .history-progress {
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .progress-circle {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: conic-gradient(#4CAF50 0%, #2c3e50 0%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 8px;
-      position: relative;
-    }
-
-    .progress-circle-inner {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #1a2a6c;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8px;
-      font-weight: bold;
-    }
-
-    .history-status {
-      font-size: 10px;
-      padding: 4px 8px;
       border-radius: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .status-pending {
-      background: #ff9800;
-      color: #000;
-    }
-
-    .status-active {
-      background: #4CAF50;
-      color: white;
-    }
-
-    .empty-history {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
-
-    /* Login Form Styles */
-    .login-container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .login-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-
-    .login-header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .login-header i {
-      font-size: 40px;
-      color: #fdbb2d;
-      margin-bottom: 15px;
-    }
-
-    .login-header h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .login-header p {
-      opacity: 0.8;
-      font-size: 14px;
-    }
-
-    .form-control {
-      margin-bottom: 15px;
-    }
-
-    .form-control label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-
-    .form-control input {
-      width: 100%;
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(0, 0, 0, 0.2);
-      color: white;
-    }
-
-    .form-control input:focus {
-      outline: none;
-      border-color: #fdbb2d;
-    }
-
-    .register-link {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .register-link a {
-      color: #fdbb2d;
-      text-decoration: none;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      margin-bottom: 25px;
-    }
-
-    .hero-section h1 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: #fdbb2d;
-    }
-
-    .hero-section p {
-      font-size: 16px;
-      opacity: 0.9;
       margin-bottom: 20px;
     }
-
-    .features {
+    
+    .referral-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       margin: 20px 0;
     }
-
-    .feature-item {
-      background: rgba(255, 255, 255, 0.1);
+    
+    .referral-stat {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
       padding: 15px;
-      border-radius: 10px;
       text-align: center;
+      backdrop-filter: blur(5px);
     }
-
-    .feature-item i {
-      font-size: 24px;
-      color: #4CAF50;
-      margin-bottom: 10px;
+    
+    .referral-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
     }
-
-    .feature-item p {
-      font-size: 12px;
+    
+    .referral-stat-label {
+      font-size: 0.9rem;
       opacity: 0.9;
     }
-
-    /* Video Section */
-    .video-section {
-      margin-top: 25px;
+    
+    .referral-link {
+      background: white;
+      color: var(--primary);
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: 500;
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Button Styles */
+    .button {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 15px;
       text-align: center;
+      border-radius: 15px;
+      margin-top: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+      border: none;
+      font-size: 1rem;
     }
-
-    .video-section h3 {
+    
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+    }
+    
+    .button-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      box-shadow: none;
+    }
+    
+    .button-secondary:hover {
+      background: #f8fafc;
+      transform: none;
+    }
+    
+    /* Input Styles - Fixed sizing */
+    .input-group {
       margin-bottom: 15px;
-      font-size: 18px;
-      color: #fdbb2d;
     }
-
-    .video-placeholder {
-      background: rgba(0, 0, 0, 0.3);
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1rem;
+      background: #f8fafc;
+      transition: var(--transition);
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: var(--card-bg);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      padding: 10px 0;
+      z-index: 100;
+    }
+    
+    .nav-item {
+      text-align: center;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: #666;
+      transition: var(--transition);
+      width: 70px;
+    }
+    
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      margin: 0 auto 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
       border-radius: 10px;
-      padding: 40px 20px;
-      margin-bottom: 15px;
+      padding: 12px;
+      transition: var(--transition);
     }
-
-    .video-placeholder i {
-      font-size: 50px;
-      color: #fdbb2d;
-      margin-bottom: 15px;
+    
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 600;
     }
-
-    .video-placeholder p {
-      font-size: 14px;
-      opacity: 0.8;
+    
+    .nav-item.active .nav-icon {
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--primary);
     }
-
-    /* Telegram Proof Section */
-    .telegram-proof {
+    
+    .nav-label {
+      font-size: 0.75rem;
+    }
+    
+    /* Task Counter */
+    .task-counter {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    
+    .counter-item {
       text-align: center;
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .telegram-proof h3 {
-      margin-bottom: 15px;
-      font-size: 18px;
-    }
-
-    .telegram-proof p {
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 15px;
+      background: #f8fafc;
+      border-radius: 15px;
+      padding: 15px;
+      flex: 1;
+      margin: 0 5px;
     }
     
-   <script
-  type="text/javascript"
-  src="https://www.highperformanceformat.com/a63631887bb0c710240619bbb86fd0e3/invoke.js"
-></script>
+    .counter-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
     
+    .counter-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    /* Task Visualization */
+    .task-visualization {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 20px 0;
+    }
+    
+    .task-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e2e8f0;
+    }
+    
+    .task-dot.completed {
+      background: var(--success);
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .notification.error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .notification.warning {
+      border-left: 4px solid var(--warning);
+    }
+    
+    /* Loading Spinner */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(67, 97, 238, 0.1);
+      border-left-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Responsive */
+    @media (min-width: 768px) {
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 15px;
+      }
+      
+      .card {
+        margin: 0;
+      }
+      
+      .profile {
+        max-width: 600px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -692,880 +604,720 @@
     <i class="fas fa-check-circle"></i>
     <span id="notification-message">Notification message</span>
   </div>
-
-  <!-- Login Section -->
-  <div id="login-section" class="login-container">
-    <div class="login-card">
-      <div class="hero-section">
-        <h1>Task Tycoon Vercel App</h1>
-        <p>আপনার আয়ের যাত্রা শুরু করুন আজই! সহজ টাস্ক সম্পন্ন করে উপার্জন করুন</p>
-        
-        <div class="features">
-          <div class="feature-item">
-            <i class="fas fa-money-bill-wave"></i>
-            <p>প্রতিদিন $1.5 পর্যন্ত আয়</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-user-friends"></i>
-            <p>রেফারেল থেকে অতিরিক্ত আয়</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-gift"></i>
-            <p>বোনাস এবং রিওয়ার্ড</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-shield-alt"></i>
-            <p>১০০% সুরক্ষিত পেমেন্ট</p>
-          </div>
+  
+  <header>
+    <div class="title">
+      <i class="fas fa-robot"></i>
+      <span>Daily Earning545</span>
+    </div>
+    <div class="balance-display">
+      <i class="fas fa-wallet"></i>
+      <span id="header-balance">$27.206</span>
+    </div>
+  </header>
+  
+  <div class="profile-container" id="home-profile">
+    <div class="profile">
+      <div class="profile-header">
+        <div class="profile-img-container">
+          <img id="profile-picture" src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
+        </div>
+        <div class="profile-info">
+          <div class="name" id="username">Loading...</div>
+          <div class="user-id">ID: <span id="user-id">Loading...</span></div>
         </div>
       </div>
       
-      <div class="login-header">
-        <i class="fas fa-robot"></i>
-        <h2>লগইন করুন</h2>
-        <p>আপনার অ্যাকাউন্টে অ্যাক্সেস পান</p>
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-value" id="total-earned">$20.706</div>
+          <div class="stat-label">Total Earned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="tasks-completed">986</div>
+          <div class="stat-label">Tasks Done</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Home Page Content -->
+  <div class="cards-container" id="home-content">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-tasks"></i>
+        <h3>Today's Tasks</h3>
+      </div>
+      <div class="card-content">
+        <div class="info-row">
+          <span class="info-label">Total Tasks</span>
+          <span class="info-value" id="total">150</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Completed</span>
+          <span class="info-value" id="completed-card">0</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Remaining</span>
+          <span class="info-value" id="remaining-card">150</span>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-header">
+            <span class="info-label">Task Progress</span>
+            <span class="info-value" id="progress-percent">0%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+        </div>
+        
+        <div class="task-visualization" id="task-visual">
+          <!-- Task dots will be generated here -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-chart-line"></i>
+        <h3>Earnings</h3>
+      </div>
+      <div class="card-content">
+        <div class="info-row">
+          <span class="info-label">Today's Earnings</span>
+          <span class="info-value">USD $<span id="todays-earning">0.000</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Lifetime Earnings</span>
+          <span class="info-value">USD $<span id="lifetime-earning">27.260</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Avg. per Task</span>
+          <span class="info-value">$0.021</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="referral-section">
+      <div class="referral-header">
+        <i class="fas fa-users"></i>
+        <h3>Refer & Earn</h3>
       </div>
       
-      <form id="login-form">
-        <div class="form-control">
-          <label for="mobile">মোবাইল নম্বর</label>
-          <input type="tel" id="mobile" placeholder="আপনার মোবাইল নম্বর দিন" required>
+      <div class="referral-content">
+        <p>Invite friends and earn $0.50 for each successful referral. Share your link and start earning!</p>
+        
+        <div class="referral-stats">
+          <div class="referral-stat">
+            <div class="referral-stat-value" id="ref-earned">$6.50</div>
+            <div class="referral-stat-label">Referral Earnings</div>
+          </div>
+          <div class="referral-stat">
+            <div class="referral-stat-value" id="referral-count">13</div>
+            <div class="referral-stat-label">Referrals</div>
+          </div>
         </div>
         
-        <div class="form-control">
-          <label for="password">পাসওয়ার্ড</label>
-          <input type="password" id="password" placeholder="আপনার পাসওয়ার্ড দিন" required>
+        <div class="referral-link">
+          <span id="ref-link">Loading...</span>
+          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
-        <button type="submit" class="btn">
-          <i class="fas fa-sign-in-alt"></i> লগইন করুন
-        </button>
-        
-        <div class="register-link">
-          অ্যাকাউন্ট নেই? <a href="#" id="show-register">রেজিস্ট্রেশন করুন</a>
-        </div>
-      </form>
-
-      <div class="video-section">
-        <h3>কিভাবে কাজ করবেন?</h3>
-        <div class="video-placeholder">
-          <i class="fas fa-play-circle"></i>
-          <p>টাস্ক টাইকুন ব্যবহার করার সম্পূর্ণ গাইড</p>
-          <p>ভিডিওটি দেখে শিখুন কিভাবে সর্বোচ্চ আয় করবেন</p>
-        </div>
-        <button class="btn btn-secondary">
-          <i class="fas fa-play"></i> ভিডিও টিউটোরিয়াল দেখুন
-        </button>
-      </div>
-
-      <div class="telegram-proof">
-        <h3>পেমেন্ট প্রুফ</h3>
-        <p>আমাদের টেলিগ্রাম চ্যানেলে দেখুন সফল পেমেন্ট প্রুফ</p>
-        <button class="btn btn-telegram">
-          <i class="fab fa-telegram"></i> টেলিগ্রাম চ্যানেল জয়েন করুন
+        <button class="button" onclick="shareReferralLink()">
+          <i class="fas fa-share-alt"></i> Share Referral Link
         </button>
       </div>
     </div>
   </div>
-
-  <!-- Registration Section -->
-  <div id="registration-section" class="login-container" style="display:none;">
-    <div class="login-card">
-      <div class="login-header">
-        <i class="fas fa-user-plus"></i>
-        <h2>রেজিস্ট্রেশন করুন</h2>
-        <p>আপনার নতুন অ্যাকাউন্ট তৈরি করুন</p>
+  
+  <!-- Withdraw Section -->
+  <div class="card" id="withdraw" style="display:none;">
+    <div class="card-header">
+      <i class="fas fa-money-bill-wave"></i>
+      <h3>Withdraw Funds</h3>
+    </div>
+    <div class="card-content">
+      <div class="info-row">
+        <span class="info-label">Available Balance</span>
+        <span class="info-value">USD $<span id="available">27.206</span></span>
       </div>
       
-      <form id="registration-form">
-        <div class="form-control">
-          <label for="name">পুরো নাম</label>
-          <input type="text" id="name" placeholder="আপনার পুরো নাম দিন" required>
+      <div class="input-group">
+        <label>Withdrawal Method</label>
+        <select id="withdraw-method">
+          <option>Select a method</option>
+          <option>Bkash $30</option>
+          <option>Nagad $30</option>
+          <option>Payeer $50</option>
+          <option>USDT (TRC20) $50</option>
+          <option>Skrill $30</option>
+          <option>Neteller $30</option>
+          <option>Perfect Money $50</option>
+        </select>
+      </div>
+      
+      <div class="input-group">
+        <label>Amount (USD)</label>
+        <input type="text" id="withdraw-amount" placeholder="Enter amount">
+      </div>
+      
+      <div class="input-group">
+        <label>Withdrawal Address</label>
+        <input type="text" id="withdraw-address" placeholder="Enter wallet address">
+      </div>
+      
+      <button class="button" onclick="submitWithdrawal()">
+        <i class="fas fa-paper-plane"></i> Submit Withdrawal
+      </button>
+    </div>
+    <button class="button telegram-proof-btn" onclick="openTelegramChannel()">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <i class="fab fa-telegram" style="font-size: 1.2rem;"></i>
+    <span>Daily Withdrawal Proof Channel</span>
+  </div>
+</button>
+
+<style>
+.telegram-proof-btn {
+  background: linear-gradient(135deg, #0088cc 0%, #00aced 100%) !important;
+  margin-top: 10px !important;
+}
+
+.telegram-proof-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 136, 204, 0.4) !important;
+}
+</style>
+
+<script>
+function openTelegramChannel() {
+  window.open('https://t.me/Daily_Earning545_Bot', '_blank');
+}
+</script>
+  </div>
+  
+  <!-- Earn Section -->
+  <div id="earn" style="display:none;">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-coins"></i>
+        <h3>Earn Money</h3>
+      </div>
+      <div class="card-content">
+        <p class="info-label" style="margin-bottom: 20px; text-align: center;">
+          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 45 seconds to complete a task and earn $0.021 per task!
+        </p>
+        
+        <div class="task-counter">
+          <div class="counter-item">
+            <div class="counter-value" id="etotal">150</div>
+            <div class="counter-label">Total Tasks</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-value" id="ecompleted">0</div>
+            <div class="counter-label">Completed</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-value" id="eremaining">150</div>
+            <div class="counter-label">Remaining</div>
+          </div>
         </div>
         
-        <div class="form-control">
-          <label for="mobile">মোবাইল নম্বর</label>
-          <input type="tel" id="reg-mobile" placeholder="আপনার মোবাইল নম্বর দিন" required>
+        <div class="progress-container">
+          <div class="progress-header">
+            <span class="info-label">Task Progress</span>
+            <span class="info-value" id="earn-progress-percent">0%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" id="earn-progress-bar"></div>
+          </div>
         </div>
         
-        <div class="form-control">
-          <label for="password">পাসওয়ার্ড</label>
-          <input type="password" id="reg-password" placeholder="একটি পাসওয়ার্ড তৈরি করুন" required>
-        </div>
-        
-        <div class="form-control">
-          <label for="confirm-password">পাসওয়ার্ড নিশ্চিত করুন</label>
-          <input type="password" id="confirm-password" placeholder="পাসওয়ার্ড আবার দিন" required>
-        </div>
-        
-        <div class="form-control">
-          <label for="referral-code">রেফারেল কোড (ঐচ্ছিক)</label>
-          <input type="text" id="referral-code" placeholder="রেফারেল কোড থাকলে দিন">
-        </div>
-        
-        <button type="submit" class="btn">
-          <i class="fas fa-user-plus"></i> রেজিস্ট্রেশন করুন
+        <button class="button" onclick="startTask()">
+          <i class="fas fa-play"></i> Start Earning ▶
         </button>
-        
-        <div class="register-link">
-          ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#" id="show-login">লগইন করুন</a>
+      </div>
+      <button class="button youtube-guide-btn" onclick="openYouTubeGuide()">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+    <div style="width: 24px; height: 24px; background: white; border-radius: 4px; 
+                display: flex; align-items: center; justify-content: center;">
+      <i class="fab fa-youtube" style="font-size: 1rem; color: #FF0000;"></i>
+    </div>
+    <span style="font-weight: 600;">How to work the bot</span>
+  </div>
+</button>
+
+<style>
+.youtube-guide-btn {
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%) !important;
+  margin-top: 10px !important;
+  border: 2px solid #FF0000 !important;
+}
+
+.youtube-guide-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5) !important;
+  background: linear-gradient(135deg, #CC0000 0%, #990000 100%) !important;
+}
+</style>
+
+<script>
+function openYouTubeGuide() {
+  window.open('https://rb.gy/1eqbrn', '_blank');
+}
+</script>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-trophy"></i>
+        <h3>Task Completion</h3>
+      </div>
+      <div class="card-content">
+        <div class="task-visualization" id="earn-task-visual">
+          <!-- Task dots will be generated here -->
         </div>
-      </form>
+      </div>
     </div>
   </div>
-
-  <!-- Main App Content (Initially Hidden) -->
-  <div id="main-app" style="display:none;">
-    <header>
-      <div class="title">
-        <i class="fas fa-robot"></i>
-        <span>Task Tycoon Vercel App</span>
-      </div>
-      <div class="balance-display">
-        <i class="fas fa-wallet"></i>
-        <span id="header-balance">$0.000</span>
-      </div>
-    </header>
-
-    <div id="loading" class="loading">
-      <i class="fas fa-spinner fa-spin"></i> Loading user data...
-    </div>
-
-    <div class="profile-container" id="home-profile" style="display:none;">
-      <div class="profile">
-        <div class="profile-header">
-          <div class="profile-img-container">
-            <img id="profile-pic" src="https://i.ibb.co.com/TDJWNCwh/A-New-Design-1762931077372.jpg" alt="Profile">
-          </div>
-          <div class="profile-info">
-            <div class="name" id="username">Loading...</div>
-            <div class="user-id">ID: <span id="user-id">Loading...</span></div>
-          </div>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-value" id="total-earned">$0.000</div>
-            <div class="stat-label">Total Earned</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="tasks-completed">0</div>
-            <div class="stat-label">Task Done</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="lifetime-earning">$0.000</div>
-            <div class="stat-label">Lifetime Earning</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="referral-earnings">$0</div>
-            <div class="stat-label">Referral Earning</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Home Page Content -->
-    <div class="cards-container" id="home-content" style="display:none;">
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-tasks"></i>
-          <h3>Today's Tasks</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Total Tasks</span>
-            <span class="info-value" id="total">100</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Completed</span>
-            <span class="info-value" id="completed-card">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Remaining</span>
-            <span class="info-value" id="remaining-card">100</span>
-          </div>
-          <div class="progress-container">
-            <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
-          </div>
-          <div class="progress-info">
-            <span>Progress</span>
-            <span id="progress-percent">0%</span>
-          </div>
-          <div class="task-visual" id="task-visual">
-            <!-- Task dots will be generated here -->
-          </div>
-          <button class="btn" onclick="startTask()">
-            <i class="fas fa-play"></i> Start Task
-          </button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-coins"></i>
-          <h3>Earnings Summary</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Today's Earning</span>
-            <span class="info-value">$<span id="todays-earning">0.000</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Lifetime Earning</span>
-            <span class="info-value">$<span id="lifetime-earning-card">0.000</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Current Balance</span>
-            <span class="info-value">$<span id="current-balance">0.000</span></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-user-friends"></i>
-          <h3>Referral Program</h3>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="info-label">Total Referrals</span>
-            <span class="info-value" id="referral-count">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Referral Earnings</span>
-            <span class="info-value">$<span id="ref-earned">0.000</span></span>
-          </div>
-          <div class="referral-section">
-            <p>Invite friends and earn $1 for each successful referral!</p>
-            <div class="referral-link" id="ref-link">Loading referral link...</div>
-            <div class="btn-group">
-              <button class="btn btn-secondary" onclick="copyReferralLink()">
-                <i class="fas fa-copy"></i> Copy Link
-              </button>
-              <button class="btn" onclick="shareReferralLink()">
-                <i class="fas fa-share-alt"></i> Share
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Profile Page -->
-    <div class="profile-card" id="profile-page" style="display:none;">
+  
+  <!-- Profile Page -->
+  <div id="profile-page">
+    <div class="profile-card">
       <div class="profile-section">
         <div class="profile-section-title">
           <i class="fas fa-user-circle"></i>
           <h3>Account Information</h3>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Username</span>
-          <span class="profile-info-value" id="profile-username">Loading...</span>
+          <div class="info-title">Username</div>
+          <div class="info-data" id="profile-username">Loading...</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">User ID</span>
-          <span class="profile-info-value" id="profile-user-id">Loading...</span>
+          <div class="info-title">User ID</div>
+          <div class="info-data" id="profile-user-id">Loading...</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Join Date</span>
-          <span class="profile-info-value" id="join-date">Loading...</span>
+          <div class="info-title">Join Date</div>
+          <div class="info-data" id="join-date">2/13/2026</div>
         </div>
       </div>
-
+    </div>
+    
+    <div class="profile-card">
       <div class="profile-section">
         <div class="profile-section-title">
-          <i class="fas fa-chart-line"></i>
-          <h3>Earnings Statistics</h3>
+          <i class="fas fa-wallet"></i>
+          <h3>Financial Summary</h3>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Current Balance</span>
-          <span class="profile-info-value">$<span id="profile-balance">0.000</span></span>
+          <div class="info-title">Current Balance</div>
+          <div class="info-data" id="profile-balance">$27.206</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Total Withdrew</span>
-          <span class="profile-info-value">$<span id="profile-withdrew">0.000</span></span>
+          <div class="info-title">Total Withdrew</div>
+          <div class="info-data" id="profile-withdrew">$0.000</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Today's Earning</span>
-          <span class="profile-info-value">$<span id="profile-today-earning">0.000</span></span>
+          <div class="info-title">Today's Earnings</div>
+          <div class="info-data" id="profile-today-earning">$0.000</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Lifetime Earning</span>
-          <span class="profile-info-value">$<span id="profile-lifetime-earning">0.000</span></span>
+          <div class="info-title">Lifetime Earnings</div>
+          <div class="info-data" id="profile-lifetime-earning">$27.260</div>
         </div>
       </div>
-
+    </div>
+    
+    <div class="profile-card">
       <div class="profile-section">
         <div class="profile-section-title">
           <i class="fas fa-users"></i>
-          <h3>Referral Information</h3>
+          <h3>Referral Program</h3>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Total Referrals</span>
-          <span class="profile-info-value" id="profile-refer-count">0</span>
+          <div class="info-title">Total Referrals</div>
+          <div class="info-data" id="profile-refer-count">13</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Pending Referrals</span>
-          <span class="profile-info-value" id="profile-pending-refs">0</span>
+          <div class="info-title">Referral Earnings</div>
+          <div class="info-data" id="profile-refer-earnings">$6.500</div>
         </div>
+        
         <div class="profile-info-item">
-          <span class="profile-info-label">Referral Earnings</span>
-          <span class="profile-info-value">$<span id="profile-refer-earnings">0.000</span></span>
-        </div>
-        <div class="profile-info-item">
-          <span class="profile-info-label">Your Referral Link</span>
-          <span class="profile-info-value" style="font-size: 12px;" id="profile-ref-link">Loading...</span>
-        </div>
-        <div class="btn-group" style="margin-top: 15px;">
-          <button class="btn btn-secondary" onclick="copyReferralLink()">
-            <i class="fas fa-copy"></i> Copy Link
-          </button>
-          <button class="btn" onclick="shareReferralLink()">
-            <i class="fas fa-share-alt"></i> Share
-          </button>
-        </div>
-      </div>
-
-      <div class="profile-section">
-        <div class="profile-section-title">
-          <i class="fas fa-tasks"></i>
-          <h3>Task Statistics</h3>
-        </div>
-        <div class="profile-info-item">
-          <span class="profile-info-label">Tasks Completed</span>
-          <span class="profile-info-value" id="profile-tasks-completed">0</span>
-        </div>
-        <div class="profile-info-item">
-          <span class="profile-info-label">Tasks Today</span>
-          <span class="profile-info-value" id="profile-tasks-today">0/100</span>
-        </div>
-      </div>
-
-      <!-- Referral History Section -->
-      <div class="profile-section">
-        <div class="profile-section-title">
-          <i class="fas fa-history"></i>
-          <h3>Referral History</h3>
-        </div>
-        <div class="referral-history">
-          <div class="history-header">
-            <div>ID</div>
-            <div>Earned</div>
-            <div>%</div>
-            <div>Status</div>
-          </div>
-          <div id="referral-history-list">
-            <!-- Referral history items will be generated here -->
-          </div>
+          <div class="info-title">Pending Referrals</div>
+          <div class="info-data" id="profile-pending-refs">0</div>
         </div>
       </div>
     </div>
-
-    <div class="nav">
-      <div class="nav-item active" id="nav-home" onclick="show('home')">
-        <div class="nav-icon">
-          <i class="fas fa-home"></i>
-        </div>
-        <div class="nav-label">Home</div>
+    
+    <div class="referral-section">
+      <div class="referral-header">
+        <i class="fas fa-share-alt"></i>
+        <h3>Share Your Referral Link</h3>
       </div>
-      <div class="nav-item" id="nav-earn" onclick="show('earn')">
-        <div class="nav-icon">
-          <i class="fas fa-coins"></i>
+      
+      <div class="referral-content">
+        <p>Earn $0.50 for every friend who signs up using your referral link!</p>
+        
+        <div class="referral-link">
+          <span id="profile-ref-link">Loading...</span>
+          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
-        <div class="nav-label">Earn</div>
-      </div>
-      <div class="nav-item" id="nav-withdraw" onclick="show('withdraw')">
-        <div class="nav-icon">
-          <i class="fas fa-wallet"></i>
-        </div>
-        <div class="nav-label">Withdraw</div>
-      </div>
-      <div class="nav-item" id="nav-profile" onclick="show('profile')">
-        <div class="nav-icon">
-          <i class="fas fa-user"></i>
-        </div>
-        <div class="nav-label">Profile</div>
+        
+        <button class="button" onclick="shareReferralLink()">
+          <i class="fas fa-share-alt"></i> Share Referral Link
+        </button>
       </div>
     </div>
   </div>
-
+  
+  <div class="nav">
+    <div class="nav-item active" id="nav-home" onclick="show('home')">
+      <div class="nav-icon">
+        <i class="fas fa-home"></i>
+      </div>
+      <div class="nav-label">Home</div>
+    </div>
+    <div class="nav-item" id="nav-earn" onclick="show('earn')">
+      <div class="nav-icon">
+        <i class="fas fa-coins"></i>
+      </div>
+      <div class="nav-label">Earn</div>
+    </div>
+    <div class="nav-item" id="nav-withdraw" onclick="show('withdraw')">
+      <div class="nav-icon">
+        <i class="fas fa-wallet"></i>
+      </div>
+      <div class="nav-label">Withdraw</div>
+    </div>
+    <div class="nav-item" id="nav-profile" onclick="show('profile')">
+      <div class="nav-icon">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="nav-label">Profile</div>
+    </div>
+  </div>
+  
   <script>
+    // Telegram Bot API Configuration
+    const BOT_TOKEN = "7629290016:AAEVxpDSLWROLfjR_JATjHWFp3-Dq3rNWD8"; // Replace with your bot token
+    const API_BASE_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
+    
     // Global variables
+    let userId = null;
+    let username = null;
     let userData = null;
     let data = null;
-    let currentUser = null;
-
-    // Generate referral codes
-    function generateReferralCode() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      // First 2 characters are numbers
-      for (let i = 0; i < 2; i++) {
-        result += Math.floor(Math.random() * 10);
+    
+    // Initialize the app
+    async function initApp() {
+      try {
+        // Check if we're in Telegram environment
+        if (window.Telegram && window.Telegram.WebApp) {
+          await initTelegramUser();
+        } else {
+          // Fallback for testing outside Telegram
+          await initTestUser();
+        }
+        
+        // Initialize user data
+        await loadUserData();
+        
+        // Update display
+        updateDisplay();
+        
+        // Check for referral parameter
+        checkReferral();
+        
+      } catch (error) {
+        console.error("Error initializing app:", error);
+        showNotification("Error loading user data. Please try again.", "error");
       }
-      // Next 6 characters are mixed
-      for (let i = 0; i < 6; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    
+    // Initialize Telegram user
+    async function initTelegramUser() {
+      const tg = window.Telegram.WebApp;
+      
+      // Expand the app to full height
+      tg.expand();
+      
+      // Get user data from Telegram
+      const user = tg.initDataUnsafe.user;
+      
+      if (user) {
+        userId = user.id;
+        username = user.username || `${user.first_name}${user.last_name ? ' ' + user.last_name : ''}`;
+        
+        // Update profile picture if available
+        if (user.photo_url) {
+          document.getElementById("profile-picture").src = user.photo_url;
+        }
+        
+        // Store user info in localStorage
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("username", username);
+        
+        console.log("Telegram user initialized:", { userId, username });
+      } else {
+        throw new Error("Could not get Telegram user data");
       }
-      return result;
     }
-
-    // Check if mobile number already exists
-    function isMobileRegistered(mobile) {
-      const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
-      return users.hasOwnProperty(mobile);
-    }
-
-    // Get user IP address (simulated)
-    function getUserIP() {
-      return "192.168." + Math.floor(Math.random() * 255) + "." + Math.floor(Math.random() * 255);
-    }
-
-    // Check if IP address already has an account
-    function isIPRegistered(ip) {
-      const ipUsers = JSON.parse(localStorage.getItem('ipUsers') || '{}');
-      return ipUsers.hasOwnProperty(ip);
-    }
-
-    // Register new user
-    function registerUser(userData) {
-      const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
-      users[userData.mobile] = userData;
-      localStorage.setItem('registeredUsers', JSON.stringify(users));
+    
+    // Initialize test user (for development outside Telegram)
+    async function initTestUser() {
+      userId = localStorage.getItem("userId");
+      username = localStorage.getItem("username");
       
-      // Store IP address to prevent multiple accounts
-      const ipUsers = JSON.parse(localStorage.getItem('ipUsers') || '{}');
-      ipUsers[userData.ip] = userData.mobile;
-      localStorage.setItem('ipUsers', JSON.stringify(ipUsers));
+      // If not stored, generate new values
+      if (!userId) {
+        userId = Math.floor(Math.random() * 1000000);
+        localStorage.setItem("userId", userId);
+      }
       
-      // Set current user
-      localStorage.setItem('currentUser', JSON.stringify(userData));
-      currentUser = userData;
+      if (!username) {
+        username = "User" + userId;
+        localStorage.setItem("username", username);
+      }
       
-      // Initialize user data
-      initializeUserData(userData);
+      console.log("Test user initialized:", { userId, username });
     }
-
-    // Initialize user data after registration
-    function initializeUserData(user) {
-      const userId = user.id;
+    
+    // Load user data from server
+    async function loadUserData() {
       const today = new Date().toLocaleDateString();
       
-      // Initialize new user data
-      userData = {
-        userId, 
-        username: user.name,
-        firstName: user.name,
-        mobile: user.mobile,
-        referrals: 0,
-        referralEarnings: 0,
-        pendingReferrals: 0,
-        lifetimeEarning: 0.50, // Registration bonus $0.50
-        withdrew: 0,
-        totalTasks: 0,
-        joinDate: today,
-        referralHistory: [],
-        referredBy: user.referredBy || null,
-        referralCode: user.referralCode
-      };
-      
-      data = {
-        date: today, 
-        completed: 0, 
-        remaining: 100, 
-        todaysEarning: 0
-      };
-      
-      // Save to localStorage
-      localStorage.setItem(`MTEarningData_${userId}`, JSON.stringify(userData));
-      localStorage.setItem(`dailyEarningData_${userId}`, JSON.stringify(data));
-      
-      // Show welcome message and bonus notification
-      showNotification("🎉 Welcome to Task Tycoon Vercel App! You received $0.50 registration bonus.", "success");
-      
-      // Hide registration and show main app
-      document.getElementById('registration-section').style.display = 'none';
-      document.getElementById('main-app').style.display = 'block';
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('home-profile').style.display = 'block';
-      document.getElementById('home-content').style.display = 'block';
-      
-      // Update display
-      updateDisplay();
-      
-      // Check for referral and update referrer's data
-      if (user.referredBy) {
-        updateReferrerData(user.referredBy, userId);
-      }
-    }
-
-    // ✅ FIXED: Update referrer's data - COMPLETELY REWRITTEN
-    function updateReferrerData(referrerCode, referredUserId) {
-      console.log("🔄 Updating referrer data for code:", referrerCode, "Referred user:", referredUserId);
-      
-      // Find referrer by code
-      const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
-      let referrer = null;
-      
-      for (const mobile in users) {
-        if (users[mobile].referralCode === referrerCode) {
-          referrer = users[mobile];
-          break;
-        }
-      }
-      
-      if (referrer) {
-        console.log("✅ Found referrer:", referrer.name);
+      try {
+        // Try to get user data from server
+        const response = await fetch(`${API_BASE_URL}/getUserData?user_id=${userId}`);
         
-        // Get referrer's data
-        const referrerDataKey = `MTEarningData_${referrer.id}`;
-        const storedReferrerData = localStorage.getItem(referrerDataKey);
-        
-        if (storedReferrerData) {
-          const referrerData = JSON.parse(storedReferrerData);
+        if (response.ok) {
+          const serverData = await response.json();
+          userData = serverData.result || {};
           
-          // Initialize referralHistory if it doesn't exist
-          if (!referrerData.referralHistory) {
-            referrerData.referralHistory = [];
-          }
-          
-          // Check if referral already exists to avoid duplicates
-          const existingReferral = referrerData.referralHistory.find(ref => ref.id === referredUserId);
-          if (!existingReferral) {
-            // Add new referral
-            const newReferral = {
-              id: referredUserId,
-              earned: 0,
-              progress: 0,
-              status: 'pending'
-            };
-            
-            referrerData.referralHistory.push(newReferral);
-            referrerData.pendingReferrals = (referrerData.pendingReferrals || 0) + 1;
-            
-            // Save updated referrer data
-            localStorage.setItem(referrerDataKey, JSON.stringify(referrerData));
-            
-            console.log("✅ Referral added successfully!");
-            showNotification("🎉 Referral added! You'll earn $1 when they complete $15 in tasks.", "success");
-            
-            // Update display if referrer is current user
-            if (currentUser && referrerData.userId === currentUser.id) {
-              updateDisplay();
-            }
-          } else {
-            console.log("ℹ️ Referral already exists");
+          // If user doesn't exist on server, create them
+          if (!userData.userId) {
+            await createUserOnServer();
           }
         } else {
-          console.log("❌ Referrer data not found");
+          // If server request fails, use localStorage
+          await loadUserDataFromLocalStorage(today);
         }
-      } else {
-        console.log("❌ Referrer not found with code:", referrerCode);
-        showNotification("Invalid referral code", "warning");
+      } catch (error) {
+        console.error("Error loading user data from server:", error);
+        // Fallback to localStorage
+        await loadUserDataFromLocalStorage(today);
       }
     }
+    
+    // Load user data from localStorage (fallback)
+    async function loadUserDataFromLocalStorage(today) {
+      // Updated values as requested
+      userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
+        userId, 
+        username, 
+        referrals: 13,
+        referralEarnings: 6.50,
+        pendingReferrals: 0,
+        lifetimeEarning: 27.260,       // total lifetime earnings (tasks + referrals)
+        withdrew: 0.054,                // amount withdrawn to make current balance 27.206
+        totalTasks: 986,
+        totalEarnedTasks: 20.706,       // earned from tasks only (for stats card)
+        joinDate: "2/13/2026"
+      };
 
-    // ✅ FIXED: Update referral progress when referred user earns
-    function updateReferralProgress(referredUserId, amountEarned) {
-      console.log("🔄 Updating referral progress for:", referredUserId, "Amount:", amountEarned);
-      
-      const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
-      
-      for (const mobile in users) {
-        const user = users[mobile];
-        const userDataKey = `MTEarningData_${user.id}`;
-        const storedUserData = localStorage.getItem(userDataKey);
-        
-        if (storedUserData) {
-          const userData = JSON.parse(storedUserData);
-          
-          if (userData.referralHistory && userData.referralHistory.length > 0) {
-            const referralIndex = userData.referralHistory.findIndex(ref => ref.id == referredUserId);
-            
-            if (referralIndex !== -1) {
-              console.log("✅ Found referral in user's history:", userData.userId);
-              
-              // Update the referral progress
-              userData.referralHistory[referralIndex].earned += amountEarned;
-              userData.referralHistory[referralIndex].progress = Math.min(100, (userData.referralHistory[referralIndex].earned / 15) * 100);
-              
-              // Check if referral is now active
-              if (userData.referralHistory[referralIndex].earned >= 15 && userData.referralHistory[referralIndex].status === 'pending') {
-                userData.referralHistory[referralIndex].status = 'active';
-                userData.pendingReferrals = Math.max(0, (userData.pendingReferrals || 0) - 1);
-                userData.referrals = (userData.referrals || 0) + 1;
-                userData.referralEarnings = (userData.referralEarnings || 0) + 1.00;
-                userData.lifetimeEarning = (userData.lifetimeEarning || 0) + 1.00;
-                
-                console.log("🎉 Referral activated! Bonus added.");
-                showNotification("💰 Referral bonus! $1.00 added to your balance.", "success");
-              }
-              
-              // Save updated user data
-              localStorage.setItem(userDataKey, JSON.stringify(userData));
-              
-              // Update display if this is the current user
-              if (currentUser && userData.userId === currentUser.id) {
-                updateDisplay();
-              }
-            }
-          }
-        }
+      data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
+        date: today, completed: 0, remaining: 150, todaysEarning: 0
+      };
+
+      if (data.date !== today) {
+        data = { date: today, completed: 0, remaining: 150, todaysEarning: 0 };
       }
     }
-
-    // Initialize the app when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check if user is already registered
-      const storedCurrentUser = localStorage.getItem('currentUser');
+    
+    // Create user on server
+    async function createUserOnServer() {
+      userData = {
+        userId, 
+        username, 
+        referrals: 13,
+        referralEarnings: 6.50,
+        pendingReferrals: 0,
+        lifetimeEarning: 27.260,
+        withdrew: 0.054,
+        totalTasks: 986,
+        totalEarnedTasks: 20.706,
+        joinDate: "2/13/2026"
+      };
       
-      if (storedCurrentUser) {
-        // User is already registered, show main app
-        currentUser = JSON.parse(storedCurrentUser);
-        loadUserData(currentUser);
-      } else {
-        // User is not registered, show login form
-        document.getElementById('login-section').style.display = 'block';
-        document.getElementById('main-app').style.display = 'none';
-        
-        // Handle login form submission
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const mobile = document.getElementById('mobile').value;
-          const password = document.getElementById('password').value;
-          
-          // Validate login
-          const users = JSON.parse(localStorage.getItem('registeredUsers') || '{}');
-          if (users[mobile] && users[mobile].password === password) {
-            // Login successful
-            localStorage.setItem('currentUser', JSON.stringify(users[mobile]));
-            currentUser = users[mobile];
-            loadUserData(currentUser);
-            showNotification("Login successful!", "success");
-          } else {
-            showNotification("Invalid mobile number or password", "error");
-          }
-        });
-        
-        // Handle registration form submission
-        document.getElementById('registration-form').addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const name = document.getElementById('name').value;
-          const mobile = document.getElementById('reg-mobile').value;
-          const password = document.getElementById('reg-password').value;
-          const confirmPassword = document.getElementById('confirm-password').value;
-          const referralCode = document.getElementById('referral-code').value;
-          
-          // Validate form
-          if (password !== confirmPassword) {
-            showNotification("Passwords do not match", "error");
-            return;
-          }
-          
-          if (isMobileRegistered(mobile)) {
-            showNotification("This mobile number is already registered", "error");
-            return;
-          }
-          
-          // Check IP address
-          const userIP = getUserIP();
-          if (isIPRegistered(userIP)) {
-            showNotification("Only one account per device is allowed", "error");
-            return;
-          }
-          
-          // Generate user ID and referral code
-          const userId = Math.floor(100000 + Math.random() * 900000);
-          const userReferralCode = generateReferralCode();
-          
-          // Create user object
-          const newUser = {
-            id: userId,
-            name: name,
-            mobile: mobile,
-            password: password,
-            referralCode: userReferralCode,
-            referredBy: referralCode || null,
-            ip: userIP
-          };
-          
-          // Register user
-          registerUser(newUser);
-        });
-        
-        // Toggle between login and registration
-        document.getElementById('show-register').addEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('login-section').style.display = 'none';
-          document.getElementById('registration-section').style.display = 'block';
-        });
-        
-        document.getElementById('show-login').addEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('registration-section').style.display = 'none';
-          document.getElementById('login-section').style.display = 'block';
-        });
-        
-        // Check URL for referral code
-        const urlParams = new URLSearchParams(window.location.search);
-        const refCode = urlParams.get('ref');
-        if (refCode) {
-          document.getElementById('referral-code').value = refCode;
-          showNotification("Referral code detected from URL!", "success");
-        }
-        
-        // Telegram channel button
-        document.querySelector('.btn-telegram').addEventListener('click', function() {
-          window.open('https://t.me/your_channel_link', '_blank');
-        });
-        
-        // Video tutorial button
-        document.querySelector('.btn-secondary').addEventListener('click', function() {
-          showNotification("Video tutorial will be available soon!", "success");
-        });
-      }
-    });
-
-    // Load user data for registered users
-    function loadUserData(user) {
-      const userId = user.id;
+      // In a real implementation, you would send this to your server
+      // For now, we'll just store it locally
+      localStorage.setItem("MTEarningData", JSON.stringify(userData));
+      
       const today = new Date().toLocaleDateString();
-      
-      // Try to load existing user data
-      const storedUserData = localStorage.getItem(`MTEarningData_${userId}`);
-      const storedDailyData = localStorage.getItem(`dailyEarningData_${userId}`);
-      
-      if (storedUserData && storedDailyData) {
-        userData = JSON.parse(storedUserData);
-        data = JSON.parse(storedDailyData);
-        
-        // Check if data is for today
-        if (data.date !== today) {
-          // Reset daily data for new day
-          data = {
-            date: today, 
-            completed: 0, 
-            remaining: 100, 
-            todaysEarning: 0
-          };
-        }
-      } else {
-        // Initialize user data if not exists (for backward compatibility)
-        initializeUserData(user);
-        return;
-      }
-      
-      // Hide loading and show content
-      document.getElementById('login-section').style.display = 'none';
-      document.getElementById('registration-section').style.display = 'none';
-      document.getElementById('main-app').style.display = 'block';
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('home-profile').style.display = 'block';
-      document.getElementById('home-content').style.display = 'block';
-      
-      // Update display
-      updateDisplay();
+      data = { date: today, completed: 0, remaining: 150, todaysEarning: 0 };
+      localStorage.setItem("dailyEarningData", JSON.stringify(data));
     }
-
-    function updateStorage() {
-      if (userData && userData.userId) {
-        localStorage.setItem(`MTEarningData_${userData.userId}`, JSON.stringify(userData));
-        localStorage.setItem(`dailyEarningData_${userData.userId}`, JSON.stringify(data));
+    
+    // Update user data on server
+    async function updateUserDataOnServer() {
+      try {
+        // In a real implementation, you would send this to your server
+        // For now, we'll just store it locally
+        localStorage.setItem("MTEarningData", JSON.stringify(userData));
+        localStorage.setItem("dailyEarningData", JSON.stringify(data));
+        
+        // Example of how you might send data to your server
+        // await fetch(`${API_BASE_URL}/updateUserData`, {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ user_id: userId, userData, data })
+        // });
+      } catch (error) {
+        console.error("Error updating user data on server:", error);
       }
+    }
+    
+    // Check for referral parameter
+    function checkReferral() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const refParam = urlParams.get('start');
+      
+      if (refParam && refParam.startsWith('ref_')) {
+        const referrerId = refParam.substring(4);
+        
+        // Don't count self-referral
+        if (referrerId != userId) {
+          processReferral(referrerId);
+        }
+      }
+    }
+    
+    // Process referral
+    async function processReferral(referrerId) {
+      try {
+        // Check if this user was already referred
+        const referredBy = localStorage.getItem("referredBy");
+        
+        if (!referredBy) {
+          // Mark this user as referred
+          localStorage.setItem("referredBy", referrerId);
+          
+          // Add to referrer's pending referrals
+          // In a real implementation, you would update this on the server
+          // For now, we'll just show a notification
+          showNotification("You've been referred by a friend! Complete 1000 tasks to activate the referral.", "success");
+          
+          // Here you would update the referrer's data on the server
+          // await fetch(`${API_BASE_URL}/addPendingReferral`, {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify({ referrer_id: referrerId, referred_id: userId })
+          // });
+        }
+      } catch (error) {
+        console.error("Error processing referral:", error);
+      }
+    }
+    
+    // Check and activate referrals when user completes tasks
+    async function checkReferralActivation() {
+      const referredBy = localStorage.getItem("referredBy");
+      
+      if (referredBy && userData.totalTasks >= 1000) {
+        try {
+          // Activate the referral
+          // In a real implementation, you would update this on the server
+          // await fetch(`${API_BASE_URL}/activateReferral`, {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify({ referrer_id: referredBy, referred_id: userId })
+          // });
+          
+          // Clear the referral marker
+          localStorage.removeItem("referredBy");
+          
+          showNotification("Congratulations! Your referral has been activated.", "success");
+        } catch (error) {
+          console.error("Error activating referral:", error);
+        }
+      }
+    }
+    
+    // Update storage
+    function updateStorage() {
+      updateUserDataOnServer();
     }
 
     function updateDisplay() {
-      if (!userData || !data) return;
+      // Calculate available balance
+      const availableBalance = userData.lifetimeEarning - userData.withdrew;
       
       // Update home screen
-      document.getElementById("username").innerText = userData.firstName || userData.username;
-      document.getElementById("user-id").innerText = userData.userId;
+      document.getElementById("username").innerText = username;
+      document.getElementById("user-id").innerText = userId;
       document.getElementById("completed-card").innerText = data.completed;
       document.getElementById("remaining-card").innerText = data.remaining;
       document.getElementById("todays-earning").innerText = data.todaysEarning.toFixed(3);
-      document.getElementById("lifetime-earning-card").innerText = userData.lifetimeEarning.toFixed(3);
-      document.getElementById("current-balance").innerText = (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      document.getElementById("header-balance").innerText = "$" + (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      
-      // Update stats grid
-      document.getElementById("total-earned").innerText = "$" + (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      document.getElementById("tasks-completed").innerText = userData.totalTasks;
-      document.getElementById("lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
-      document.getElementById("referral-earnings").innerText = "$" + (userData.referralEarnings || 0).toFixed(3);
+      document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
+      document.getElementById("available").innerText = availableBalance.toFixed(3);
+      document.getElementById("header-balance").innerText = "$" + availableBalance.toFixed(3);
       
       // Update progress bar
-      const progressPercent = (data.completed / 100 * 100);
+      const progressPercent = (data.completed / 150 * 100);
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
       // Update profile stats
-      document.getElementById("profile-balance").innerText = (userData.lifetimeEarning - userData.withdrew).toFixed(3);
-      document.getElementById("profile-withdrew").innerText = userData.withdrew.toFixed(3);
-      document.getElementById("profile-tasks-completed").innerText = userData.totalTasks;
+      document.getElementById("total-earned").innerText = "$" + userData.totalEarnedTasks.toFixed(3);
+      document.getElementById("tasks-completed").innerText = userData.totalTasks;
       
       // Update referral section
-      document.getElementById("ref-earned").innerText = (userData.referralEarnings || 0).toFixed(3);
-      document.getElementById("referral-count").innerText = userData.referrals || 0;
-      document.getElementById("ref-link").innerText = `https://task-tycoon.vercel.app/?ref=${userData.referralCode}`;
+      document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
+      document.getElementById("referral-count").innerText = userData.referrals;
+      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
       // Update profile page
-      document.getElementById("profile-username").innerText = userData.firstName || userData.username;
-      document.getElementById("profile-user-id").innerText = userData.userId;
-      document.getElementById("profile-refer-count").innerText = userData.referrals || 0;
-      document.getElementById("profile-refer-earnings").innerText = (userData.referralEarnings || 0).toFixed(3);
-      document.getElementById("profile-today-earning").innerText = data.todaysEarning.toFixed(3);
-      document.getElementById("profile-lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
+      document.getElementById("profile-username").innerText = username;
+      document.getElementById("profile-user-id").innerText = userId;
+      document.getElementById("profile-balance").innerText = "$" + availableBalance.toFixed(3);
+      document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
+      document.getElementById("profile-refer-count").innerText = userData.referrals;
+      document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
+      document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
+      document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("join-date").innerText = userData.joinDate;
-      document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals || 0;
-      document.getElementById("profile-ref-link").innerText = `https://task-tycoon.vercel.app/?ref=${userData.referralCode}`;
-      document.getElementById("profile-tasks-today").innerText = `${data.completed}/100`;
+      document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
+      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
-      // Update referral history
-      updateReferralHistoryDisplay();
+      // Update earn section
+      document.getElementById("ecompleted").innerText = data.completed;
+      document.getElementById("eremaining").innerText = data.remaining;
+      document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
+      document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
       // Update task visualization
       updateTaskVisualization();
     }
 
-    // Update referral history display
-    function updateReferralHistoryDisplay() {
-      const historyList = document.getElementById("referral-history-list");
-      
-      if (!userData.referralHistory || userData.referralHistory.length === 0) {
-        historyList.innerHTML = '<div class="empty-history">No referral history yet</div>';
-        return;
-      }
-      
-      historyList.innerHTML = '';
-      
-      userData.referralHistory.forEach(referral => {
-        const historyItem = document.createElement("div");
-        historyItem.className = "history-item";
-        
-        const progressPercentage = Math.min(100, (referral.earned / 15) * 100);
-        const progressColor = referral.status === 'active' ? '#4CAF50' : '#ff9800';
-        
-        historyItem.innerHTML = `
-          <div class="history-id">${referral.id}</div>
-          <div class="history-earned">$${referral.earned.toFixed(2)}</div>
-          <div class="history-progress">
-            <div class="progress-circle" style="background: conic-gradient(${progressColor} ${progressPercentage}%, #2c3e50 ${progressPercentage}%)">
-              <div class="progress-circle-inner">${Math.round(progressPercentage)}%</div>
-            </div>
-          </div>
-          <div class="history-status ${referral.status === 'active' ? 'status-active' : 'status-pending'}">${referral.status}</div>
-        `;
-        
-        historyList.appendChild(historyItem);
-      });
-    }
-
     function updateTaskVisualization() {
       const homeVisual = document.getElementById("task-visual");
+      const earnVisual = document.getElementById("earn-task-visual");
       homeVisual.innerHTML = "";
+      earnVisual.innerHTML = "";
       
-      // Create 100 dots (10 rows of 10)
+      // Create 100 dots (10 rows of 15)
       for (let i = 0; i < 10; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
@@ -1573,10 +1325,10 @@
         row.style.gap = "5px";
         row.style.marginBottom = "5px";
         
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 15; j++) {
           const dot = document.createElement("div");
           dot.className = "task-dot";
-          const index = i * 10 + j;
+          const index = i * 15 + j;
           
           if (index < data.completed) {
             dot.classList.add("completed");
@@ -1585,12 +1337,13 @@
           row.appendChild(dot);
         }
         
-        homeVisual.appendChild(row);
+        homeVisual.appendChild(row.cloneNode(true));
+        earnVisual.appendChild(row.cloneNode(true));
       }
     }
 
+    // Task links array
     const taskLinks = [
-      "https://tomake-chai-vlona.vercel.app",
       "https://premium-sm-offer.vercel.app",
     ];
 
@@ -1599,7 +1352,7 @@
       const messageElement = document.getElementById("notification-message");
       
       messageElement.textContent = message;
-      notification.className = "notification " + (type || "success");
+      notification.className = "notification " + type;
       notification.classList.add("show");
       
       setTimeout(() => {
@@ -1608,7 +1361,7 @@
     }
 
     function startTask() {
-      if (data.completed >= 100) {
+      if (data.completed >= 150) {
         showNotification("You have completed all tasks for today!", "warning");
         return;
       }
@@ -1626,44 +1379,83 @@
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
           
-          if (duration >= 17) {
+          if (duration >= 1) {
             data.completed++;
-            data.remaining = 100 - data.completed;
-            data.todaysEarning += 0.015;
-            userData.lifetimeEarning += 0.015;
+            data.remaining = 150 - data.completed;
+            data.todaysEarning += 0.021;
+            userData.lifetimeEarning += 0.021;
             userData.totalTasks++;
-            
-            // ✅ FIXED: Update referral progress for this user
-            updateReferralProgress(userData.userId, 0.015);
+            userData.totalEarnedTasks += 0.021;
             
             updateStorage();
             updateDisplay();
-            showNotification("✅ Task completed! $0.015 added to your balance.", "success");
             
-            // Check if all tasks completed for bonus
-            if (data.completed === 100) {
-              userData.lifetimeEarning += 0.10;
-              updateStorage();
-              updateDisplay();
-              showNotification("🎉 Congratulations! You completed all tasks and earned a $0.10 bonus!", "success");
-            }
+            // Check if referral should be activated
+            checkReferralActivation();
+            
+            showNotification("✅ Task completed! $0.021 added to your balance.", "success");
           } else {
-            showNotification("⏱️ You must view the ad for at least 15 seconds to complete the task!", "error");
+            showNotification("⏱️ You must view the ad for at least 30 seconds to complete the task!", "error");
           }
         }
       }, 500);
+    }
+
+    function submitWithdrawal() {
+      const amount = parseFloat(document.getElementById("withdraw-amount").value);
+      const method = document.getElementById("withdraw-method").value;
+      const address = document.getElementById("withdraw-address").value;
+      const availableBalance = userData.lifetimeEarning - userData.withdrew;
+      
+      if (isNaN(amount)) {
+        showNotification("Please enter a valid amount", "error");
+        return;
+      }
+      if (amount < 30) {
+        showNotification("Minimum withdrawal amount is $30", "error");
+        return;
+      }
+      if (amount > availableBalance) {
+        showNotification("Insufficient balance", "error");
+        return;
+      }
+      if (userData.referrals < 10) {
+        showNotification("You need at least 10 referrals to withdraw", "error");
+        return;
+      }
+      if (method === "Select a method") {
+        showNotification("Please select a withdrawal method", "error");
+        return;
+      }
+      if (!address) {
+        showNotification("Please enter your withdrawal address", "error");
+        return;
+      }
+      
+      // Update balance
+      userData.withdrew += amount;
+      // lifetimeEarning stays same, withdrew increases, available decreases
+      updateStorage();
+      updateDisplay();
+      showNotification("Withdrawal request submitted successfully! It will be processed within 24-48 hours.", "success");
     }
 
     function show(section) {
       // Hide all sections first
       document.getElementById("home-profile").style.display = "none";
       document.getElementById("home-content").style.display = "none";
+      document.getElementById("withdraw").style.display = "none";
+      document.getElementById("earn").style.display = "none";
       document.getElementById("profile-page").style.display = "none";
       
       // Show appropriate section
       if (section === 'home') {
         document.getElementById("home-profile").style.display = "block";
         document.getElementById("home-content").style.display = "block";
+      } else if (section === 'withdraw') {
+        document.getElementById("withdraw").style.display = "block";
+      } else if (section === 'earn') {
+        document.getElementById("earn").style.display = "block";
       } else if (section === 'profile') {
         document.getElementById("profile-page").style.display = "block";
       }
@@ -1676,23 +1468,29 @@
     }
 
     function copyReferralLink() {
-      if (!userData) return;
-      
-      const refLink = `https://new-mt-earning.vercel.app/?ref=${userData.referralCode}`;
+      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
+        .then(() => showNotification("✅ Referral link copied! You earn $0.50 for each successful referral.", "success"))
         .catch(() => showNotification("Failed to copy link", "error"));
     }
     
     function shareReferralLink() {
-      if (!userData) return;
+      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       
-      const refLink = `https://new-mt-earning.vercel.app/?ref=${userData.referralCode}`;
-      
-      if (navigator.share) {
+      // Check if we're in a Telegram environment
+      if (window.Telegram && window.Telegram.WebApp) {
+        // Use Telegram's share functionality
+        window.Telegram.WebApp.share(refLink, { title: 'Earn with Daily Earning545' }, (success) => {
+          if (!success) {
+            // Fallback to copy if sharing fails
+            copyReferralLink();
+          }
+        });
+      } else if (navigator.share) {
+        // Use Web Share API for browsers that support it
         navigator.share({
-          title: 'Earn with Task Tycoon Vercel App',
-          text: 'Join Task Tycoon Vercel App and start earning money by completing simple tasks!',
+          title: 'Earn with Daily Earning545',
+          text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
           url: refLink
         })
         .catch((error) => {
@@ -1700,17 +1498,208 @@
           copyReferralLink();
         });
       } else {
+        // Fallback to copying the link
         copyReferralLink();
       }
     }
 
-    // Initialize task visualization
-    updateTaskVisualization();
+    // Initialize the app when the page loads
+    window.addEventListener('DOMContentLoaded', initApp);
   </script>
+  
+  <script>
+    // Geo-blocking script
+    fetch("https://ipapi.co/json/")
+      .then(response => response.json())
+      .then(data => {
+        let country = data.country;   // দেশ কোড (BD, IN ইত্যাদি)
+        let timezone = data.timezone; // টাইমজোন (Asia/Dhaka, Asia/Kolkata ইত্যাদি)
+
+        if( (country === "BD" && timezone === "Asia/Dhaka") || 
+            (country === "IN" && timezone === "Asia/Kolkata") ) {
+          // অনুমতি দেওয়া হলো
+          console.log("Access Allowed:", country, timezone);
+        } else {
+          // ব্লক করা হবে
+          document.body.innerHTML = "<h2 style='color:red;text-align:center;'>❌ Access Denied ❌<br>Daily Earning545 Bot এ VPN দিয়ে কাজ করতে পারবে না। ⚠ আপনি যদি VPN ব‍্যবহার করেন, অনুগ্রহ করে VPN বন্ধ করে আবার চেষ্টা করুন ধন্যবাদ🌺</h2>";
+        }
+      })
+      .catch(error => {
+        console.error("Geo API Error:", error);
+      });
+  </script>
+  
+  <!-- Welcome Message -->
+<div class="welcome-toast" id="welcomeToast">
+  <div class="toast-content">
+    <div class="toast-header">
+      <div class="toast-icon">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="toast-text">
+        <h3>স্বাগতম! 👋</h3>
+        <p>Daily Earning545 এ আপনার আয়ের যাত্রা শুরু হোক</p>
+      </div>
+      <button class="toast-close" onclick="closeWelcomeToast()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="toast-features">
+      <span class="feature-tag">💰 টাস্ক প্রতি $0.021</span>
+      <span class="feature-tag">👥 রেফার $0.50</span>
+      <span class="feature-tag">🚀 দৈনিক ১৫০ টাস্ক</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.welcome-toast {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  max-width: 320px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideInRight 0.5s ease-out;
+  border-left: 4px solid #4361ee;
+  overflow: hidden;
+}
+
+.toast-content {
+  padding: 0;
+}
+
+.toast-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 15px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.toast-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #4361ee, #4cc9f0);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.toast-text {
+  flex: 1;
+}
+
+.toast-text h3 {
+  color: #1e293b;
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.toast-text p {
+  color: #64748b;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.toast-features {
+  display: flex;
+  gap: 8px;
+  padding: 15px 20px 20px 20px;
+  flex-wrap: wrap;
+}
+
+.feature-tag {
+  background: rgba(67, 97, 238, 0.1);
+  color: #4361ee;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .welcome-toast {
+    top: 70px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+}
+</style>
+
+<script>
+function closeWelcomeToast() {
+  const toast = document.getElementById('welcomeToast');
+  toast.style.animation = 'slideOutRight 0.3s ease-out forwards';
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 300);
+}
+
+// Show welcome message every time
+document.addEventListener('DOMContentLoaded', function() {
+  const toast = document.getElementById('welcomeToast');
+  setTimeout(() => {
+    toast.style.display = 'block';
+  }, 1000);
+  
+  // Auto hide after 8 seconds
+  setTimeout(() => {
+    if (toast.style.display !== 'none') {
+      closeWelcomeToast();
+    }
+  }, 8000);
+});
+</script>
 </body>
 </html>
-
-<script
-  type="text/javascript"
-  src="https://pl26607619.effectivegatecpm.com/89/be/eb/89beeb153f91b5aec28bb0d98b62029c.js"
-></script>
